@@ -1,0 +1,723 @@
+VEXUS
+Web3 Community Raffle Platform
+Master Software Requirements Specification (SRS)
+Web App (React)  •  Admin Dashboard (React)  •  Backend Platform  •  Mobile App (Flutter — Final Phase)
+Version V3.0  —  Client-Aligned Master Baseline
+August 2026
+Table of Contents
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText>TOC \h \o "1-2"</w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:hyperlink w:anchor="_Toc238267092" w:history="1"><w:r w:rsidR="0078741C" w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>01  Executive Summary</w:r><w:r w:rsidR="0078741C"><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r w:rsidR="0078741C"><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267092 \h </w:instrText></w:r><w:r w:rsidR="0078741C"><w:rPr><w:noProof/></w:rPr></w:r><w:r w:rsidR="0078741C"><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r w:rsidR="0078741C"><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267093" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>02  Product Scope and Design Principles</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267093 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267094" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>2.1 Product Definition</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267094 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267095" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>2.2 Design Principles (Product Principles)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267095 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267096" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>03  Overview of the Four Platform Surfaces</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267096 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267097" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>3.1 Module Map — Mobile App (Flutter)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267097 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267098" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>3.2 Module Map — Web App (React)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267098 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267099" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>3.3 Module Map — Admin Dashboard (React)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267099 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267100" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>3.4 Module Map — Backend Platform</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267100 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267101" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>04  Personas & Roles</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267101 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267102" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>05  Authentication & Identity</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267102 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267103" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>5.1 Registration / Login Methods</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267103 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267104" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>5.2 Account Linking After Registration</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267104 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267105" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>5.3 Multiple Discord/X Accounts</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267105 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267106" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>5.4 Wallet Authentication (Wallet Auth)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267106 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267107" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>06  Home & Discovery</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267107 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267108" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>6.1 Header — Web & Mobile</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267108 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267109" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>6.2 Main Navigation</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267109 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267110" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>6.3 Home Page Sections</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267110 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267111" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>6.4 Discover Page</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267111 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267112" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>6.5 Mobile Differences from Web</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267112 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267113" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>07  Project Page and Raffle Page</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267113 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267114" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>7.1 Project Page</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267114 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267115" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>7.2 Raffle Page</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267115 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267116" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>08  Raffle Types and State Machine</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267116 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267117" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>8.1 The Four Types</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267117 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267118" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>8.2 State Machine</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267118 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267119" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>09  Requirement Engine</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267119 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267120" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>9.1 Evaluation Logic</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267120 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267121" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>10  My Raffles / My Wins / Calendar</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267121 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267122" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>10.1 My Raffles</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267122 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267123" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>10.2 My Wins</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267123 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267124" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>10.3 Calendar</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267124 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267125" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>11  Notification Architecture</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267125 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267126" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>11.1 Events</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267126 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267127" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>11.2 Community-Specific Notifications</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267127 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267128" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>12  Premium Model</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267128 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267129" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>12.1 Free</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267129 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267130" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>12.2 Premium</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267130 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267131" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>13  Auto-Register (Premium)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267131 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267132" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>14  Community / Team — Management and Roles</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267132 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267133" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>14.1 Community Page Structure</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267133 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267134" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>14.2 Community Creation</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267134 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267135" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>14.3 Roles and Permissions</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267135 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267136" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>15  Community Rules and Templates</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267136 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267137" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>15.1 Community Rules</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267137 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267138" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>15.2 Templates</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267138 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267139" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>16  Raffle Management and Winner Selection</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267139 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267140" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>16.1 Raffle Management Dashboard</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267140 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267141" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>16.2 Winner Selection System (Provably Fair)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267141 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267142" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>16.3 Reroll</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267142 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267143" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>17  Reputation System</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267143 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267144" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>18  Professional Profile / CV</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267144 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267145" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>18.1 Profile Sections</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267145 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267146" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>18.2 Open for Opportunities</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267146 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267147" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>19  Hiring</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267147 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267148" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>19.1 Job Opening</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267148 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267149" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>19.2 Job Application</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267149 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267150" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>19.3 Community Invitation</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267150 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267151" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>20  Support</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267151 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267152" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>21  Super Admin Dashboard</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267152 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267153" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>21.1 Full Modules</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267153 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267154" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>21.2 Admin Dashboard Security</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267154 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267155" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>22  Mobile App Specification (Flutter)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267155 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267156" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>22.1 Mobile-Specific Features</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267156 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267157" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>22.2 Web Synchronization</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267157 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267158" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>22.3 Store Publishing Requirements</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267158 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267159" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>23  Web App Specification (React)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267159 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267160" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>23.1 Technical Considerations</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267160 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267161" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>23.2 Web vs Mobile Differences</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267161 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267162" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>24  Admin Dashboard Specification (React)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267162 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267163" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>25  Backend Platform and API Architecture</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267163 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267164" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>25.1 API Pattern</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267164 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267165" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>25.2 Core Services (Microservices / Modular Monolith)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267165 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267166" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>26  System Architecture</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267166 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267167" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>26.1 Database (ERD)</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267167 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267168" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>27  Security Architecture</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267168 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267169" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>27.1 Fixed Principles from the Start</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267169 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267170" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>27.2 Additional Layers</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267170 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267171" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>28  Infrastructure & Tech Stack</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267171 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267172" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>29  Development Roadmap</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267172 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267173" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Phase 0 — Foundation</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267173 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267174" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Phase 1 — Core MVP</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267174 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267175" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Phase 2</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267175 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267176" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Phase 3</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267176 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267177" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>30  Acceptance Criteria</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267177 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267178" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>31  Open Decisions the Client Must Resolve Before Freeze</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267178 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267179" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Authentication</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267179 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267180" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>NFT</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267180 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267181" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Premium</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267181 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267182" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Reputation</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267182 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267183" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Hiring</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267183 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267184" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Raffle</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267184 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267185" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>Infrastructure</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267185 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267186" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>32  Appendix — Terminology and Current Readiness</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267186 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267187" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>32.1 What Is Ready Now as the Execution Baseline</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267187 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267188" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>32.2 Priority Principle</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267188 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+<w:tab w:val="right" w:leader="dot" w:pos="9696"/></w:tabs><w:jc w:val="center"/><w:rPr><w:noProof/></w:rPr></w:pPr><w:hyperlink w:anchor="_Toc238267189" w:history="1"><w:r w:rsidRPr="0005123D"><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/><w:bCs/><w:noProof/></w:rPr><w:t>32.3 Next Step</w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc238267189 \h </w:instrText></w:r><w:r><w:rPr><w:noProof/></w:rPr></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>1
+01  Executive Summary
+VEXUS is an integrated Web3 platform combining Raffle discovery and participation, Community management, Premium Automation, Reputation, Professional Identity, and Hiring — within one unified product.
+The platform is built around the Web App, Admin Dashboard, and unified Backend as the core launch components, while the Mobile App (Flutter) is implemented in the final phase while preserving the same business logic and single source of truth.
+A user-facing web application built with React / TypeScript, serving as the primary MVP surface.
+An administrative dashboard built with React / TypeScript as a standalone application.
+A unified Backend platform (APIs and Services) powering all platform surfaces from the same Single Source of Truth.
+A mobile application (iOS / Android) built with Flutter, planned for the final phase and not within the MVP scope.
+This document converts everything discussed with the client — together with the previous SRS and the Alphabot platform analysis used as a behavioral reference — into one detailed product specification, structured for review and approval before implementation begins.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Where a point remains open for decision, it is clearly classified as: Confirmed / Existing Baseline / Proposed / Open Decision. Every Open Decision must be resolved before being introduced into the MVP acceptance criteria.
+02  Product Scope and Design Principles
+2.1 Product Definition
+Vexus is a Web3 platform combining: Raffle Discovery + Raffle Participation + Community Management + Premium Automation + Reputation + Professional Identity + Hiring, with Raffle as the product core and a broad ecosystem layer around it.
+Layer
+Description
+Target User
+Public Platform
+Project, Raffle, and Community discovery without mandatory login
+Visitor / Public User
+User Platform
+Profile, participation, wins, notifications, reputation, hiring
+Registered User
+Community Platform
+Team, Raffle, template, member, and hiring management
+Community Owner / Manager
+Super Admin
+Full platform management: users, communities, fraud, subscriptions, system
+Vexus Internal Team
+2.2 Design Principles (Product Principles)
+These principles govern every subsequent design or architectural decision in this document:
+P1 — Free Participation
+Users can participate in free Raffles without any subscription. Premium is not required for basic participation.
+P2 — Premium = Software Capabilities, Not a Better Winning Chance
+Premium provides Automation / Notifications / Account Capabilities / Community Management and other software capabilities. Premium must not become a purchase of a higher winning chance within the same Raffle, as that is a fundamentally different model that must be avoided to preserve Provably Fair credibility.
+P3 — Non-Custodial
+The platform never stores Private Keys or Seed Phrases. Wallet Signature is not used for login; any wallet signature required is solely for verifying ownership of the NFT/Main Wallet.
+P4 — Performance First
+Raffle Entry does not rely on expensive synchronous verification. Target: queued entry ingestion, with an initial response time below 300ms at p95, and an initial launch target of at least 5,000 submissions per minute per Raffle.
+P5 — Provably Fair
+Winner selection must be independently verifiable by any external party. Sequence: server_seed_hash → freeze ledger → entries_hash → public entropy → reveal → draw_seed → winners.
+P6 — Centralized Platform Rules
+Every Community uses a centralized Rule Catalog managed by Vexus (Super Admin), rather than each Community maintaining a completely different rule system. This simplifies maintenance and trust across the platform.
+03  Overview of the Four Platform Surfaces
+Every feature in this document is built once in the Backend and exposed first through Web and Admin, then through Mobile in the final phase, while maintaining one source of truth and unified business logic.
+Figure 1 — Vexus Four-Surface Platform Map
+3.1 Module Map — Mobile App (Flutter)
+Figure 2 — Mobile App Modules
+3.2 Module Map — Web App (React)
+Figure 3 — Web App Modules
+3.3 Module Map — Admin Dashboard (React)
+Figure 4 — Admin Dashboard Modules
+3.4 Module Map — Backend Platform
+Figure 5 — Backend Services
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Mobile-specific details are provided in Section 22, while the primary launch is Web-first. The Mobile App is not an MVP surface and belongs to the final phase.
+04  Personas & Roles
+Role
+Description
+Where the Platform Is Used
+Visitor / Guest
+Unregistered visitor browsing public projects and Raffles
+Web (MVP) • Mobile (Final Phase)
+Registered User
+Registered user participating in Raffles with a profile and Reputation
+Web (MVP) • Mobile (Final Phase)
+Premium User
+Subscribed user with Auto-Register and advanced notifications
+Web (MVP) • Mobile (Final Phase)
+Community Owner
+Community creator with full permissions over the Community
+Web (MVP) • Mobile (Final Phase)
+Community Manager
+Partial administrative permissions within a specific Community
+Web (MVP) • Mobile (Final Phase)
+Community Member
+Community team member with limited permissions
+Web (MVP) • Mobile (Final Phase)
+Hiring Manager
+Manages jobs and applicants within the Community
+Web (MVP) • Mobile (Final Phase)
+Job Candidate
+User looking for work opportunities within Web3 communities
+Web (MVP) • Mobile (Final Phase)
+Super Admin
+Full platform control
+Admin Dashboard only
+Support Agent
+Technical support and tickets through the Admin Dashboard
+Admin Dashboard only
+05  Authentication & Identity
+5.1 Registration / Login Methods
+The primary account is created through:
+Discord — connect a Discord account and create the core identity.
+Username + Password — the account's primary login credentials.
+Google Login — additional login after linking Google to the account.
+X Login — additional login after linking an X account to the account.
+Whop / Telegram — can be used for login after linking them.
+Confirmed implementation note: Wallet Signature is not a platform login method.
+5.2 Account Linking After Registration
+After creating the account, the user can link external accounts and services for login, the feed, and execution of Raffle requirements according to the function of each integration:
+Discord
+X (Twitter) — supports multiple X accounts within the same account.
+Google
+Whop
+Telegram
+Multiple wallets for participation and verification use cases.
+5.3 Multiple X Accounts
+Confirmed
+Users can link multiple X accounts within the same VEXUS account and switch between them when participating in Raffles and satisfying eligibility requirements. This allows participation to continue when one account becomes unavailable, with each account recorded as an independent external identity.
+The data model must support a 1:N relationship between User and SocialAccounts for X accounts, with clear policies for rate limits, provider restrictions, and prevention of multi-account abuse. The same account may also be used in the feed context and in executing Raffle requirements when appropriate for the integration.
+5.4 Wallet: Add Wallet and Main Wallet Verification
+Add Wallet: users can add multiple wallets for Raffle participation, Winning Wallet management, and other general use cases. Main Wallet: the user may perform Connect Main Wallet / Message Signing only to verify ownership of the wallet associated with the project's NFT holdings, in order to unlock NFT Holder benefits. This mechanism is not used as general login and the platform never stores private keys.
+Figure 6 — Sequence Diagram: Account Creation via Discord, followed by Login through Linked Account Providers
+06  Home & Discovery
+6.1 Header — Web & Mobile
+Header elements: ☰ menu | logo | search | Subscribe button | 🔔 notifications | login / avatar.
+6.2 Main Navigation
+Main navigation: Home, Raffles, Communities, Calendar, VEXUS Feed, Talent / Jobs (Phase 2), Profile. Search and notifications are global utilities, while community management tools appear inside the Community Context rather than increasing Global Navigation clutter.
+6.3 Home Page Sections
+Trending Raffles / Projects
+Upcoming Raffles
+Ending Soon
+Discover More
+Featured Communities
+Recommended For You
+Latest Community Activity
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Trending is calculated later automatically from entries, activity, and recency instead of manual ordering.
+6.4 Discover Page
+Discovery is divided into Projects / Raffles / Communities, while VEXUS Feed remains a separate layer planned for Phase 2.
+Chain (network)
+Status (state)
+Community
+Verified
+Ending Soon
+Upcoming
+Raffle Type
+Available actions: View / Enter / Follow / Star / Auto-Register.
+6.5 Mobile Differences from Web
+On mobile, the main navigation appears as a Bottom Navigation Bar. This interface is implemented in the final phase.
+Voice search and mobile-specific capabilities — Features Later / Final Phase.
+On mobile, filters are displayed as a draggable Bottom Sheet instead of a Sidebar.
+6.6 VEXUS Feed — Phase 2
+VEXUS Feed is separate from Raffle requirement execution. Project updates use Public X Username/Posts without requiring project OAuth merely to fetch updates. X requirement execution inside the Raffle uses the user's linked X accounts, and the same account may serve both contexts when needed.
+07  Project Page and Raffle Page
+7.1 Project Page
+Sections: Overview / Active Raffles / Upcoming Raffles / Past Raffles / Calendar Data / Community.
+Actions: Enter Raffle / Follow Project / Add to Calendar / View Community.
+7.2 Raffle Page
+Sections: Project Header / Raffle Info / Countdown / Winners-Spots / Description / Requirements / Eligibility / User Status / Actions / Winner Information / Other Project Raffles / Fairness-Verification.
+This follows the original model in which project information + requirements + project raffles are part of the same Raffle experience.
+Actions before end
+Check Eligibility
+Enter Raffle
+Auto-Register
+Add / Select Wallet
+Connect / Select X Account
+Connect / Select X Account additionally when required to execute Raffle requirements
+Actions after end
+View Winners
+Verify Fairness
+08  Raffle Modes / Participation and State Machine
+8.1 The Four Modes
+Mode / Type
+Mechanism and Classification
+Random / Weighted Raffle
+Weighted Random Draw — Core Draw Mode. Weights are determined only by Raffle configuration and its rules; Premium provides no hidden increase in winning probability.
+FCFS
+First Valid N Entrants — Core Participation Mode.
+Application
+Applications + Manual Approval — Non-random Participation Mode, used when selection is based on application review.
+Wallet Collection
+Collect Qualified Wallets — Non-random Collection Mode, and does not itself produce random winners.
+8.2 Classification Principles and State Machine
+Random / Weighted is the primary draw mode; FCFS is the immediate-entry mode; Application and Wallet Collection are non-random participation modes within the same Raffle Engine. State machine: draft → scheduled → active → ended → finalizing → finalized, with the option to transition to cancelled from any of the first three states.
+Figure 7 — Raffle State Machine
+09  Requirement Engine
+The central engine on which every Raffle is built creates a Requirement Tree from the following types:
+Discord
+X
+NFT
+Token
+Wallet
+Telegram
+Email
+CAPTCHA
+Password
+Website Visit
+Free Text
+Generic
+9.1 Evaluation Logic
+Requirement Blocks = AND — every block must be satisfied.
+Values inside same requirement = OR — satisfying one value within the same block is sufficient.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Example: (NFT A OR NFT B) AND (Discord Role) AND (X Follow). The engine also rechecks mutable requirements before Finalization. Wallet verification within the Raffle means using Add Wallet / Verified Wallet according to the rule; NFT Holder Message Signing is a separate context for verifying ownership of the Main Wallet.
+Figure 8 — Requirement Engine TreeCertain cases will requirex ^ discord ^ wallet
+10  My Raffles / My Wins / Calendar
+10.1 My Raffles
+Sections: Upcoming / Active / Joined / Won / Lost.
+Row data: Project, Raffle, Status, Eligibility, Entry, End Time, Winner Status.
+10.2 My Wins
+Fields: Project, Raffle, Reward, Winning Wallet, Date, Winner Status, External Fulfillment Info (if any). There is no Claim, Claim Deadline, or Reclaim inside the platform.
+10.3 Calendar
+Sections: Upcoming Mints / Won Raffles / External Wins / Reminders.
+Actions: Add Event / Add External Win / Set Reminder / Add Note.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>In the mobile app, Calendar can sync with the device calendar (iOS Calendar / Google Calendar) as a Phase 2 feature, with Push reminders tied to each Mint date or Raffle end.
+11  Notification Architecture
+Notifications are a fully independent Domain from the rest of the services and support the following channels within the approved rollout:
+In-App
+Email
+Push (Mobile)
+Discord DM
+Telegram
+11.1 Events
+Event
+Description
+Raffle opened
+Opening participation in a new Raffle
+Raffle ending
+Approaching Raffle end
+Entry success / failed
+Entry process success or failure
+Winner / Reroll
+Winner announcement or reroll
+Mint reminder
+Mint date reminder
+Auto-register success / failure
+Auto-registration result
+OAuth expired
+External account link expiration
+Community new raffle / announcement
+New activity from a followed Community
+Figure 9 — Notification Architecture and Channels
+11.2 Community-Specific Notifications
+Community-specific notifications remain part of the core architecture, while expanded channels (such as Discord DM / Telegram) are activated in Phase 2, with core Raffle and Auto-Register events remaining notification-capable from the MVP.
+12  Premium Model
+Figure 10 — Free vs Premium
+12.1 Free
+Browse
+Manual Raffle Entry
+Basic Account
+Basic Email/Push Notifications
+Basic Calendar
+12.2 Premium
+Advanced Discord notifications
+Telegram notifications
+Community-specific notifications
+Auto-Register
+Community / Team creation
+Advanced notification controls
+Multi-account X support (Confirmed) — multiple X accounts per user, with provider limits and anti-abuse policies.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Non-negotiable principle: Premium does not provide any advantage within the draw algorithm itself (it does not increase winning probability) — see P2 in Section 2.
+13  Auto-Register (Premium)
+A Premium feature that allows the user to configure preferences so participation is registered automatically in matching Raffles:
+Select Communities
+Select Projects
+Select Raffle Types
+Enable / Disable
+Activity Log: Successful / Failed / Pending
+Preferences
+Confirmed — Auto-Register is a core Premium product feature. It registers the user in the Raffle and completes the required tasks according to the permissions granted by the user to integration providers. Successful / Failed / Pending is recorded for every operation.
+Auto-Register only performs actions that fall within the permissions granted to each Provider, and Scopes must be isolated per provider with no unnecessary permissions requested.
+Figure 11 — Sequence Diagram: Auto-Register Flow
+14  Community / Team — Management and Roles
+The approved term in this document is Community, and it contains Projects, Raffles, Events, Team, Templates, Integrations, Notifications, and Settings.
+14.1 Community Page Structure
+Overview / Projects / Raffles / Rules / Templates / Members / Hiring / Integrations / Notifications / Settings.
+14.2 Community Creation
+The Create Community button is visible to everyone, but creation requires Premium.
+Confirmed
+14.3 Roles and Permissions
+Role
+Typical Permissions
+founder
+ Giving permission to others/editing comm settings
+Comm manager
+Head of collab
+Collab manager
+mod
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Roles and permissions are managed as capability scopes within the Community and enforced server-side. They include Owner/Founder, Manager, Moderator, Collab roles, and independent Hiring permissions. The system supports explicit and audited Ownership Transfer, Recovery through verification/support, and invitations that expire and can be cancelled and resent. All material team, permission, Raffle, and Integration actions are recorded in the Audit Log.
+15  Community Rules and Templates
+15.1 Community Rules
+Each Community selects from Available Platform Rules managed by the Super Admin through a centralized Rule Catalog.
+Recommended design: the Raffle takes a Snapshot of the rule configuration when it is created, because future rule changes must not unintentionally modify the history of an old Raffle.
+Confirmed Baseline — Centralized Rule Catalog + Raffle Snapshot + reusable Templates.
+15.2 Templates
+Core productivity feature: Create Raffle → Save as Template → Reuse later by changing variables only → Publish.
+The Template may contain: Requirements, Raffle Type, Winner count, Duration defaults, Visibility, Notification defaults, Description template, Project relation.
+Community Template and Project Template must remain distinct.
+Proposed Architecture
+Figure 12 — Complete Community creation and Raffle publishing flow. After creating a Template, the user defines only core variables such as Winner Count and Duration, while the remaining settings are populated from the Template and saved rules.
+16  Raffle Management and Winner Selection
+16.1 Raffle Management Dashboard
+Sections: Overview / Entries / Requirements / Winners / Notifications / Settings.
+Actions: Edit / Duplicate / Finalize / Reroll / Export Winners / Post to Discord / Post to Telegram / Cancel, while preserving the draw history and results without deleting winner history.
+16.2 Winner Selection System (Provably Fair)
+Sequence: Valid Entries → Freeze → Entries Hash → Public Entropy → Reveal Server Seed → Draw Seed → Deterministic Draw → Winners. The result must be externally verifiable from the same published evidence.
+Figure 13 — Sequence Diagram: Verifiable Winner Selection (Provably Fair)
+16.3 Reroll
+Winner → Reroll → New Selection → History Preserved (old history is not deleted) → New Notification.
+17  Reputation System
+Reputation is a formal independent Domain that aggregates signals from multiple sources:
+X Followers
+X Activity
+Money Score
+ASOS Score
+Community Experience
+Roles
+Participation
+Wins
+Other verified signals
+These are aggregated into one Reputation Score displayed to the user, example: 91 / 100.
+Formula = Open Decision, while the Domain itself is Confirmed and included in the product structure. Any connection between Reputation Score and winning probabilities requires a separate explicit decision; the default assumption is that Reputation does not change Odds within the Raffle.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Important decision to lock: Reputation Score must not be linked to winning odds inside any Raffle without a separate explicit decision by the client — preserving P5 (Provably Fair).
+18  Professional Profile / CV
+18.1 Profile Sections
+About / Reputation / Wallets / X / Discord / Collections / Current Roles / Community History / Professional Experience / Hiring Status.
+Each Experience item contains: Community, Role, Start Date, End Date, Current?, Verified?.
+18.2 Open for Opportunities
+An ON/OFF toggle inside the profile, with the desired roles specified: Community Manager, Collab Manager, Recruiter, Other.
+19  Hiring — Phase 2
+19.1 Job Opening
+A Community can create a Job Opening containing Role, Description, Requirements, Status, and Hiring Manager. It appears to users as a job opportunity within the Community/Talent Context.
+19.2 Job Application
+The candidate clicks Apply, then the status progresses: Applied → Shortlisted → Accepted or Rejected. The Hiring Manager sees: Candidate, Reputation, Experience, Roles, Communities, Socials, Collections, Availability.
+There is no standalone Job platform or app; Hiring and Applications are part of the Web App and Community/Talent Context and are delivered in Phase 2.
+Figure 14 — Hiring flow from job opening to acceptance
+19.3 Community Invitation — Phase 2
+A completely separate flow from Apply: Community → Invite User → User decides Accept or Reject.
+Figure 15 — Community invitation flow: the invitation/link has an expiry and can be cancelled and resent.
+20  Support & Internal Messaging
+Sections: Help Center / Search / Popular Articles / Start Conversation / My Conversations.
+Support includes an internal messaging system between the user and Support Agent for tickets and requests, while keeping these conversations separate from any public Social Chat.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>An AI-powered Chatbot may be added later for initial responses to common requests before escalation to a human Support Agent.
+21  Super Admin Dashboard
+The Platform Admin in the current SRS operates across all tenants (Cross-Tenant) and includes Vetting, Fraud & Support, Feature Flags, Subscription Overrides, Emergency Takedown, and Premium management.
+21.1 Full Modules
+Module
+Function
+Overview
+Real-time platform health KPIs
+Users
+User management, suspension/ban, identity review
+Communities
+Community approval/suspension, request review
+Projects
+Management of projects associated with each Community
+Raffles
+Monitor all platform Raffles, emergency intervention
+Rules
+Centralized Rule Catalog used by all Communities
+Templates
+Platform-approved templates
+Subscriptions
+Premium plans, billing, manual overrides
+Fraud
+Suspicious behavior detection, Sybil Detection, automatic/manual banning
+Hiring
+Platform-wide job and application monitoring
+Notifications
+Notification template management and platform-wide broadcasts
+Support
+Support tickets, Popular Articles, Multilingual Config
+Integrations
+API keys for Discord/X/Telegram/Blockchain providers
+System Health
+Performance, error, and response-time monitoring
+Audit Logs
+Complete log of every sensitive administrative action
+Settings
+Global platform settings, Feature Flags
+21.2 Admin Dashboard Security
+Mandatory two-factor authentication (2FA) for all admin accounts.
+Granular RBAC permissions for each module.
+Every sensitive action (ban, raffle modification, subscription override, or support action) is recorded in a non-deletable Audit Log.
+22  Mobile App Specification (Flutter) — Final Phase
+A single mobile app (unified Flutter Codebase) is released on iOS and Android in the final phase, using the same business logic as the web with mobile-specific experience adaptations:
+22.1 Mobile-Specific Features
+Push Notifications via Firebase Cloud Messaging (Android) and APNs (iOS).
+Deep Linking to open a Raffle or Community page directly from a notification or external link (such as a Discord link).
+Wallet Connect via WalletConnect v2 to support mobile wallets (MetaMask Mobile, Trust Wallet, Rainbow...).
+Biometric Login (Face ID / Fingerprint) as an additional security layer on top of the session after the initial login.
+Offline-first for some screens (My Raffles, My Wins, Calendar) with automatic synchronization when connectivity returns.
+Bottom Navigation Bar instead of the web Sidebar.
+Direct sharing (Native Share Sheet) for sharing a Raffle link or win result.
+22.2 Web Synchronization
+When the mobile phase is implemented, the core functions available on the Web must be available on Mobile using the same business logic. Mobile is not part of the MVP acceptance criteria.
+22.3 Store Publishing Requirements
+Compliance with Apple App Store and Google Play policies for Web3/Crypto applications (disclosure of wallet use, no real-money-funded gambling).
+Privacy Policy and Terms of Service pages published and accessible from within the app.
+Account Deletion functionality available inside the app as a mandatory store approval requirement.
+23  Web App Specification (React)
+A web application built with React + TypeScript, serving as the primary MVP surface and responsible for the full Public Platform, User Platform, and Community Platform experience, except for Super Admin, which is built as a separate application.
+23.1 Technical Considerations
+Server-Side Rendering or Static Generation for public Discovery/Project/Raffle pages to improve SEO and initial load speed.
+Wallet Connect through the browser (MetaMask Extension, WalletConnect QR for other wallets).
+Fully responsive design that works on mobile web as a fallback even before the Flutter app is launched.
+Real-time updates (WebSocket / Server-Sent Events) for participant counters and the Countdown on the Raffle page.
+23.2 Web vs Mobile Differences
+Aspect
+Web
+Mobile
+Primary Navigation
+Sidebar / Top Menu
+Bottom Navigation
+Notifications
+In-App + Email
+Push + In-App + Email
+Wallet Linking
+Extension / WalletConnect QR
+WalletConnect Deep Link
+Login
+Credentials + OAuth
+Credentials + OAuth + Biometric
+First Screen
+Home
+Home with brief Onboarding
+24  Admin Dashboard Specification (React)
+A fully independent web application from the user applications, built with React + TypeScript, with separate authentication (Separate Auth Realm) and granular RBAC permissions, covering all modules described in Section 21.
+Access to this dashboard through the user mobile app is not allowed — only through a web browser with separate admin authentication.
+All tables (Users, Raffles, Communities...) support advanced search, filters, and CSV/Excel export.
+Main Dashboard with real-time indicators: active users, ongoing Raffles, detected fraud rate, Premium revenue.
+25  Backend Platform and API Architecture
+25.1 API Pattern
+Unified REST API for Web and Admin Dashboard and Mobile when launched (same endpoints, different permissions by token).
+A single BFF (Backend For Frontend) / API Gateway layer handling authentication, Rate Limiting, and routing to internal services.
+A separate WebSocket Gateway for real-time updates (participant counters, draw status).
+25.2 Core Services (Microservices / Modular Monolith)
+Service
+Responsibility
+Auth Service
+Login, OAuth/Provider Linking, sessions, and identity management. No general Wallet Auth.
+Core API
+Users, projects, communities, profiles
+Raffle Engine
+Complete Raffle lifecycle, from creation through Finalization
+Requirement Engine
+Requirement Tree evaluation (AND/OR)
+Verification Workers
+Asynchronous verification for Discord/X/NFT/Token/Wallet/CAPTCHA, including NFT Holder Main Wallet Verification.
+Notification Engine
+Notification delivery across all channels
+Reputation Engine
+Reputation Score calculation from multiple signals
+Hiring Engine
+Jobs, applications, candidate statuses
+Admin API
+All Super Admin Dashboard operations
+Figure 16 — Sequence Diagram: Raffle Entry Flow from the App to the Database
+26  System Architecture
+The current SRS follows the core architecture: NestJS/Node.js, PostgreSQL, Redis, Workers, external providers, Discord service, Object Storage, with replaceable Provider Adapters.
+Figure 17 — Overall Architecture: Mobile, Web, and Admin over a unified Backend platform
+26.1 Database (ERD)
+The core data model includes User / Wallet / SocialAccount / Community / Team Membership / Project / Raffle / Requirement / Entry / Winner / Calendar / Notification / Reputation / Hiring / SupportConversation / SupportMessage / AuditLog, with Main Wallet NFT Verification separated from Add Wallet.
+Figure 18 — Entity Relationship Diagram (ERD)
+27  Security Architecture
+27.1 Fixed Principles from the Start
+Wallet Signature: used only when required to verify ownership of the Main Wallet associated with NFT holdings. There is no general Wallet-based Login and no storage of private keys.
+OAuth Tokens: stored encrypted via Secret Manager / KMS.
+Raffle Entry: CAPTCHA → Rate Limit → Identity Dedup → Verification, then create the Entry Idempotently, using the user's linked X accounts to execute X requirements.
+27.2 Additional Layers
+Audit Logs are immutable for every sensitive action.
+2FA is mandatory for admin accounts.
+All tokens are encrypted (Token Encryption) and sessions are rotated (Session Rotation).
+Rate Limiting at both user and IP level.
+Anti-Sybil layers to prevent multiple fake accounts.
+Circuit Breakers to protect external services (Discord/X/Blockchain RPC) from cascading failure.
+Backup / Point-in-Time Recovery (PITR) for the database.
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Approved security architecture: encrypted OAuth Tokens, Identity Binding, Anti-Sybil, and Provider Scope protection, with complete separation between X Feed fetching and X Eligibility actions.
+28  Infrastructure & Tech Stack
+Layer
+Technology
+Mobile App
+Flutter (iOS + Android from one Codebase)
+Web App
+Next.js / React / TypeScript
+Admin Dashboard
+React / TypeScript
+Backend
+NestJS / Node.js
+Database
+PostgreSQL
+Cache
+Redis
+Queue
+BullMQ / Redis Streams
+Scale-up Queue
+Kafka
+Storage
+S3 / Cloudflare R2
+Blockchain
+Chain Provider Abstraction (multi-network)
+Discord
+discord.js
+Telegram
+grammY
+Push Notifications
+Firebase Cloud Messaging + APNs
+Monitoring
+Prometheus / Grafana
+Error Tracking
+Sentry
+Tracing
+OpenTelemetry
+CI/CD
+GitHub Actions
+Containers
+Docker
+Orchestration
+Kubernetes or equivalent managed services
+<w:left w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:bottom w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/><w:right w:val="single" w:sz="4" w:space="6" w:color="00C2A8"/></w:pBdr><w:shd w:val="clear" w:color="auto" w:fill="F7F6FF"/><w:spacing w:after="160"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:i/><w:iCs/><w:color w:val="6B6B85"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>The current SRS recommends approximately the same technology stack for the same reasons: library maturity, hiring ease, and horizontal scalability.
+29  Development Roadmap
+Phase 0 — Foundation
+Repo, CI/CD, Dev/Staging/Production, PostgreSQL, Redis, Secrets, Observability, Base Schema, Auth Foundation, Design System. Estimated duration: approximately two weeks.
+Phase 1 — Core Web MVP
+Authentication, Unified User Profile, Multiple X Accounts, Add Wallets, NFT Holder Main Wallet Verification, core Discovery, Projects, Raffles, Raffle Modes, Requirement Engine, Discord, Premium, Auto-Register, Reputation, Calendar, My Raffles, My Wins, Communities, Templates, Provably Fair, Basic Admin, Support & Internal Messaging.
+Phase 2 — Ecosystem Expansion
+VEXUS Feed and Public X Project Updates, Advanced Notifications, Telegram, Hiring, Job Applications, Community Invitations for Hiring, Community/Talent enhancements, Advanced Analytics, and expanded social/integration features.
+Phase 3 — Final Platform Expansion
+Flutter Mobile App, Mobile-specific capabilities, Advanced Hiring, Advanced Reputation, White-label, deeper analytics, additional network support, and advanced Fraud/Risk systems.
+30  Acceptance Criteria
+Before accepting each Phase as complete, the following minimum criteria must be satisfied:
+Initial Raffle Entry response time below 300ms at p95, with capacity for at least 5,000 submissions/minute per Raffle.
+Every winner draw result must be independently verifiable (Verify Fairness) without blind trust in the server.
+Mobile/Web parity is not required for the MVP; when Mobile launches in Phase 3, core functions must remain consistent with Web from the same source of truth.
+No code path may store a Private Key or Seed Phrase on the server, and Wallet Signature must not be used as general login.
+Every sensitive admin action must be recorded in a non-deletable Audit Log.
+Pass a Load Test simulating a Raffle scenario with at least hundreds of thousands of concurrent participants for one large project.
+31  Remaining Open Decisions Before Freeze
+The following items must be resolved before their final details are locked, and none is an additional MVP requirement unless explicitly stated in the Roadmap.
+Authentication
+Finalize the list of additional Login providers and any final Provider restrictions. Multiple X accounts are confirmed and required, with Abuse controls and Rate Limits.
+Detailed Username/Password/OTP/2FA policy and re-authentication stages.
+Password Security Policy (Username/Password Security Policy). (At baseline, it must be required on the website and be strong + OTP + 2FA)
+NFT
+Final NFT Holder benefit details, what Premium Benefits are unlocked, and the sources/networks used to verify the Collection.
+Whether NFT ownership affects Community permissions remains a Product decision independent from ownership proof itself.
+Discounts or additional Benefits for holders of specific Collections are managed from the Dashboard when approved.
+Premium
+Final Premium limits and pricing/billing/package design.
+Policies for Multi-Account X usage within Premium, if any, without affecting Odds.
+Auto-Register itself is Confirmed; only Provider Scopes, execution constraints, and provider-specific policies remain.
+Create Community = Premium Confirmed.
+Hiring = Phase 2, with final Premium entitlement to be determined before Hiring launches.
+Reputation
+Final formula for the Reputation Score.
+Final Range / normalization.
+Source of the Money Score and its verification mechanism.
+Source/interface for the ASOS API and any additional external signals.
+Public and private presentation format for Reputation Details.
+Future effects of Reputation on the product, assuming by default that it does not change Odds.
+Hiring
+Final Job Opening/Application workflow details for Phase 2.
+There is no standalone Job Chat; Support Messaging remains separate from Hiring communication.
+Whether advanced Interview/Offer workflows exist within Phase 2.
+Job Proposal/Offer details if approved.
+Raffle
+Exact Weighted Draw weights and rules for interpreting/applying the weights.
+Exact eligibility rules for each Provider/Requirement Type.
+Infrastructure
+Expected traffic target (Traffic Target).
+Monthly infrastructure budget.
+Preferred Cloud Provider.
+Final Launch Deadline.
+32  Appendix — Terminology and Current Readiness
+32.1 What Is Ready Now as the Execution Baseline
+#
+Item
+1
+Product Scope
+2
+Site Map
+3
+Page Map
+4
+User Flows
+5
+Community Flows
+6
+Hiring Flows
+7
+Raffle State Machine
+8
+Winner Selection Flow
+9
+Database Domain Model
+10
+High-Level Architecture
+11
+Authentication Architecture
+12
+Notification Architecture
+13
+Premium Model
+14
+Reputation Model
+15
+Hiring Model
+16
+Admin Model
+17
+Security Model
+18
+Infrastructure Baseline
+19
+Development Phases
+20
+Open Decisions
+21
+Mobile App Specification — Final Phase
+22
+Web App Specification — MVP Primary Surface
+23
+Admin Dashboard Specification — Core
+24
+Sequence Diagrams (Auth / Entry / Winner Selection / Auto-Register)
+25
+Full ERD
+32.2 Priority Principle
+No part of the previous SRS is final by itself; this version is the Master Baseline after the client's current decisions. Alphabot details remain Reference Behavior only and are not the final authority for the Vexus product.
+32.3 Next Step
+After approval, this document becomes the Single Source of Truth for implementation. The Vexus team starts with Phase 0, then Phase 1 Web MVP, while Feed/Hiring/Advanced Notifications are deferred to Phase 2 and Mobile to Phase 3.

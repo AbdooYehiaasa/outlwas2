@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .pr-split { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:22px; align-items:start; }
+  .pr-id { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .pr-quad { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; }
+  @media (max-width:1080px) { .pr-split { grid-template-columns:minmax(0,1fr); } .pr-side { position:static !important; } }
+  @media (max-width:620px) { .pr-quad { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+</style>
+</helmet>
+
+<div data-page="profile" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:46px 28px 0;">
+    <div class="pr-id" style="margin-bottom:30px;">
+      <span style="width:88px;height:88px;flex:none;border-radius:24px;display:grid;place-items:center;background:linear-gradient(135deg,#FFA047,#FF3C00);font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:32px;color:#08060a;box-shadow:0 16px 44px rgba(255,106,0,.3);">A</span>
+      <div style="flex:1;min-width:240px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;">
+          <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(26px,3vw,38px);line-height:1;letter-spacing:-.01em;margin:0;">arc_director</h1>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#00D6B4;padding:4px 9px;border:1px solid rgba(0,214,180,.3);border-radius:5px;background:rgba(0,214,180,.07);">◈ VERIFIED IDENTITY</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#FF8A33;padding:4px 9px;border:1px solid rgba(255,106,0,.3);border-radius:5px;background:rgba(255,106,0,.07);">PREMIUM</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.07em;color:#6E646C;">JOINED MAR 2026 · 6 COMMUNITIES · 2 WALLETS VERIFIED</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button style="padding:12px 19px;font-size:13.5px;font-weight:600;color:#C6BBC1;background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:10px;cursor:pointer;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">Edit profile</button>
+        <a href="premium.dc.html" style="padding:12px 19px;font-size:13.5px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:10px;transition:transform .2s;" style-hover="transform:translateY(-2px);color:#08060a">Manage plan</a>
+      </div>
+    </div>
+
+    <div class="pr-split">
+      <div>
+        <!-- reputation -->
+        <div class="vx-spot" style="border:1px solid rgba(255,255,255,.09);border-radius:19px;background:linear-gradient(165deg,#141017,#0b080d 60%);overflow:hidden;margin-bottom:20px;">
+          <div style="height:2px;background:linear-gradient(90deg,#FF3C00,#FFA047,#00D6B4);"></div>
+          <div style="padding:24px 24px 0;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#6E646C;margin-bottom:12px;">REPUTATION SCORE</div>
+              <div style="display:flex;align-items:baseline;gap:11px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:clamp(44px,5vw,62px);font-weight:700;line-height:.9;color:#F4EDE6;">{{ score }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#6E646C;">/ 100 · {{ band }}</span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;margin-bottom:7px;">NEXT BAND AT 95</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00D6B4;">+4 FROM CONSISTENT PARTICIPATION</div>
+            </div>
+          </div>
+          <div style="padding:20px 24px 0;">
+            <div style="height:6px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;">
+              <span style="display:block;height:100%;width:{{ score }}%;border-radius:99px;background:linear-gradient(90deg,#FF3C00,#FFA047);transition:width 1s cubic-bezier(.16,1,.3,1);"></span>
+            </div>
+          </div>
+          <div class="pr-quad" style="margin:22px 0 0;background:rgba(255,255,255,.07);border-top:1px solid rgba(255,255,255,.07);">
+            <sc-for list="{{ factors }}" as="f" hint-placeholder-count="4">
+              <div style="background:#0b080d;padding:17px 15px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:19px;font-weight:700;color:{{ f.color }};">{{ f.v }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.11em;color:#6E646C;margin-top:6px;line-height:1.4;">{{ f.k }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:16px 24px;background:rgba(255,106,0,.04);border-top:1px solid rgba(255,255,255,.06);">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.65;letter-spacing:.05em;color:#8C8189;">REPUTATION AFFECTS WEIGHT ONLY IN WEIGHTED RAFFLES, AND ONLY WHERE THE PROJECT CHOSE THAT MODEL. IT NEVER GUARANTEES AN ALLOCATION.</span>
+          </div>
+        </div>
+
+        <!-- connections -->
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:19px;background:rgba(255,255,255,.016);overflow:hidden;margin-bottom:20px;">
+          <div style="padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+            <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.03em;">CONNECTED IDENTITIES</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#6E646C;">USED BY THE REQUIREMENT ENGINE</span>
+          </div>
+          <sc-for list="{{ connections }}" as="c" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid rgba(255,255,255,.05);flex-wrap:wrap;">
+              <span style="width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;background:{{ c.bg }};color:{{ c.color }};font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;">{{ c.icon }}</span>
+              <div style="flex:1;min-width:150px;">
+                <div style="font-size:13.5px;font-weight:600;color:#F4EDE6;">{{ c.label }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#6E646C;margin-top:4px;">{{ c.value }}</div>
+              </div>
+              <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:{{ c.color }};">{{ c.state }}</span>
+              <button style="flex:none;padding:9px 14px;font-size:12.5px;font-weight:600;color:#C6BBC1;background:transparent;border:1px solid rgba(255,255,255,.13);border-radius:8px;cursor:pointer;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">{{ c.action }}</button>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- activity -->
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:19px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.07);font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.03em;">YOUR ACTIVITY</div>
+          <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
+            <div style="display:flex;gap:13px;padding:15px 22px;border-bottom:1px solid rgba(255,255,255,.05);">
+              <span style="width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:8px;background:{{ a.bg }};color:{{ a.color }};font-size:11px;">{{ a.icon }}</span>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13.5px;line-height:1.5;color:#C6BBC1;">{{ a.text }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#6E646C;margin-top:5px;">{{ a.meta }}</div>
+              </div>
+              <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#4E454C;">{{ a.time }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- side -->
+      <aside class="pr-side" style="position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;">
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#6E646C;">NOTIFICATIONS</div>
+          <sc-for list="{{ prefs }}" as="p" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.05);">
+              <span style="flex:1;min-width:0;">
+                <span style="display:block;font-size:13px;font-weight:600;color:#DCD2D6;">{{ p.label }}</span>
+                <span style="display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.07em;color:#6E646C;margin-top:4px;">{{ p.meta }}</span>
+              </span>
+              <button onClick="{{ p.toggle }}" style="flex:none;width:38px;height:20px;border-radius:99px;border:none;background:{{ p.track }};position:relative;cursor:pointer;transition:background .25s;">
+                <span style="position:absolute;top:3px;left:{{ p.x }};width:14px;height:14px;border-radius:99px;background:#08060a;transition:left .25s cubic-bezier(.16,1,.3,1);"></span>
+              </button>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#6E646C;">FOLLOWING</div>
+          <sc-for list="{{ following }}" as="f" hint-placeholder-count="4">
+            <a href="community.dc.html" style="display:flex;align-items:center;gap:12px;padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s;" style-hover="background:rgba(255,255,255,.03)">
+              <span style="width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;background:{{ f.art }};font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:11px;color:#08060a;">{{ f.initials }}</span>
+              <span style="flex:1;min-width:0;font-size:13px;font-weight:600;color:#DCD2D6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ f.name }}</span>
+              <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:{{ f.liveColor }};">{{ f.live }}</span>
+            </a>
+          </sc-for>
+          <div style="padding:14px 18px;">
+            <a href="communities.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#FF6A00;">ALL COMMUNITIES →</a>
+          </div>
+        </div>
+
+        <div style="padding:18px 20px;border:1px solid rgba(255,60,0,.22);border-radius:18px;background:rgba(255,60,0,.035);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#FF3C00;margin-bottom:11px;">SECURITY</div>
+          <p style="font-size:12.5px;line-height:1.6;color:#9B8F96;margin:0 0 14px;">The Outlaws never asks for a private key or seed phrase. Wallet proofs are read-only signatures.</p>
+          <a href="support.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:#FF6A00;">REPORT AN IMPERSONATION →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+class Component extends DCLogic {
+  state = { prefs: { closing: true, opens: true, wins: true, digest: false } };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  renderVals() {
+    const s = this.state;
+    return {
+      score: 91, band: 'TRUSTED',
+      factors: [
+        { k: 'ENTRIES COMPLETED', v: '15', color: '#F4EDE6' },
+        { k: 'REQUIREMENTS HONOURED', v: '100%', color: MET },
+        { k: 'CLAIMS ON TIME', v: '1 / 1', color: MET },
+        { k: 'SYBIL FLAGS', v: '0', color: MET }
+      ],
+      connections: [
+        { icon: 'X', label: 'X account', value: '@vex_2847', state: 'VERIFIED', color: MET, bg: 'rgba(0,214,180,.1)', action: 'Manage' },
+        { icon: 'D', label: 'Discord', value: 'arc_director#2847 · 6 guilds', state: 'VERIFIED', color: MET, bg: 'rgba(0,214,180,.1)', action: 'Manage' },
+        { icon: 'W', label: 'Primary wallet', value: '0x8f2c…4A9b', state: 'PROOF SIGNED', color: MET, bg: 'rgba(0,214,180,.1)', action: 'Replace' },
+        { icon: 'W', label: 'Secondary wallet', value: '0x41ae…97D0', state: 'PROOF SIGNED', color: MET, bg: 'rgba(0,214,180,.1)', action: 'Remove' },
+        { icon: 'T', label: 'Telegram', value: 'not connected', state: 'PREMIUM ALERTS', color: PEND, bg: 'rgba(255,106,0,.1)', action: 'Connect' }
+      ],
+      activity: [
+        { icon: '▸', color: PEND, bg: 'rgba(255,106,0,.09)', text: 'Entered ARCforge Genesis Pass', meta: 'LEDGER POSITION #4,809', time: '2h' },
+        { icon: '★', color: MET, bg: 'rgba(0,214,180,.09)', text: 'Won Northstar Access Pass', meta: 'DRAW VERIFIED · CLAIM PENDING', time: '7d' },
+        { icon: '◈', color: MET, bg: 'rgba(0,214,180,.09)', text: 'Wallet proof re-signed for 0x41ae…97D0', meta: 'EIP-712 · GASLESS', time: '9d' },
+        { icon: '▸', color: PEND, bg: 'rgba(255,106,0,.09)', text: 'Joined Northstar DAO', meta: 'FOLLOWING · CALENDAR SYNCED', time: '12d' },
+        { icon: '·', color: DEAD, bg: 'rgba(255,255,255,.05)', text: 'Not selected in Ember Labs Founder Pass', meta: '6,204 ENTRIES · 3 WINNERS', time: '14d' }
+      ],
+      prefs: [
+        ['closing', 'Closing soon', 'RAFFLES YOU ENTERED · 6H BEFORE'],
+        ['opens', 'New raffles', 'FROM FOLLOWED COMMUNITIES'],
+        ['wins', 'Draw results', 'WIN OR NOT SELECTED'],
+        ['digest', 'Weekly digest', 'EMAIL · MONDAYS']
+      ].map(([key, label, meta]) => ({
+        label, meta,
+        track: s.prefs[key] ? '#FF6A00' : 'rgba(255,255,255,.14)',
+        x: s.prefs[key] ? '21px' : '3px',
+        toggle: () => this.setState(st => ({ prefs: Object.assign({}, st.prefs, { [key]: !st.prefs[key] }) }))
+      })),
+      following: [
+        { name: 'ARCforge Community', initials: 'AC', live: '4 LIVE', liveColor: PEND, art: 'linear-gradient(135deg,#FFA047,#FF3C00)' },
+        { name: 'Northstar DAO', initials: 'ND', live: '1 LIVE', liveColor: PEND, art: 'linear-gradient(135deg,#FFD08A,#FF8A33)' },
+        { name: 'Riftbound Arena', initials: 'RA', live: '2 LIVE', liveColor: PEND, art: 'linear-gradient(135deg,#5ef2d6,#00806c)' },
+        { name: 'Frontier Collective', initials: 'FC', live: 'NONE', liveColor: DEAD, art: 'linear-gradient(135deg,#C6BBC1,#6E646C)' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

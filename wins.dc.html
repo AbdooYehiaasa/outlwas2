@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .wn-split { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:22px; align-items:start; }
+  .wn-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+  @media (max-width:1080px) { .wn-split { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:760px) { .wn-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:560px) { .wn-steps { grid-template-columns:minmax(0,1fr); } .wn-claim { flex-direction:column !important; } .wn-claim > * { width:100%; justify-content:center; } }
+</style>
+</helmet>
+
+<div data-page="wins" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <div style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.012);">
+    <div class="ol-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:44px;display:flex;align-items:center;gap:12px;">
+      <a href="myraffles.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#6E646C;">MY RAFFLES</a>
+      <span style="color:#3E353C;font-size:10px;">/</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#C6BBC1;">ALLOCATIONS WON</span>
+      <span style="flex:1;"></span>
+      <span style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#00D6B4;white-space:nowrap;">
+        <span style="width:6px;height:6px;border-radius:99px;background:#00D6B4;animation:vx-pulse 1.8s ease-in-out infinite;"></span>1 UNCLAIMED
+      </span>
+    </div>
+  </div>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:46px 28px 0;">
+    <div style="margin-bottom:30px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#00D6B4;margin-bottom:13px;">VERIFIED OUTCOMES</div>
+      <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(32px,3.8vw,52px);line-height:1;letter-spacing:-.02em;margin:0 0 14px;">
+        <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">My</span><span class="vx-word" style="animation-delay:.24s;color:#00D6B4;text-shadow:0 0 46px rgba(0,214,180,.4);">Wins</span>
+      </h1>
+      <p style="font-size:15.5px;line-height:1.6;color:#9B8F96;max-width:560px;margin:0;text-wrap:pretty;">Allocations you were selected for, the proof that selected you, and the claim status of each reward.</p>
+    </div>
+
+    <div class="wn-split">
+      <div>
+        <!-- primary win card -->
+        <div class="vx-spot" style="position:relative;border:1px solid rgba(0,214,180,.3);border-radius:20px;background:linear-gradient(165deg,rgba(0,214,180,.1),#0a070c 62%);overflow:hidden;">
+          <div style="height:2px;background:linear-gradient(90deg,#00D6B4,#5ef2d6,#00806c);"></div>
+          <div style="padding:26px 26px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:#00D6B4;padding:5px 11px;border:1px solid rgba(0,214,180,.35);border-radius:6px;background:rgba(0,214,180,.08);">◈ ALLOCATION WON</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#6E646C;">DRAWN 04 SEP 2026 · 14:00 UTC</span>
+          </div>
+
+          <div style="padding:20px 26px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+            <span class="vx-seal" style="width:58px;height:58px;flex:none;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#5ef2d6,#00806c);font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;color:#08060a;">NS</span>
+            <div style="min-width:200px;flex:1;">
+              <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,30px);line-height:1.1;margin:0 0 8px;">Northstar Access Pass</h2>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#6E646C;">NORTHSTAR PROTOCOL · WEIGHTED RANDOM · 1 OF 5,104 ENTRIES</div>
+            </div>
+          </div>
+
+          <div style="margin:22px 26px 0;padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.022);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#6E646C;margin-bottom:14px;">CLAIM STATUS</div>
+            <div class="wn-steps">
+              <sc-for list="{{ claimSteps }}" as="c" hint-placeholder-count="4">
+                <div style="padding:12px;border:1px solid {{ c.border }};border-radius:11px;background:{{ c.bg }};">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;">
+                    <span class="{{ c.pulse }}" style="width:19px;height:19px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ c.color }};color:{{ c.color }};font-size:9px;font-weight:700;">{{ c.icon }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:{{ c.color }};">{{ c.n }}</span>
+                  </div>
+                  <div style="font-size:12.5px;font-weight:600;color:{{ c.ink }};line-height:1.35;">{{ c.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="padding:22px 26px 26px;">
+            <div class="wn-claim" style="display:flex;gap:11px;flex-wrap:wrap;">
+              <button onClick="{{ claim }}" style="flex:1;min-width:200px;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;color:#08060a;background:{{ claimBg }};transition:transform .2s;" style-hover="transform:translateY(-2px)">{{ claimLabel }}</button>
+              <a href="raffle.dc.html" style="display:flex;align-items:center;justify-content:center;padding:16px 20px;border:1px solid rgba(0,214,180,.35);border-radius:12px;font-size:14.5px;font-weight:600;color:#00D6B4;background:rgba(0,214,180,.06);transition:background .2s;" style-hover="background:rgba(0,214,180,.14)">Verify this draw</a>
+            </div>
+            <div style="margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.6;letter-spacing:.04em;color:#6E646C;">{{ claimNote }}</div>
+          </div>
+        </div>
+
+        <!-- proof -->
+        <div style="margin-top:22px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+            <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.03em;">WHY YOU WON</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#00D6B4;">RECOMPUTABLE BY ANYONE</span>
+          </div>
+          <sc-for list="{{ proof }}" as="p" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);">
+              <span style="width:17px;height:17px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid #00D6B4;color:#00D6B4;font-size:8px;">✓</span>
+              <span style="flex:1;min-width:0;font-size:13.5px;color:#DCD2D6;">{{ p.label }}</span>
+              <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8C8189;word-break:break-all;">{{ p.value }}</span>
+            </div>
+          </sc-for>
+          <div style="padding:16px 22px;">
+            <button style="width:100%;padding:13px;font-size:13.5px;font-weight:600;color:#00D6B4;background:rgba(0,214,180,.06);border:1px solid rgba(0,214,180,.3);border-radius:11px;cursor:pointer;transition:background .2s;" style-hover="background:rgba(0,214,180,.15)">Download evidence bundle</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- side -->
+      <aside style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+            <div class="vx-spot" style="background:#0b080d;padding:18px 16px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:22px;font-weight:700;color:{{ s.color }};">{{ s.v }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;margin-top:7px;">{{ s.k }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#6E646C;">PAST OUTCOMES</div>
+          <sc-for list="{{ history }}" as="h" hint-placeholder-count="4">
+            <a href="raffle.dc.html" style="display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s,padding-left .25s;" style-hover="background:rgba(255,255,255,.03);padding-left:23px">
+              <span style="width:9px;height:9px;flex:none;border-radius:3px;background:{{ h.color }};"></span>
+              <span style="flex:1;min-width:0;">
+                <span style="display:block;font-size:13.5px;font-weight:600;color:#DCD2D6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ h.title }}</span>
+                <span style="display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#6E646C;margin-top:4px;">{{ h.meta }}</span>
+              </span>
+              <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.09em;color:{{ h.color }};">{{ h.state }}</span>
+            </a>
+          </sc-for>
+        </div>
+
+        <div style="padding:20px;border:1px solid rgba(255,106,0,.24);border-radius:18px;background:linear-gradient(160deg,rgba(255,106,0,.08),transparent 70%);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#FF8A33;margin-bottom:11px;">ODDS, HONESTLY</div>
+          <p style="font-size:12.5px;line-height:1.6;color:#9B8F96;margin:0;">Reputation affects weight only where a project chose a weighted model. It never guarantees an allocation, and Premium never changes it.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+class Component extends DCLogic {
+  state = { step: 2 };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); this.t && clearTimeout(this.t); }
+
+  claim = () => {
+    if (this.state.step >= 4) return;
+    this.setState({ step: 3 });
+    this.t = setTimeout(() => this.setState({ step: 4 }), 1600);
+  };
+
+  renderVals() {
+    const step = this.state.step;
+    const defs = [
+      ['STEP 01', 'Winner published'],
+      ['STEP 02', 'Receiving wallet confirmed'],
+      ['STEP 03', 'Project signs transfer'],
+      ['STEP 04', 'Reward delivered']
+    ];
+    const claimSteps = defs.map(([n, label], i) => {
+      const idx = i + 1;
+      const done = idx < step, active = idx === step;
+      const color = done ? MET : active ? PEND : DEAD;
+      return {
+        n, label, color,
+        icon: done ? '✓' : active ? '◵' : String(idx),
+        ink: done || active ? '#F4EDE6' : '#6E646C',
+        pulse: active && !(window.OutlawsFX && window.OutlawsFX.reduced) ? 'vx-node' : '',
+        border: done ? 'rgba(0,214,180,.26)' : active ? 'rgba(255,106,0,.32)' : 'rgba(255,255,255,.08)',
+        bg: done ? 'rgba(0,214,180,.045)' : active ? 'rgba(255,106,0,.06)' : 'rgba(255,255,255,.016)'
+      };
+    });
+
+    const label = step >= 4 ? 'Reward delivered' : step === 3 ? 'Awaiting project signature…' : 'Claim allocation';
+    return {
+      claimSteps, claim: this.claim,
+      claimLabel: label,
+      claimBg: step >= 4 ? 'linear-gradient(180deg,#5ef2d6,#00b899)' : 'linear-gradient(180deg,#FFA047,#FF6A00)',
+      claimNote: step >= 4
+        ? 'DELIVERED TO 0x8F2C…4A9B · TX 0x71ad…9e04 · NON-CUSTODIAL TRANSFER'
+        : 'CLAIM WINDOW CLOSES 18 SEP 2026. THE OUTLAWS NEVER HOLDS YOUR REWARD OR YOUR KEYS.',
+      proof: [
+        { label: 'Server seed (revealed)', value: '9f4e…c0b1' },
+        { label: 'Entry ledger merkle root', value: '2a71…88ff' },
+        { label: 'Public entropy source', value: 'block #21,402,118' },
+        { label: 'Your ledger position', value: '#3,417' },
+        { label: 'Deterministic draw output', value: 'index 3,417 → you' }
+      ],
+      stats: [
+        { k: 'ALLOCATIONS WON', v: '1', color: MET },
+        { k: 'TOTAL ENTRIES', v: '15', color: '#F4EDE6' },
+        { k: 'HIT RATE', v: '6.7%', color: '#F4EDE6' },
+        { k: 'UNCLAIMED', v: step >= 4 ? '0' : '1', color: step >= 4 ? DEAD : PEND }
+      ],
+      history: [
+        { title: 'Northstar Access Pass', meta: '04 SEP 2026 · NORTHSTAR PROTOCOL', state: 'WON', color: MET },
+        { title: 'Ember Labs Founder Pass', meta: '28 AUG 2026 · EMBER LABS', state: 'NOT SELECTED', color: DEAD },
+        { title: 'Morrow Genesis Membership', meta: '21 AUG 2026 · MORROW SOCIETY', state: 'NOT SELECTED', color: DEAD },
+        { title: 'Atlas Realm Parcel', meta: '14 AUG 2026 · ATLAS', state: 'NOT SELECTED', color: DEAD }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

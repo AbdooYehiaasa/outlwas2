@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .mr-head { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:28px; align-items:end; }
+  .mr-sum { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden; }
+  .mr-row { display:grid; grid-template-columns:64px minmax(0,1.5fr) repeat(3,minmax(0,1fr)) auto; gap:18px; align-items:center; padding:18px 20px; }
+  .mr-toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  @media (max-width:1100px) {
+    .mr-row { grid-template-columns:52px minmax(0,1fr) auto; grid-row-gap:14px; }
+    .mr-row .mr-cell { grid-column:2 / span 2; display:flex; align-items:baseline; justify-content:space-between; gap:14px; border-top:1px solid rgba(255,255,255,.05); padding-top:11px; }
+    .mr-row .mr-cell .mr-k { display:block !important; }
+    .mr-row .mr-act { grid-column:2 / span 2; }
+    .mr-row .mr-act a { width:100%; justify-content:center; }
+  }
+  @media (max-width:860px) { .mr-head { grid-template-columns:minmax(0,1fr); } .mr-sum { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:560px) { .mr-row { grid-template-columns:44px minmax(0,1fr); } .mr-row .mr-cell, .mr-row .mr-act { grid-column:1 / span 2; } }
+</style>
+</helmet>
+
+<div data-page="myraffles" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html" class="on">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <!-- context rail -->
+  <div style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.012);">
+    <div class="ol-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:44px;display:flex;align-items:center;gap:12px;">
+      <a href="index.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#6E646C;">HOME</a>
+      <span style="color:#3E353C;font-size:10px;">/</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#C6BBC1;">MY RAFFLES</span>
+      <span style="flex:1;"></span>
+      <span style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#00D6B4;white-space:nowrap;">
+        <span style="width:6px;height:6px;border-radius:99px;background:#00D6B4;animation:vx-pulse 1.8s ease-in-out infinite;"></span>LEDGER SYNCED · BLOCK #21,405,912
+      </span>
+    </div>
+  </div>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div class="mr-head" style="padding:50px 0 30px;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:13px;">YOUR PARTICIPATION</div>
+        <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.02em;margin:0 0 16px;">
+          <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">My</span><span class="vx-word" style="animation-delay:.24s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">Raffles</span>
+        </h1>
+        <p style="font-size:16px;line-height:1.6;color:#9B8F96;max-width:560px;margin:0;text-wrap:pretty;">
+          <span class="vx-word" style="animation-delay:.45s;">Every raffle you entered, its live state, and the finalized results you can still verify. Entries are signed and immutable — this view is a record, not a form.</span>
+        </p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="discover.dc.html" style="padding:13px 20px;font-size:14px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:10px;white-space:nowrap;transition:transform .2s;" style-hover="transform:translateY(-2px);color:#08060a">Find more raffles</a>
+        <a href="wins.dc.html" style="padding:13px 20px;font-size:14px;font-weight:600;color:#00D6B4;background:rgba(0,214,180,.07);border:1px solid rgba(0,214,180,.35);border-radius:10px;white-space:nowrap;transition:background .2s;" style-hover="background:rgba(0,214,180,.15)">My wins</a>
+      </div>
+    </div>
+
+    <div class="mr-sum vx-stagger" style="margin-bottom:30px;">
+      <sc-for list="{{ summary }}" as="s" hint-placeholder-count="4">
+        <div class="vx-spot" style="background:#0b080d;padding:20px 18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#6E646C;margin-bottom:12px;">{{ s.label }}</div>
+          <div style="display:flex;align-items:baseline;gap:9px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:30px;font-weight:700;line-height:1;color:{{ s.color }};">{{ s.value }}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4E454C;">{{ s.unit }}</span>
+          </div>
+          <div style="font-size:12.5px;line-height:1.5;color:#8C8189;margin-top:11px;">{{ s.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div class="mr-toolbar" style="padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:20px;">
+      <div style="display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;flex-wrap:wrap;">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+          <button onClick="{{ t.pick }}" style="padding:9px 15px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ t.color }};background:{{ t.bg }};border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="position:relative;">
+          <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#6E646C;font-size:13px;">⌕</span>
+          <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search your raffles…" style="width:230px;max-width:100%;padding:11px 13px 11px 34px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:9px;color:#F4EDE6;font-size:13.5px;outline:none;transition:border-color .25s;" style-focus="border-color:rgba(255,106,0,.55)" />
+        </div>
+        <div style="display:flex;gap:4px;padding:4px;border:1px solid rgba(255,255,255,.09);border-radius:10px;">
+          <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="2">
+            <button onClick="{{ s.pick }}" style="padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.07em;color:{{ s.color }};background:{{ s.bg }};border:none;border-radius:7px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ s.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+      <div class="vx-stagger" style="display:flex;flex-direction:column;gap:12px;">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="4">
+          <div>
+            <div class="mr-row vx-spot" style="border:1px solid {{ r.border }};border-radius:16px;background:{{ r.bg }};transition:border-color .3s,transform .3s;" style-hover="border-color:rgba(255,106,0,.34);transform:translateY(-2px)">
+              <span style="width:56px;height:56px;border-radius:13px;display:grid;place-items:center;background:{{ r.art }};font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:17px;color:#08060a;">{{ r.initials }}</span>
+
+              <div style="min-width:0;">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;padding:3px 7px;border-radius:4px;color:{{ r.stateColor }};border:1px solid {{ r.stateBorder }};background:{{ r.stateBg }};">{{ r.state }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;padding:3px 7px;border-radius:4px;color:{{ r.entryColor }};border:1px solid {{ r.entryBorder }};background:{{ r.entryBg }};">{{ r.entryState }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#6E646C;">{{ r.chain }}</span>
+                </div>
+                <div style="font-size:15.5px;font-weight:600;color:#F4EDE6;">{{ r.title }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#6E646C;margin-top:6px;">{{ r.provenance }} · {{ r.ref }}</div>
+              </div>
+
+              <div class="mr-cell">
+                <span class="mr-k" style="display:none;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;">PRIZE</span>
+                <span style="font-size:13px;color:#C6BBC1;">{{ r.prize }}</span>
+              </div>
+
+              <div class="mr-cell">
+                <span class="mr-k" style="display:none;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;">ENTRANTS</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:13.5px;font-weight:600;color:#F4EDE6;">{{ r.entrants }}</span>
+              </div>
+
+              <div class="mr-cell">
+                <span class="mr-k" style="display:none;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;">{{ r.timeLabel }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:13.5px;font-weight:600;color:{{ r.timeColor }};">{{ r.time }}</span>
+              </div>
+
+              <div class="mr-act">
+                <a href="{{ r.href }}" style="display:inline-flex;align-items:center;gap:9px;padding:11px 17px;font-size:13.5px;font-weight:600;color:{{ r.ctaInk }};background:{{ r.ctaBg }};border:1px solid {{ r.ctaBorder }};border-radius:10px;white-space:nowrap;transition:transform .2s;" style-hover="transform:translateY(-2px)">{{ r.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:52px 40px;border:1px dashed rgba(255,255,255,.14);border-radius:18px;background:rgba(255,255,255,.014);text-align:center;">
+        <div style="width:48px;height:48px;margin:0 auto 18px;display:grid;place-items:center;border-radius:14px;border:1px solid rgba(255,106,0,.3);color:#FF6A00;font-size:18px;">◷</div>
+        <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:21px;margin:0 0 10px;">{{ emptyTitle }}</h3>
+        <p style="font-size:14px;line-height:1.6;color:#9B8F96;max-width:430px;margin:0 auto 22px;">{{ emptyBody }}</p>
+        <a href="discover.dc.html" style="display:inline-block;padding:13px 24px;font-size:14px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:10px;" style-hover="color:#08060a">Browse open raffles</a>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:24px;display:flex;align-items:center;gap:11px;padding:15px 18px;border:1px solid rgba(0,214,180,.2);border-radius:13px;background:rgba(0,214,180,.035);">
+      <span style="color:#00D6B4;font-size:14px;flex:none;">◈</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.65;letter-spacing:.05em;color:#8C8189;">ENTRIES ARE CRYPTOGRAPHICALLY SIGNED AND WRITTEN TO A DECENTRALIZED LEDGER. TIMESTAMPS AND SELECTIONS CANNOT BE EDITED — BY YOU, BY A PROJECT, OR BY THE OUTLAWS.</span>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;All&quot;,&quot;options&quot;:[&quot;All&quot;,&quot;Active&quot;,&quot;Completed&quot;,&quot;Won&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+const ENTRIES = [
+  { title: 'ARCforge Genesis Pass', initials: 'AF', provenance: 'ARCforge Community', ref: 'entry #4,809 · 0x9f4e…c0b1', chain: 'ETHEREUM', state: 'ACTIVE', entry: 'SUBMITTED', prize: '1 × Genesis Pass', entrants: 4821, mins: 3742, group: 'Active' },
+  { title: 'Riftbound Arena Beta Key', initials: 'RB', provenance: 'Riftbound Arena · Gaming', ref: 'entry #2,118 · 0x41ae…97D0', chain: 'ARBITRUM', state: 'ACTIVE', entry: 'ELIGIBLE', prize: '1,000 × beta keys', entrants: 3820, mins: 1640, group: 'Active' },
+  { title: 'Frontier Land Whitelist', initials: 'FL', provenance: 'Frontier Collective', ref: 'entry #712 · 0x8f2c…4A9b', chain: 'BASE', state: 'ENDING SOON', entry: 'SUBMITTED', prize: '50 × Tier-1 spots', entrants: 892, mins: 752, group: 'Active' },
+  { title: 'Northstar Access Pass', initials: 'NS', provenance: 'Northstar Protocol', ref: 'won 04 Sep 2026', chain: 'ETHEREUM', state: 'COMPLETED', entry: 'ALLOCATION WON', prize: '1 × Access Pass', entrants: 5104, mins: 0, group: 'Won' },
+  { title: 'Ember Labs Founder Pass', initials: 'EL', provenance: 'Ember Labs', ref: 'finalized 28 Aug 2026', chain: 'ETHEREUM', state: 'COMPLETED', entry: 'NOT SELECTED', prize: '3 × Founder Passes', entrants: 6204, mins: 0, group: 'Completed' },
+  { title: 'Morrow Genesis Membership', initials: 'MW', provenance: 'Morrow Society', ref: 'finalized 21 Aug 2026', chain: 'ETHEREUM', state: 'COMPLETED', entry: 'NOT SELECTED', prize: '1 × lifetime membership', entrants: 6204, mins: 0, group: 'Completed' },
+  { title: 'Atlas Realm Parcel', initials: 'AR', provenance: 'Atlas', ref: 'finalized 14 Aug 2026', chain: 'BASE', state: 'COMPLETED', entry: 'NOT SELECTED', prize: '12 × parcels', entrants: 4118, mins: 0, group: 'Completed' },
+  { title: 'Spectral Audio Rights', initials: 'SA', provenance: 'Spectral DAO', ref: 'finalized 02 Aug 2026', chain: 'SOLANA', state: 'COMPLETED', entry: 'NOT SELECTED', prize: 'Fractional release rights', entrants: 2100, mins: 0, group: 'Completed' }
+];
+
+class Component extends DCLogic {
+  state = { tab: 'All', sort: 'Recently entered', query: '' };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  onQuery = e => this.setState({ query: e.target.value });
+
+  renderVals() {
+    const s = this.state;
+    const counts = {
+      All: ENTRIES.length,
+      Active: ENTRIES.filter(e => e.group === 'Active').length,
+      Completed: ENTRIES.filter(e => e.group === 'Completed').length,
+      Won: ENTRIES.filter(e => e.group === 'Won').length
+    };
+
+    let rows = ENTRIES.filter(e => {
+      if (s.tab === 'Active') return e.group === 'Active';
+      if (s.tab === 'Completed') return e.group === 'Completed' || e.group === 'Won';
+      if (s.tab === 'Won') return e.group === 'Won';
+      return true;
+    });
+    const q = s.query.trim().toLowerCase();
+    if (q) rows = rows.filter(e => (e.title + ' ' + e.provenance + ' ' + e.prize).toLowerCase().indexOf(q) > -1);
+    if (s.sort === 'Ending soon') rows = rows.slice().sort((a, b) => (a.mins || 1e9) - (b.mins || 1e9));
+    if (s.sort === 'Most entrants') rows = rows.slice().sort((a, b) => b.entrants - a.entrants);
+
+    const stateTone = { 'ACTIVE': PEND, 'ENDING SOON': '#FFB061', 'COMPLETED': DEAD, 'UPCOMING': DEAD };
+    const entryTone = { 'SUBMITTED': PEND, 'ELIGIBLE': MET, 'ALLOCATION WON': MET, 'NOT SELECTED': DEAD, 'INELIGIBLE': '#FF3C00' };
+
+    const view = rows.map(e => {
+      const won = e.entry === 'ALLOCATION WON';
+      const live = e.group === 'Active';
+      const hrs = Math.floor(e.mins / 60), days = Math.floor(hrs / 24);
+      const sc = stateTone[e.state], ec = entryTone[e.entry];
+      return {
+        title: e.title, initials: e.initials, provenance: e.provenance, ref: e.ref, chain: e.chain,
+        state: e.state, stateColor: sc, stateBorder: sc === DEAD ? 'rgba(255,255,255,.14)' : sc + '55', stateBg: sc === DEAD ? 'rgba(255,255,255,.04)' : sc + '14',
+        entryState: e.entry, entryColor: ec, entryBorder: ec === DEAD ? 'rgba(255,255,255,.14)' : ec + '55', entryBg: ec === DEAD ? 'rgba(255,255,255,.04)' : ec + '14',
+        prize: e.prize,
+        entrants: e.entrants.toLocaleString('en-US'),
+        timeLabel: live ? 'TIME LEFT' : 'FINALIZED',
+        time: live ? (days >= 1 ? days + 'd ' + String(hrs % 24).padStart(2, '0') + 'h' : String(hrs).padStart(2, '0') + 'h ' + String(e.mins % 60).padStart(2, '0') + 'm') : 'verified',
+        timeColor: live ? (e.mins < 360 ? PEND : '#F4EDE6') : MET,
+        art: won ? 'linear-gradient(135deg,#5ef2d6,#00806c)' : live ? 'linear-gradient(135deg,#FFA047,#FF3C00)' : 'linear-gradient(135deg,#C6BBC1,#6E646C)',
+        border: won ? 'rgba(0,214,180,.26)' : 'rgba(255,255,255,.08)',
+        bg: won ? 'rgba(0,214,180,.04)' : 'linear-gradient(160deg,#100c12,#0a070c)',
+        href: live ? 'raffle.dc.html' : won ? 'wins.dc.html' : 'raffle.dc.html',
+        cta: live ? 'View raffle' : won ? 'View allocation' : 'View result',
+        ctaInk: live ? '#08060a' : won ? '#08060a' : '#C6BBC1',
+        ctaBg: live ? 'linear-gradient(180deg,#FFA047,#FF6A00)' : won ? 'linear-gradient(180deg,#5ef2d6,#00b899)' : 'transparent',
+        ctaBorder: live || won ? 'transparent' : 'rgba(255,255,255,.14)'
+      };
+    });
+
+    return {
+      query: s.query, onQuery: this.onQuery,
+      summary: [
+        { label: 'ACTIVE ENTRIES', value: '3', unit: 'LIVE', color: PEND, note: 'Across two followed communities.' },
+        { label: 'COMPLETED', value: '12', unit: 'DRAWS', color: '#F4EDE6', note: 'Past selections finalized and published.' },
+        { label: 'ALLOCATIONS WON', value: '1', unit: 'PRIZE', color: MET, note: 'Northstar Access Pass — claimed.' },
+        { label: 'TOTAL ENTRIES', value: '15', unit: 'LIFETIME', color: '#F4EDE6', note: 'Full entry history is verifiable.' }
+      ],
+      tabs: ['All', 'Active', 'Completed', 'Won'].map(t => ({
+        label: t.toUpperCase() + ' (' + counts[t] + ')',
+        color: s.tab === t ? '#08060a' : '#8C8189',
+        bg: s.tab === t ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ tab: t })
+      })),
+      sorts: ['Recently entered', 'Ending soon', 'Most entrants'].map(v => ({
+        label: v.toUpperCase(),
+        color: s.sort === v ? '#FF6A00' : '#6E646C',
+        bg: s.sort === v ? 'rgba(255,106,0,.1)' : 'transparent',
+        pick: () => this.setState({ sort: v })
+      })),
+      rows: view, hasRows: view.length > 0, empty: view.length === 0,
+      emptyTitle: q ? 'No entries match that search' : 'Nothing in this tab yet',
+      emptyBody: q
+        ? 'No raffle in your history matches “' + s.query.trim() + '”. Clear the search to see all ' + ENTRIES.length + ' entries.'
+        : 'You have no raffles in this state. Open Discover and the requirement engine will tell you what you already qualify for.'
+    };
+  }
+}
+</script>
+</body>
+</html>

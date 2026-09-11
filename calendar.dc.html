@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .cal-split { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:22px; align-items:start; }
+  .cal-month { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px; }
+  .cal-cell { min-height:98px; padding:9px; border:1px solid rgba(255,255,255,.06); border-radius:11px; background:rgba(255,255,255,.014); display:flex; flex-direction:column; gap:5px; transition:border-color .25s, background .25s; }
+  .cal-cell:hover { border-color:rgba(255,106,0,.3); background:rgba(255,106,0,.04); }
+  @media (max-width:1080px) { .cal-split { grid-template-columns:minmax(0,1fr); } .cal-side { position:static !important; } }
+  @media (max-width:760px) {
+    .cal-month { display:flex; flex-direction:column; gap:8px; }
+    .cal-dow { display:none !important; }
+    .cal-cell { min-height:0; flex-direction:row; align-items:center; gap:12px; flex-wrap:wrap; }
+    .cal-empty { display:none !important; }
+  }
+</style>
+</helmet>
+
+<div data-page="calendar" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html" class="on">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div style="padding:50px 0 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:13px;">ALLOCATION CALENDAR</div>
+        <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(32px,3.8vw,52px);line-height:1;letter-spacing:-.02em;margin:0 0 14px;">
+          <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">Never</span><span class="vx-word" style="animation-delay:.24s;margin-right:.22em;">miss</span><span class="vx-word" style="animation-delay:.38s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">a window</span><span class="vx-word" style="animation-delay:.5s;">.</span>
+        </h1>
+        <p style="font-size:15.5px;line-height:1.6;color:#9B8F96;max-width:540px;margin:0;text-wrap:pretty;">Opens, closes and draw dates from every community you follow — in one grid, with reminders that land before the window shuts.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="display:flex;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;">
+          <sc-for list="{{ views }}" as="v" hint-placeholder-count="2">
+            <button onClick="{{ v.pick }}" style="padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ v.color }};background:{{ v.bg }};border:none;border-radius:8px;cursor:pointer;transition:all .25s;">{{ v.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onClick="{{ prev }}" style="width:38px;height:38px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#C6BBC1;cursor:pointer;font-size:14px;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">‹</button>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:#F4EDE6;min-width:112px;text-align:center;">{{ monthLabel }}</span>
+          <button onClick="{{ next }}" style="width:38px;height:38px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#C6BBC1;cursor:pointer;font-size:14px;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">›</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cal-split">
+      <div>
+        <!-- legend -->
+        <div style="display:flex;gap:16px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:16px;">
+          <sc-for list="{{ legend }}" as="l" hint-placeholder-count="3">
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:#8C8189;">
+              <span style="width:8px;height:8px;border-radius:3px;background:{{ l.color }};"></span>{{ l.label }}
+            </span>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ isMonth }}" hint-placeholder-val="{{ true }}">
+          <div class="cal-month cal-dow" style="margin-bottom:8px;">
+            <sc-for list="{{ dow }}" as="d" hint-placeholder-count="7">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#4E454C;text-align:center;padding:4px 0;">{{ d.label }}</div>
+            </sc-for>
+          </div>
+          <div class="cal-month vx-stagger">
+            <sc-for list="{{ cells }}" as="c" hint-placeholder-count="7">
+              <div class="{{ c.cls }}" style="{{ c.style }}">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:12px;font-weight:600;color:{{ c.numColor }};">{{ c.day }}</span>
+                  <sc-if value="{{ c.isToday }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:#FF6A00;">TODAY</span>
+                  </sc-if>
+                </div>
+                <sc-for list="{{ c.events }}" as="e" hint-placeholder-count="1">
+                  <a href="raffle.dc.html" style="display:block;padding:6px 8px;border-radius:7px;background:{{ e.bg }};border-left:2px solid {{ e.color }};transition:transform .2s;" style-hover="transform:translateX(2px)">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.09em;color:{{ e.color }};margin-bottom:3px;">{{ e.kind }} · {{ e.time }}</div>
+                    <div style="font-size:11.5px;font-weight:600;color:#DCD2D6;line-height:1.3;">{{ e.title }}</div>
+                  </a>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+          <div class="vx-stagger" style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ agenda }}" as="a" hint-placeholder-count="6">
+              <div>
+                <a href="raffle.dc.html" class="vx-spot" style="display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:linear-gradient(160deg,#100c12,#0a070c);transition:transform .28s,border-color .28s;flex-wrap:wrap;" style-hover="transform:translateY(-3px);border-color:rgba(255,106,0,.38)">
+                  <div style="flex:none;width:52px;text-align:center;padding:8px 0;border:1px solid rgba(255,255,255,.1);border-radius:10px;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:#F4EDE6;line-height:1;">{{ a.day }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#6E646C;margin-top:4px;">{{ a.mon }}</div>
+                  </div>
+                  <div style="flex:1;min-width:180px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;padding:3px 7px;border-radius:4px;color:{{ a.color }};border:1px solid {{ a.border }};background:{{ a.bg }};">{{ a.kind }}</span>
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#6E646C;">{{ a.time }}</span>
+                    </div>
+                    <div style="font-size:15px;font-weight:600;color:#F4EDE6;">{{ a.title }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#6E646C;margin-top:5px;">{{ a.project }}</div>
+                  </div>
+                  <span style="flex:none;padding:10px 15px;font-size:13px;font-weight:600;color:#C6BBC1;border:1px solid rgba(255,255,255,.13);border-radius:9px;">Open →</span>
+                </a>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- side -->
+      <aside class="cal-side" style="position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;">
+        <div style="border:1px solid rgba(255,106,0,.26);border-radius:18px;background:linear-gradient(160deg,rgba(255,106,0,.09),transparent 70%);padding:20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#FF8A33;margin-bottom:13px;">NEXT UP</div>
+          <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:20px;line-height:1.15;margin-bottom:10px;">{{ nextTitle }}</div>
+          <div style="display:flex;align-items:baseline;gap:9px;margin-bottom:16px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:26px;font-weight:700;color:#FF6A00;">{{ nextCountdown }}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:#6E646C;">UNTIL CLOSE</span>
+          </div>
+          <a href="raffle.dc.html" style="display:flex;align-items:center;justify-content:center;padding:12px;font-size:13.5px;font-weight:700;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:10px;transition:transform .2s;" style-hover="transform:translateY(-2px);color:#08060a">Open raffle</a>
+        </div>
+
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#6E646C;">REMINDERS</div>
+          <sc-for list="{{ reminders }}" as="r" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.05);">
+              <span style="flex:1;min-width:0;">
+                <span style="display:block;font-size:13.5px;font-weight:600;color:#DCD2D6;">{{ r.label }}</span>
+                <span style="display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#6E646C;margin-top:4px;">{{ r.meta }}</span>
+              </span>
+              <button onClick="{{ r.toggle }}" style="flex:none;width:38px;height:20px;border-radius:99px;border:none;background:{{ r.track }};position:relative;cursor:pointer;transition:background .25s;">
+                <span style="position:absolute;top:3px;left:{{ r.x }};width:14px;height:14px;border-radius:99px;background:#08060a;transition:left .25s cubic-bezier(.16,1,.3,1);"></span>
+              </button>
+            </div>
+          </sc-for>
+          <div style="padding:16px 18px;">
+            <a href="premium.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:#FF6A00;">DISCORD DM + TELEGRAM ALERTS → PREMIUM</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Month&quot;,&quot;options&quot;:[&quot;Month&quot;,&quot;List&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;}}">
+const PEND = '#FF6A00', MET = '#00D6B4', WARN = '#FFB061';
+
+const EVENTS = [
+  { day: 11, kind: 'CLOSES', time: '18:00', title: 'Spectral Audio Rights', project: 'SPECTRAL DAO' },
+  { day: 12, kind: 'CLOSES', time: '06:40', title: 'Nightfall Arena Access', project: 'NIGHTFALL INTERACTIVE' },
+  { day: 13, kind: 'DRAW', time: '12:00', title: 'Frontier Land Whitelist', project: 'FRONTIER COLLECTIVE' },
+  { day: 14, kind: 'OPENS', time: '09:00', title: 'Obsidian Realm Bundle', project: 'OBSIDIAN CORE' },
+  { day: 16, kind: 'OPENS', time: '15:00', title: 'Northstar Access Pass', project: 'NORTHSTAR PROTOCOL' },
+  { day: 17, kind: 'CLOSES', time: '23:59', title: 'ARCforge Genesis Pass', project: 'ARCFORGE LABS' },
+  { day: 19, kind: 'OPENS', time: '10:00', title: 'Ironwood Harvester Allocation', project: 'IRONWOOD' },
+  { day: 21, kind: 'DRAW', time: '14:00', title: 'Riftbound Arena Beta Key', project: 'RIFTBOUND' },
+  { day: 23, kind: 'OPENS', time: '12:00', title: 'Mesa Seed Pass', project: 'MESA PROTOCOL' },
+  { day: 26, kind: 'DRAW', time: '18:00', title: 'Nova Node Operator Drop', project: 'NOVA PROTOCOL' }
+];
+
+class Component extends DCLogic {
+  state = { view: 'Month', month: 8, reminders: { closing: true, opens: true, draws: false } };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  renderVals() {
+    const s = this.state;
+    const tone = { OPENS: MET, CLOSES: PEND, DRAW: WARN };
+    const names = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+    const today = 11;
+    const isSep = s.month === 8;
+
+    // September 2026 starts on a Tuesday; 30 days
+    const lead = isSep ? 2 : 0;
+    const days = isSep ? 30 : 31;
+    const cells = [];
+    for (let i = 0; i < lead; i++) {
+      cells.push({ cls: 'cal-cell cal-empty', style: 'min-height:98px;padding:9px;border:1px solid rgba(255,255,255,.03);border-radius:11px;background:transparent;', day: '', numColor: '#2a2329', isToday: false, events: [] });
+    }
+    for (let d = 1; d <= days; d++) {
+      const evs = isSep ? EVENTS.filter(e => e.day === d) : [];
+      cells.push({
+        cls: 'cal-cell',
+        style: (d === today && isSep ? 'border-color:rgba(255,106,0,.45);background:rgba(255,106,0,.05);' : ''),
+        day: String(d).padStart(2, '0'),
+        numColor: evs.length ? '#F4EDE6' : '#6E646C',
+        isToday: d === today && isSep,
+        events: evs.map(e => ({ kind: e.kind, time: e.time, title: e.title, color: tone[e.kind], bg: tone[e.kind] + '12' }))
+      });
+    }
+
+    const agenda = (isSep ? EVENTS : []).map(e => ({
+      day: String(e.day).padStart(2, '0'), mon: names[s.month].slice(0, 3),
+      kind: e.kind, time: e.time, title: e.title, project: e.project,
+      color: tone[e.kind], border: tone[e.kind] + '55', bg: tone[e.kind] + '14'
+    }));
+
+    const rem = [
+      ['closing', 'Closing within 6 hours', 'IN-APP + EMAIL'],
+      ['opens', 'New raffle from a followed community', 'IN-APP'],
+      ['draws', 'Draw finalized and verifiable', 'IN-APP']
+    ].map(([key, label, meta]) => ({
+      label, meta,
+      track: s.reminders[key] ? '#FF6A00' : 'rgba(255,255,255,.14)',
+      x: s.reminders[key] ? '21px' : '3px',
+      toggle: () => this.setState(st => ({ reminders: Object.assign({}, st.reminders, { [key]: !st.reminders[key] }) }))
+    }));
+
+    return {
+      views: ['Month', 'List'].map(v => ({
+        label: v.toUpperCase(),
+        color: s.view === v ? '#08060a' : '#8C8189',
+        bg: s.view === v ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ view: v })
+      })),
+      isMonth: s.view === 'Month', isList: s.view === 'List',
+      monthLabel: names[s.month] + ' 2026',
+      prev: () => this.setState({ month: (s.month + 11) % 12 }),
+      next: () => this.setState({ month: (s.month + 1) % 12 }),
+      legend: [
+        { label: 'OPENS', color: MET }, { label: 'CLOSES', color: PEND }, { label: 'DRAW', color: WARN }
+      ],
+      dow: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map(label => ({ label })),
+      cells, agenda,
+      nextTitle: 'Spectral Audio Rights',
+      nextCountdown: '05h 12m',
+      reminders: rem
+    };
+  }
+}
+</script>
+</body>
+</html>

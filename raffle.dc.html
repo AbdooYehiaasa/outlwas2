@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#08060a; }
+  body { font-family:'Space Grotesk', Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#FF6A00; text-decoration:none; }
+  a:hover { color:#FF9040; }
+  ::selection { background:#FF6A00; color:#0a0709; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-track { background:#0b0810; }
+  ::-webkit-scrollbar-thumb { background:#2a1f2b; border-radius:99px; }
+  ::-webkit-scrollbar-thumb:hover { background:#FF6A00; }
+
+  @keyframes vx-pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.35; transform:scale(.82); } }
+  @keyframes vx-rise { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes vx-sweep { from { transform:translateX(-120%); } to { transform:translateX(320%); } }
+  @keyframes vx-orbit { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+  @keyframes vx-word { 0% { opacity:0; transform:translateY(34px) scale(.9); filter:blur(12px); } 55% { opacity:.85; transform:translateY(8px) scale(.98); filter:blur(2px); } 100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
+  @keyframes vx-draw { 0% { stroke-dashoffset:1200; opacity:0; } 45% { opacity:.5; } 100% { stroke-dashoffset:0; opacity:.22; } }
+  @keyframes vx-dotglow { 0%,100% { opacity:.12; transform:scale(1); } 50% { opacity:.55; transform:scale(1.45); } }
+  @keyframes vx-float { 0%,100% { transform:translate3d(0,0,0); opacity:.18; } 25% { transform:translate3d(6px,-14px,0); opacity:.7; } 50% { transform:translate3d(-4px,-7px,0); opacity:.35; } 75% { transform:translate3d(9px,-19px,0); opacity:.85; } }
+  @keyframes vx-ripple { 0% { transform:translate(-50%,-50%) scale(.2); opacity:.85; } 100% { transform:translate(-50%,-50%) scale(11); opacity:0; } }
+  @keyframes vx-scan { 0% { transform:translateY(-110%); opacity:0; } 12% { opacity:1; } 88% { opacity:1; } 100% { transform:translateY(560%); opacity:0; } }
+  @keyframes vx-tickin { from { opacity:0; transform:translateY(-58%) scale(.92); filter:blur(5px); } to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
+  @keyframes vx-node { 0%,100% { box-shadow:0 0 0 0 rgba(255,106,0,.55); } 50% { box-shadow:0 0 0 9px rgba(255,106,0,0); } }
+  @keyframes vx-seal { 0% { transform:scale(.4) rotate(-12deg); opacity:0; } 60% { transform:scale(1.08) rotate(2deg); opacity:1; } 100% { transform:scale(1) rotate(0); opacity:1; } }
+  @keyframes vx-urgent { 0%,100% { color:#FF6A00; text-shadow:0 0 0 rgba(255,60,0,0); } 50% { color:#FF8A33; text-shadow:0 0 22px rgba(255,60,0,.75); } }
+
+  .vx-rise { animation:vx-rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  .vx-word { display:inline-block; animation:vx-word .95s cubic-bezier(.16,1,.3,1) both; transition:color .3s ease, transform .3s ease, text-shadow .3s ease; }
+  .vx-word:hover { transform:translateY(-4px); text-shadow:0 0 28px rgba(255,106,0,.6); }
+  .vx-line { stroke:#FF6A00; stroke-width:.6; opacity:0; stroke-dasharray:6 7; stroke-dashoffset:1200; animation:vx-draw 2.6s cubic-bezier(.16,1,.3,1) forwards; }
+  .vx-dot { fill:#FF8A33; opacity:0; transform-box:fill-box; transform-origin:center; animation:vx-dotglow 3.4s ease-in-out infinite; }
+  .vx-mote { position:absolute; width:2px; height:2px; border-radius:99px; background:#FF8A33; box-shadow:0 0 8px rgba(255,106,0,.9); animation:vx-float 9s ease-in-out infinite; }
+  .vx-ripple { position:fixed; width:46px; height:46px; border-radius:99px; border:1px solid rgba(255,106,0,.75); pointer-events:none; z-index:9999; animation:vx-ripple .95s cubic-bezier(.16,1,.3,1) forwards; }
+  .vx-tick { animation:vx-tickin .45s cubic-bezier(.16,1,.3,1); }
+  .vx-urgent { animation:vx-urgent 1.6s ease-in-out infinite; }
+  .vx-seal { animation:vx-seal .7s cubic-bezier(.16,1,.3,1) both; }
+
+  .vx-reveal { transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1); }
+  .vx-stagger > * { transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1), filter .85s cubic-bezier(.16,1,.3,1); }
+  .vx-armed.vx-reveal { opacity:0; transform:translateY(38px); filter:blur(7px); }
+  .vx-armed.vx-reveal.vx-in { opacity:1; transform:translateY(0); filter:blur(0); }
+  .vx-armed.vx-stagger > * { opacity:0; transform:translateY(30px) scale(.985); filter:blur(6px); }
+  .vx-armed.vx-stagger.vx-in > * { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+  .vx-stagger > *:nth-child(1) { transition-delay:0s } .vx-stagger > *:nth-child(2) { transition-delay:.09s }
+  .vx-stagger > *:nth-child(3) { transition-delay:.18s } .vx-stagger > *:nth-child(4) { transition-delay:.27s }
+  .vx-stagger > *:nth-child(5) { transition-delay:.36s } .vx-stagger > *:nth-child(6) { transition-delay:.45s }
+  .vx-stagger > *:nth-child(7) { transition-delay:.54s }
+
+  .vx-spot { position:relative; }
+  .vx-spot::after { content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .35s ease; background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,.14), transparent 62%); }
+  .vx-spot:hover::after { opacity:1; }
+  .vx-scanner { position:absolute; left:0; right:0; height:38%; pointer-events:none; background:linear-gradient(180deg, transparent, rgba(255,106,0,.16), transparent); animation:vx-scan 1.5s linear infinite; }
+
+  @keyframes ol-enter { from { opacity:0; transform:translateY(14px); filter:blur(4px); } to { opacity:1; transform:none; filter:none; } }
+  [data-page] > *:not(header):not(svg):not([aria-hidden="true"]) { animation:ol-enter .42s cubic-bezier(.16,1,.3,1) both; }
+  html[data-leaving] [data-page] > *:not(header):not(svg):not([aria-hidden="true"]) { opacity:0; transform:translateY(-8px); filter:blur(3px); transition:opacity .16s ease, transform .16s ease, filter .16s ease; }
+  html[data-leaving] header { opacity:.72; transition:opacity .16s ease; }
+
+  .vx-burger { display:none; }
+  .vx-mobilebar { display:none; }
+  @media (max-width:1180px) {
+    .vx-split { grid-template-columns:minmax(0,1fr) !important; }
+    .vx-console { position:static !important; }
+    .vx-mobilebar { display:flex !important; }
+    .vx-pagepad { padding-bottom:104px !important; }
+  }
+  @media (max-width:1120px) {
+    .vx-nav { display:none !important; }
+    .vx-burger { display:grid !important; }
+    .vx-search { min-width:0 !important; width:40px; justify-content:center; padding:9px 0 !important; }
+    .vx-search .vx-search-label, .vx-search .vx-search-kbd { display:none !important; }
+  }
+  @media (max-width:900px) {
+    .vx-flow { grid-template-columns:minmax(0,1fr) !important; }
+    .vx-eligsteps { flex-direction:column !important; align-items:stretch !important; }
+    .vx-eligsteps > span { display:none !important; }
+    .vx-fairgrid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  }
+  @media (max-width:820px) {
+    .vx-chip { display:none !important; }
+    .vx-shell { padding-left:18px !important; padding-right:18px !important; }
+    .vx-projrow { flex-direction:column !important; align-items:flex-start !important; }
+  }
+  @media (max-width:620px) {
+    .vx-sub { display:none !important; }
+    .vx-mark span:first-child { display:none !important; }
+    .vx-metagrid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .vx-foot { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .vx-crumb-mid { display:none !important; }
+  }
+  @media (max-width:520px) {
+    .vx-count > div > div:first-child { font-size:30px !important; min-width:44px !important; }
+    .vx-count { gap:4px !important; }
+    .vx-fairgrid { grid-template-columns:minmax(0,1fr) !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vx-word, .vx-line, .vx-mote, .vx-rise, .vx-scanner, .vx-urgent { animation:none !important; opacity:1 !important; }
+    .vx-reveal, .vx-stagger > * { opacity:1 !important; transform:none !important; filter:none !important; }
+  }
+</style>
+</helmet>
+
+<div data-page="raffle" class="vx-pagepad" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <div id="vx-aura" style="position:fixed;inset:0;pointer-events:none;z-index:0;will-change:transform;background:radial-gradient(1100px 620px at 76% -10%, rgba(255,106,0,.15), transparent 65%), radial-gradient(760px 520px at 2% 18%, rgba(255,60,0,.06), transparent 70%);"></div>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.32;background-image:linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);background-size:76px 76px;mask-image:radial-gradient(1000px 700px at 50% 0%, #000 20%, transparent 78%);-webkit-mask-image:radial-gradient(1000px 700px at 50% 0%, #000 20%, transparent 78%);"></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
+    <line x1="0" y1="24%" x2="100%" y2="24%" class="vx-line" style="animation-delay:.4s" />
+    <line x1="0" y1="76%" x2="100%" y2="76%" class="vx-line" style="animation-delay:.9s" />
+    <line x1="18%" y1="0" x2="18%" y2="100%" class="vx-line" style="animation-delay:1.3s" />
+    <line x1="82%" y1="0" x2="82%" y2="100%" class="vx-line" style="animation-delay:1.7s" />
+    <circle cx="18%" cy="24%" r="2.4" class="vx-dot" style="animation-delay:2.6s" />
+    <circle cx="82%" cy="24%" r="2.4" class="vx-dot" style="animation-delay:2.9s" />
+    <circle cx="18%" cy="76%" r="2.4" class="vx-dot" style="animation-delay:3.2s" />
+    <circle cx="82%" cy="76%" r="2.4" class="vx-dot" style="animation-delay:3.5s" />
+  </svg>
+
+  <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;">
+    <span class="vx-mote" style="top:22%;left:10%;animation-delay:.3s"></span>
+    <span class="vx-mote" style="top:36%;left:89%;animation-delay:1.1s"></span>
+    <span class="vx-mote" style="top:58%;left:6%;animation-delay:2s"></span>
+    <span class="vx-mote" style="top:70%;left:93%;animation-delay:.8s"></span>
+    <span class="vx-mote" style="top:84%;left:31%;animation-delay:2.7s"></span>
+    <span class="vx-mote" style="top:14%;left:58%;animation-delay:3.4s"></span>
+  </div>
+
+  <div id="vx-halo" aria-hidden="true" style="position:fixed;top:0;left:0;width:520px;height:520px;border-radius:99px;pointer-events:none;z-index:1;opacity:0;filter:blur(58px);will-change:transform,opacity;transition:opacity .5s ease;background:radial-gradient(circle, rgba(255,106,0,.13), rgba(255,60,0,.05) 45%, transparent 70%);"></div>
+
+  <div aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:60;pointer-events:none;">
+    <span id="vx-progress" style="display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#FF3C00,#FFA047,#00D6B4);box-shadow:0 0 14px rgba(255,106,0,.7);"></span>
+  </div>
+
+  <!-- ░░ HEADER ░░ -->
+  <header style="position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:rgba(8,6,10,.78);border-bottom:1px solid rgba(255,255,255,.07);">
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:72px;display:flex;align-items:center;gap:22px;">
+      <a href="index.html" style="display:flex;align-items:center;gap:11px;flex:none;">
+        <span style="width:30px;height:30px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);box-shadow:0 0 22px rgba(255,106,0,.45);">
+          <span style="width:8px;height:8px;background:#FF6A00;box-shadow:0 0 10px #FF6A00;"></span>
+        </span>
+        <span class="vx-mark" style="display:flex;flex-direction:column;line-height:1;">
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:11px;letter-spacing:.42em;color:#6E646C;">THE</span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;letter-spacing:.13em;color:#F4EDE6;margin-top:3px;">OUTLAWS</span>
+        </span>
+      </a>
+
+      <nav class="vx-nav" style="display:flex;align-items:center;gap:2px;flex:1;">
+        <a href="index.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Home</a>
+        <a href="discover.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#F4EDE6;border-radius:8px;white-space:nowrap;background:rgba(255,106,0,.1);">Discover</a>
+        <a href="projects.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Projects</a>
+        <a href="myraffles.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">My Raffles</a>
+        <a href="communities.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Communities</a>
+        <a href="calendar.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Calendar</a>
+        <a href="premium.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Premium</a>
+      </nav>
+
+      <button class="ol-burger vx-burger" style="width:40px;height:40px;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#C6BBC1;font-size:15px;cursor:pointer;margin-right:auto;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#FF6A00">☰</button>
+
+      <a href="search.dc.html" class="vx-search" style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#6E646C;font-family:inherit;font-size:13.5px;cursor:pointer;min-width:220px;flex:none;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#A79BA3">
+        <span style="font-size:14px;">⌕</span>
+        <span class="vx-search-label" style="flex:1;text-align:left;white-space:nowrap;">Search raffles, projects…</span>
+        <span class="vx-search-kbd" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 6px;border:1px solid rgba(255,255,255,.13);border-radius:5px;letter-spacing:.06em;">⌘K</span>
+      </a>
+
+      <div style="display:flex;align-items:center;gap:12px;flex:none;">
+        <button style="position:relative;width:38px;height:38px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#A79BA3;cursor:pointer;font-size:15px;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#F4EDE6">
+          ◵
+          <span style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:99px;background:#FF6A00;box-shadow:0 0 9px #FF6A00;"></span>
+        </button>
+        <a href="premium.dc.html" class="vx-sub" style="padding:10px 17px;font-size:13.5px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:9px;white-space:nowrap;box-shadow:0 6px 24px rgba(255,106,0,.32);transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,106,0,.5)">Subscribe</a>
+        <div class="vx-chip" style="display:flex;align-items:center;gap:9px;padding:5px 11px 5px 5px;border:1px solid rgba(255,255,255,.09);border-radius:99px;cursor:pointer;transition:border-color .22s;" style-hover="border-color:rgba(255,106,0,.4)">
+          <span style="width:28px;height:28px;border-radius:99px;background:linear-gradient(135deg,#FF6A00,#7a2a00);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#08060a;">O</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#C6BBC1;">vex_2847</span>
+        </div>
+      </div>
+    </div>
+    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,.55) 18%,rgba(255,106,0,.85) 50%,rgba(255,106,0,.55) 82%,transparent);opacity:.5;"></div>
+  </header>
+
+  <!-- ░░ CONTEXT RAIL ░░ -->
+  <div style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.012);">
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:44px;display:flex;align-items:center;gap:12px;overflow:hidden;">
+      <a href="index.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#6E646C;transition:color .2s;" style-hover="color:#FF6A00">HOME</a>
+      <span class="vx-crumb-mid" style="color:#3E353C;font-size:10px;">/</span>
+      <a href="discover.dc.html" class="vx-crumb-mid" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#6E646C;transition:color .2s;" style-hover="color:#FF6A00">ARCFORGE LABS</a>
+      <span style="color:#3E353C;font-size:10px;">/</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#C6BBC1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">GENESIS PASS</span>
+      <span style="flex:1;"></span>
+      <span style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ statusColor }};white-space:nowrap;">
+        <span style="width:6px;height:6px;border-radius:99px;background:{{ statusColor }};animation:vx-pulse 1.5s ease-in-out infinite;"></span>{{ statusLabel }}
+      </span>
+    </div>
+  </div>
+
+  <!-- ░░ HERO ░░ -->
+  <section class="vx-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div class="vx-split" style="display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,.68fr);gap:40px;padding:52px 0 64px;align-items:start;">
+
+      <div>
+        <div class="vx-projrow" style="display:flex;align-items:center;gap:16px;margin-bottom:30px;">
+          <span style="width:52px;height:52px;flex:none;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#FFA047,#FF3C00);font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;color:#08060a;box-shadow:0 10px 30px rgba(255,106,0,.28);">AF</span>
+          <div style="min-width:0;">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+              <span style="font-size:16px;font-weight:600;color:#F4EDE6;">Arcforge Labs</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#00D6B4;padding:3px 8px;border:1px solid rgba(0,214,180,.3);border-radius:5px;background:rgba(0,214,180,.07);">◈ VERIFIED PROJECT</span>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#6E646C;margin-top:6px;">HOSTED BY ARCFORGE CORE · 12.4K MEMBERS</div>
+          </div>
+          <div style="display:flex;gap:9px;flex:none;">
+            <button style="padding:9px 15px;font-size:12.5px;font-weight:600;font-family:inherit;color:#C6BBC1;background:transparent;border:1px solid rgba(255,255,255,.13);border-radius:8px;cursor:pointer;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">Follow project</button>
+            <button style="padding:9px 15px;font-size:12.5px;font-weight:600;font-family:inherit;color:#C6BBC1;background:transparent;border:1px solid rgba(255,255,255,.13);border-radius:8px;cursor:pointer;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">Community</button>
+          </div>
+        </div>
+
+        <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(38px,4.4vw,62px);line-height:1;letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance;">
+          <span class="vx-word" style="animation-delay:.1s;margin-right:.24em;">Arcforge</span><span class="vx-word" style="animation-delay:.24s;margin-right:.24em;">Genesis</span><span class="vx-word" style="animation-delay:.38s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">Pass</span>
+        </h1>
+
+        <p style="font-size:16.5px;line-height:1.62;color:#9B8F96;max-width:640px;margin:0 0 32px;text-wrap:pretty;">
+          <span class="vx-word" style="animation-delay:.6s;">One Genesis Pass, drawn from the frozen entry ledger with a weighted model that rewards reputation without ever guaranteeing a spot. Snapshot taken at close; every step of the draw is published.</span>
+        </p>
+
+        <div class="vx-metagrid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:26px;">
+          <sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+            <div class="vx-spot" style="background:#0b080d;padding:18px 16px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;margin-bottom:8px;">{{ m.label }}</div>
+              <div style="font-size:14.5px;font-weight:600;color:#F4EDE6;">{{ m.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <sc-for list="{{ signals }}" as="s" hint-placeholder-count="4">
+            <span style="display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid rgba(255,255,255,.09);border-radius:99px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#8C8189;">
+              <span style="color:{{ s.tone }};">◈</span>{{ s.label }}
+            </span>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- ENTRY CONSOLE -->
+      <div class="vx-console" style="position:sticky;top:96px;">
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:20px;background:linear-gradient(168deg,#141017 0%,#0b080d 60%);overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.62);">
+          <div style="height:2px;background:{{ statusBar }};"></div>
+
+          <div style="padding:20px 22px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:{{ statusColor }};padding:4px 9px;border:1px solid {{ statusBorder }};border-radius:5px;background:{{ statusBg }};">{{ statusLabel }}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;letter-spacing:.08em;">{{ modeLabel }}</span>
+          </div>
+
+          <div style="padding:18px 22px 0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#6E646C;margin-bottom:12px;">{{ countdownLabel }}</div>
+            <div class="vx-count" style="display:flex;align-items:flex-end;gap:8px;">
+              <sc-for list="{{ countdown }}" as="c" hint-placeholder-count="4">
+                <div style="text-align:center;">
+                  <div style="position:relative;overflow:hidden;height:42px;">
+                    <div class="{{ c.cls }}" style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:36px;font-weight:700;line-height:1.15;color:{{ c.color }};min-width:52px;">{{ c.v }}</div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;margin-top:5px;">{{ c.l }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:16px;height:3px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;">
+              <span style="display:block;height:100%;width:{{ timePct }};border-radius:99px;background:{{ statusBar }};transition:width 1s linear;"></span>
+            </div>
+          </div>
+
+          <div style="padding:20px 22px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;margin-bottom:6px;">WINNER SPOTS</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#F4EDE6;">1</div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;margin-bottom:6px;">VALID ENTRIES</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:15px;font-weight:700;color:#F4EDE6;">{{ entriesLive }}</div>
+            </div>
+          </div>
+
+          <div style="margin:20px 22px 0;padding:14px 16px;border:1px solid {{ userBorder }};border-radius:12px;background:{{ userBg }};">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;">YOUR STATUS</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ userColor }};">{{ userStatus }}</span>
+            </div>
+            <div style="font-size:13px;line-height:1.55;color:#9B8F96;margin-top:9px;">{{ userHint }}</div>
+          </div>
+
+          <div style="padding:18px 22px 22px;">
+            <button onClick="{{ primaryAction }}" style="position:relative;overflow:hidden;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;color:{{ ctaInk }};background:{{ ctaBg }};box-shadow:{{ ctaShadow }};transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-2px)">
+              <span>{{ ctaLabel }}</span>
+              <span style="position:absolute;top:0;bottom:0;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);animation:vx-sweep 4s ease-in-out infinite;"></span>
+            </button>
+            <div style="display:flex;gap:9px;margin-top:11px;">
+              <button style="flex:1;padding:11px;font-family:inherit;font-size:12.5px;font-weight:600;color:#C6BBC1;background:transparent;border:1px solid rgba(255,255,255,.13);border-radius:10px;cursor:pointer;transition:all .2s;" style-hover="border-color:rgba(255,106,0,.5);color:#FF6A00">Auto-Register</button>
+              <button onClick="{{ scrollToFairness }}" style="flex:1;padding:11px;font-family:inherit;font-size:12.5px;font-weight:600;color:#00D6B4;background:rgba(0,214,180,.06);border:1px solid rgba(0,214,180,.3);border-radius:10px;cursor:pointer;transition:all .2s;" style-hover="background:rgba(0,214,180,.14)">Verify fairness</button>
+            </div>
+            <div style="margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.6;letter-spacing:.04em;color:#6E646C;">
+              FREE ENTRY · GASLESS · PREMIUM NEVER CHANGES DRAW PROBABILITY
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ ELIGIBILITY ░░ -->
+  <section class="vx-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div class="vx-reveal" style="border-top:1px solid rgba(255,255,255,.07);padding-top:44px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-bottom:26px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:11px;">01 — ELIGIBILITY</div>
+          <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.01em;margin:0;">Verification, not vibes</h2>
+        </div>
+        <button onClick="{{ runCheck }}" style="padding:13px 22px;font-family:inherit;font-size:14px;font-weight:600;color:{{ checkInk }};background:{{ checkBg }};border:1px solid {{ checkBorder }};border-radius:10px;cursor:pointer;transition:all .22s;" style-hover="transform:translateY(-2px)">{{ checkLabel }}</button>
+      </div>
+
+      <div style="position:relative;border:1px solid {{ eligBorder }};border-radius:18px;background:{{ eligBg }};overflow:hidden;transition:border-color .5s ease,background .5s ease;">
+        <sc-if value="{{ scanning }}" hint-placeholder-val="{{ false }}">
+          <div class="vx-scanner"></div>
+        </sc-if>
+
+        <div class="vx-eligsteps" style="display:flex;align-items:center;gap:10px;padding:22px;border-bottom:1px solid rgba(255,255,255,.06);">
+          <sc-for list="{{ eligSteps }}" as="e" hint-placeholder-count="4">
+            <div style="flex:1;display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid {{ e.border }};border-radius:12px;background:{{ e.bg }};transition:all .45s cubic-bezier(.16,1,.3,1);">
+              <span class="{{ e.pulse }}" style="width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ e.color }};color:{{ e.color }};font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;">{{ e.icon }}</span>
+              <div style="min-width:0;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;">{{ e.n }}</div>
+                <div style="font-size:13.5px;font-weight:600;color:{{ e.ink }};margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ e.label }}</div>
+              </div>
+            </div>
+            <span style="flex:none;color:#3E353C;font-family:'JetBrains Mono',monospace;font-size:12px;">→</span>
+          </sc-for>
+        </div>
+
+        <div style="padding:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <span class="{{ verdictAnim }}" style="width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:12px;background:{{ verdictBg }};color:{{ verdictColor }};font-size:18px;">{{ verdictIcon }}</span>
+          <div style="flex:1;min-width:220px;">
+            <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:19px;color:{{ verdictColor }};">{{ verdictTitle }}</div>
+            <div style="font-size:13.5px;line-height:1.55;color:#9B8F96;margin-top:6px;">{{ verdictBody }}</div>
+          </div>
+          <sc-if value="{{ showFix }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ openFix }}" style="flex:none;padding:12px 20px;font-family:inherit;font-size:13.5px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border:none;border-radius:10px;cursor:pointer;transition:transform .2s;" style-hover="transform:translateY(-2px)">Fix what's missing</button>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ REQUIREMENTS + ENTRY FLOW ░░ -->
+  <section class="vx-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:56px 28px 0;">
+    <div class="vx-flow" style="display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:22px;align-items:start;">
+
+      <div class="vx-reveal">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:20px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:11px;">02 — REQUIREMENTS</div>
+            <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(24px,2.3vw,30px);letter-spacing:-.01em;margin:0;">{{ reqMetCount }} of {{ reqTotal }} blocks satisfied</h2>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:#6E646C;white-space:nowrap;">ALL BLOCKS REQUIRED</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;">
+          <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="4">
+            <div>
+              <div class="vx-spot" style="border:1px solid {{ b.border }};border-radius:14px;background:{{ b.bg }};overflow:hidden;transition:border-color .4s ease,background .4s ease;">
+                <div onClick="{{ b.toggle }}" style="display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;">
+                  <span style="width:24px;height:24px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ b.color }};color:{{ b.color }};font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;">{{ b.icon }}</span>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+                      <span style="font-size:14.5px;font-weight:600;color:#F4EDE6;">{{ b.title }}</span>
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;padding:3px 7px;border-radius:4px;color:#FF8A33;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.22);">{{ b.logic }}</span>
+                    </div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#6E646C;margin-top:5px;">{{ b.sub }}</div>
+                  </div>
+                  <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:{{ b.color }};">{{ b.state }}</span>
+                  <span style="flex:none;color:#6E646C;font-size:11px;transform:{{ b.caret }};transition:transform .3s ease;">▾</span>
+                </div>
+
+                <div style="padding:0 18px 16px;display:flex;flex-direction:column;gap:8px;">
+                  <sc-for list="{{ b.items }}" as="i" hint-placeholder-count="2">
+                    <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid {{ i.border }};border-radius:10px;background:{{ i.bg }};">
+                      <span style="width:16px;height:16px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ i.color }};color:{{ i.color }};font-size:8.5px;font-weight:700;">{{ i.icon }}</span>
+                      <span style="flex:1;font-size:13px;color:#DCD2D6;">{{ i.label }}</span>
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:{{ i.color }};">{{ i.state }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <sc-if value="{{ b.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:16px 18px;border-top:1px dashed rgba(255,255,255,.1);background:rgba(255,255,255,.02);">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#6E646C;margin-bottom:10px;">WHY THIS BLOCK IS {{ b.state }}</div>
+                    <div style="font-size:13px;line-height:1.6;color:#9B8F96;margin-bottom:14px;">{{ b.why }}</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:14px;">
+                      <sc-for list="{{ b.facts }}" as="f" hint-placeholder-count="3">
+                        <div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#4E454C;margin-bottom:5px;">{{ f.k }}</div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C6BBC1;">{{ f.v }}</div>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ b.showAction }}" hint-placeholder-val="{{ false }}">
+                      <button style="padding:10px 17px;font-family:inherit;font-size:13px;font-weight:600;color:#FF6A00;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.35);border-radius:9px;cursor:pointer;transition:all .2s;" style-hover="background:rgba(255,106,0,.16)">{{ b.action }}</button>
+                    </sc-if>
+                  </div>
+                </sc-if>
+              </div>
+
+              <sc-if value="{{ b.hasRail }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:12px;padding:9px 0 9px 30px;">
+                  <span style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,106,0,.5),transparent);"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:#FF6A00;">AND</span>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- ENTRY FLOW -->
+      <div class="vx-reveal">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:11px;">03 — ENTRY</div>
+        <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(24px,2.3vw,30px);letter-spacing:-.01em;margin:0 0 20px;">Guided entry</h2>
+
+        <div style="border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="display:flex;flex-direction:column;">
+            <sc-for list="{{ flowSteps }}" as="f" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid rgba(255,255,255,.05);background:{{ f.bg }};transition:background .4s ease;">
+                <span class="{{ f.pulse }}" style="width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ f.color }};color:{{ f.color }};font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;">{{ f.icon }}</span>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13.5px;font-weight:600;color:{{ f.ink }};">{{ f.label }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#6E646C;margin-top:4px;">{{ f.meta }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="padding:18px;">
+            <sc-if value="{{ showWalletPick }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-bottom:14px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#6E646C;margin-bottom:10px;">SELECT RECEIVING WALLET</div>
+                <sc-for list="{{ wallets }}" as="w" hint-placeholder-count="2">
+                  <div onClick="{{ w.pick }}" style="display:flex;align-items:center;gap:11px;padding:12px 14px;margin-bottom:8px;border:1px solid {{ w.border }};border-radius:10px;background:{{ w.bg }};cursor:pointer;transition:all .25s;">
+                    <span style="width:16px;height:16px;flex:none;border-radius:99px;border:1.5px solid {{ w.color }};display:grid;place-items:center;color:{{ w.color }};font-size:8px;">{{ w.icon }}</span>
+                    <span style="flex:1;font-family:'JetBrains Mono',monospace;font-size:12px;color:#DCD2D6;">{{ w.addr }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:#6E646C;">{{ w.tag }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ showReceipt }}" hint-placeholder-val="{{ false }}">
+              <div class="vx-seal" style="padding:16px;border:1px solid rgba(0,214,180,.3);border-radius:12px;background:rgba(0,214,180,.06);margin-bottom:14px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                  <span style="color:#00D6B4;font-size:15px;">◈</span>
+                  <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;color:#00D6B4;">Entry recorded</span>
+                </div>
+                <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:#6E646C;">{{ r.k }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#DCD2D6;">{{ r.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <button onClick="{{ flowAction }}" style="width:100%;padding:14px;font-family:inherit;font-size:14.5px;font-weight:700;color:{{ flowInk }};background:{{ flowBg }};border:1px solid {{ flowBorder }};border-radius:11px;cursor:pointer;transition:transform .2s;" style-hover="transform:translateY(-2px)">{{ flowLabel }}</button>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.6;letter-spacing:.04em;color:#6E646C;">
+              ENTRY IS FREE · NO SIGNATURE COST · WITHDRAW ANY TIME BEFORE CLOSE
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FAIRNESS ░░ -->
+  <section id="fairness" style="position:relative;z-index:1;margin-top:76px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg,rgba(0,214,180,.035),transparent 70%);">
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:56px 28px;">
+      <div class="vx-reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-bottom:28px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#00D6B4;margin-bottom:11px;">04 — PROVABLY FAIR</div>
+          <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.01em;margin:0;">The evidence chain for this draw</h2>
+        </div>
+        <button style="padding:13px 22px;font-family:inherit;font-size:14px;font-weight:600;color:#00D6B4;background:rgba(0,214,180,.07);border:1px solid rgba(0,214,180,.4);border-radius:10px;cursor:pointer;transition:all .22s;" style-hover="background:rgba(0,214,180,.16);transform:translateY(-2px)">Recompute locally</button>
+      </div>
+
+      <div class="vx-fairgrid vx-stagger" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;">
+        <sc-for list="{{ fairness }}" as="f" hint-placeholder-count="7">
+          <div>
+            <div class="vx-spot" style="height:100%;padding:18px;border:1px solid {{ f.border }};border-radius:14px;background:{{ f.bg }};">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:{{ f.color }};">{{ f.n }}</span>
+                <span style="width:16px;height:16px;display:grid;place-items:center;border-radius:99px;border:1px solid {{ f.color }};color:{{ f.color }};font-size:8px;">{{ f.icon }}</span>
+              </div>
+              <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;line-height:1.25;color:#F4EDE6;margin-bottom:8px;">{{ f.title }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.55;color:#6E646C;word-break:break-all;">{{ f.hash }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ PROJECT ECOSYSTEM ░░ -->
+  <section class="vx-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:64px 28px 0;">
+    <div class="vx-reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:22px;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:11px;">05 — ARCFORGE ECOSYSTEM</div>
+        <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(24px,2.4vw,32px);letter-spacing:-.01em;margin:0;">More from this project</h2>
+      </div>
+      <div style="display:flex;gap:6px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+          <button onClick="{{ t.pick }}" style="padding:9px 15px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;font-weight:500;color:{{ t.color }};background:{{ t.bg }};border:none;border-radius:8px;cursor:pointer;transition:all .25s;">{{ t.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div class="vx-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
+      <sc-for list="{{ ecosystem }}" as="e" hint-placeholder-count="3">
+        <div>
+          <a href="raffle.dc.html" class="vx-spot" style="display:block;height:100%;padding:20px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:linear-gradient(160deg,#100c12,#0a070c);transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s;" style-hover="transform:translateY(-4px);border-color:rgba(255,106,0,.4)">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;padding:4px 8px;border-radius:5px;color:{{ e.stateColor }};border:1px solid {{ e.stateBorder }};background:{{ e.stateBg }};">{{ e.state }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;">{{ e.mode }}</span>
+            </div>
+            <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:18px;line-height:1.2;margin:0 0 8px;color:#F4EDE6;">{{ e.title }}</h3>
+            <p style="font-size:13px;line-height:1.5;color:#8C8189;margin:0 0 18px;">{{ e.prize }}</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9B8F96;">{{ e.entries }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:{{ e.timeColor }};">{{ e.time }}</span>
+            </div>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer style="position:relative;z-index:1;margin-top:80px;border-top:1px solid rgba(255,255,255,.07);">
+    <div class="vx-foot vx-shell" style="max-width:1400px;margin:0 auto;padding:48px 28px 24px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:36px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);">
+            <span style="width:6px;height:6px;background:#FF6A00;"></span>
+          </span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <sc-for list="{{ footer }}" as="col" hint-placeholder-count="3">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#4E454C;margin-bottom:16px;">{{ col.title }}</div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="4">
+              <a href="support.dc.html" style="font-size:13.5px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:20px 28px 32px;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;">© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+
+  <!-- ░░ MOBILE ACTION BAR ░░ -->
+  <div class="vx-mobilebar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;align-items:center;gap:12px;padding:12px 16px;background:rgba(8,6,10,.93);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.09);">
+    <div style="flex:none;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#6E646C;">{{ countdownLabel }}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:700;color:{{ statusColor }};margin-top:3px;">{{ compactTime }}</div>
+    </div>
+    <button onClick="{{ primaryAction }}" style="flex:1;padding:14px;font-family:inherit;font-size:14.5px;font-weight:700;color:{{ ctaInk }};background:{{ ctaBg }};border:none;border-radius:11px;cursor:pointer;">{{ ctaLabel }}</button>
+  </div>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;raffleState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;live&quot;,&quot;options&quot;:[&quot;live&quot;,&quot;ending&quot;,&quot;ended&quot;,&quot;finalizing&quot;,&quot;finalized&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Raffle state&quot;},&quot;forceEligible&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Raffle state&quot;}}">
+const P = n => String(Math.max(0, n)).padStart(2, '0');
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C', FAIL = '#FF3C00';
+
+class Component extends DCLogic {
+  state = {
+    t: 0, entries: 4821,
+    elig: 'idle',            // idle | checking | verifying | partial | eligible
+    reqPhase: 0,             // how many blocks resolved during verification
+    open: {},                // expanded requirement blocks
+    step: 0,                 // 0 none · 1 wallet · 2 confirm · 3 submitted
+    wallet: 0,
+    tab: 'Active',
+    tickKey: 0
+  };
+
+  constructor(props) {
+    super(props);
+    this.pointer = { x: 0, y: 0, tx: 0, ty: 0, on: false };
+    this.timeouts = [];
+  }
+
+  fx() {
+    if (window.OutlawsFX) { window.OutlawsFX.start(); return; }
+    this.fxRetry = setTimeout(() => this.fx(), 250);
+  }
+
+  later(fn, ms) { this.timeouts.push(setTimeout(fn, ms)); }
+
+  componentDidMount() {
+    this.reduced = window.OutlawsFX ? window.OutlawsFX.reduced : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.fx(); // page-level motion + navigation runtime (outlaws.js)
+
+    this.timer = setInterval(() => this.setState(s => ({
+      t: s.t + 1,
+      entries: s.entries + (Math.random() > 0.6 ? 1 : 0),
+      tickKey: s.tickKey + 1
+    })), 1000);
+  }
+
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    clearTimeout(this.fxRetry);
+    this.timeouts.forEach(clearTimeout);
+  }
+
+  // ── eligibility sequence: CHECKING → VERIFYING (blocks resolve one by one) → verdict
+  runCheck = () => {
+    if (this.state.elig === 'checking' || this.state.elig === 'verifying') return;
+    this.timeouts.forEach(clearTimeout); this.timeouts = [];
+    this.setState({ elig: 'checking', reqPhase: 0, step: 0 });
+    this.later(() => this.setState({ elig: 'verifying' }), 900);
+    [1, 2, 3, 4].forEach((n, i) => this.later(() => this.setState({ reqPhase: n }), 1400 + i * 620));
+    this.later(() => this.setState({ elig: this.props.forceEligible ? 'eligible' : 'partial' }), 4200);
+  };
+
+  openFix = () => {
+    this.setState({ open: { hold: true } });
+    const el = document.querySelectorAll('.vx-reveal')[1];
+    if (el) window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - 110, behavior: 'smooth' });
+  };
+
+  scrollToFairness = () => {
+    const el = document.getElementById('fairness');
+    if (el) window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - 80, behavior: 'smooth' });
+  };
+
+  toggle = id => () => this.setState(s => ({ open: Object.assign({}, s.open, { [id]: !s.open[id] }) }));
+
+  primary = () => {
+    const rs = this.props.raffleState ?? 'live';
+    if (rs === 'finalized') return this.scrollToFairness();
+    if (this.state.step === 3) return;
+    if (this.state.elig === 'eligible') return this.setState({ step: Math.max(1, this.state.step) });
+    if (this.state.elig === 'partial') return this.openFix();
+    return this.runCheck();
+  };
+
+  flowNext = () => {
+    const s = this.state;
+    if (s.elig !== 'eligible') return this.runCheck();
+    if (s.step < 2) return this.setState({ step: 2 });
+    if (s.step === 2) return this.setState({ step: 3 });
+  };
+
+  renderVals() {
+    const rs = this.props.raffleState ?? 'live';
+    const s = this.state;
+    const ended = rs === 'ended' || rs === 'finalizing' || rs === 'finalized';
+
+    const base = rs === 'ending' ? 3 * 3600 + 11 * 60 : 2 * 86400 + 14 * 3600 + 22 * 60;
+    const total = ended ? 0 : Math.max(0, base - s.t);
+    const urgent = !ended && total < 6 * 3600;
+
+    const statusMap = {
+      live: ['LIVE', PEND], ending: ['ENDING SOON', '#FFB061'],
+      ended: ['ENDED', DEAD], finalizing: ['FINALIZING', '#FFB061'], finalized: ['FINALIZED', MET]
+    };
+    const [statusLabel, statusColor] = statusMap[rs] || statusMap.live;
+
+    const digits = [
+      [P(Math.floor(total / 86400)), 'DAYS'],
+      [P(Math.floor(total / 3600) % 24), 'HRS'],
+      [P(Math.floor(total / 60) % 60), 'MIN'],
+      [P(total % 60), 'SEC']
+    ];
+    const countdown = digits.map(([v, l], i) => ({
+      v, l,
+      cls: i === 3 && !ended && !this.reduced ? 'vx-tick' : '',
+      color: ended ? DEAD : (urgent ? '#FF8A33' : '#F4EDE6')
+    }));
+
+    // ── requirement blocks: states derive from the verification phase
+    const phase = s.elig === 'eligible' ? 4 : (s.elig === 'idle' ? 0 : s.reqPhase);
+    const resolved = (idx, good) => {
+      if (s.elig === 'idle') return 'unknown';
+      if (phase <= idx) return 'checking';
+      if (s.elig === 'eligible') return 'met';
+      return good ? 'met' : 'missing';
+    };
+    const tone = st => st === 'met' ? MET : st === 'missing' ? FAIL : st === 'checking' ? PEND : DEAD;
+    const icon = st => st === 'met' ? '✓' : st === 'missing' ? '!' : st === 'checking' ? '◵' : '·';
+    const word = st => st === 'met' ? 'MET' : st === 'missing' ? 'MISSING' : st === 'checking' ? 'CHECKING' : 'NOT CHECKED';
+    const shell = st => ({
+      met: ['rgba(0,214,180,.26)', 'rgba(0,214,180,.045)'],
+      missing: ['rgba(255,60,0,.3)', 'rgba(255,60,0,.05)'],
+      checking: ['rgba(255,106,0,.3)', 'rgba(255,106,0,.05)'],
+      unknown: ['rgba(255,255,255,.08)', 'rgba(255,255,255,.016)']
+    }[st]);
+
+    const defs = [
+      { id: 'social', title: 'Social presence', logic: 'ANY OF', sub: 'X ACCOUNT · @arcforgelabs', good: true,
+        items: [['Follow @arcforgelabs', true], ['Repost the Genesis announcement', false]],
+        why: 'One of the two social actions is enough. Your connected X account satisfies the follow condition, so the repost is optional.',
+        facts: [['SOURCE', 'X · api v2'], ['ACCOUNT', '@vex_2847'], ['CHECKED', 'at close + live']], action: 'Connect another X account' },
+      { id: 'discord', title: 'Discord role', logic: 'REQUIRED', sub: 'ARCFORGE CORE · ROLE ID 8842', good: true,
+        items: [['Hold role “Arcforge Core”', true]],
+        why: 'Role membership is read from the project guild at entry time and re-read at snapshot.',
+        facts: [['GUILD', 'Arcforge Core'], ['ROLE', 'Arcforge Core'], ['RE-CHECK', 'on close']], action: 'Reconnect Discord' },
+      { id: 'hold', title: 'Token holding', logic: 'ANY OF', sub: 'SNAPSHOT AT CLOSE · ETHEREUM', good: false,
+        items: [['Hold 1× Outlaw Node NFT', false], ['Hold 3× Arcforge Shard', false]],
+        why: 'Neither holding was found in your verified wallets. Holdings are counted at the snapshot block, so acquiring one before close still qualifies.',
+        facts: [['CONTRACT', '0x8f2…4A9b'], ['SNAPSHOT', 'block at close'], ['WALLETS', '2 verified']], action: 'Add a wallet' },
+      { id: 'wallet', title: 'Wallet verification', logic: 'REQUIRED', sub: 'SIGNATURE · NO GAS', good: true,
+        items: [['Signed ownership proof', true]],
+        why: 'A gasless signature proves you control the receiving wallet. Nothing is ever custodied.',
+        facts: [['METHOD', 'EIP-712'], ['COST', 'gasless'], ['SCOPE', 'read-only']], action: 'Re-sign proof' }
+    ];
+
+    const blocks = defs.map((d, i) => {
+      const st = resolved(i, d.good);
+      const [border, bg] = shell(st);
+      return {
+        id: d.id, title: d.title, logic: d.logic, sub: d.sub, why: d.why,
+        state: word(st), color: tone(st), icon: icon(st), border, bg,
+        open: !!s.open[d.id], caret: s.open[d.id] ? 'rotate(180deg)' : 'rotate(0deg)',
+        hasRail: i < defs.length - 1,
+        showAction: st === 'missing' || st === 'unknown',
+        action: d.action,
+        facts: d.facts.map(([k, v]) => ({ k, v })),
+        toggle: this.toggle(d.id),
+        items: d.items.map(([label, good]) => {
+          const ist = resolved(i, good);
+          const [ib, ibg] = shell(ist);
+          return { label, state: word(ist), color: tone(ist), icon: icon(ist), border: ib, bg: ibg };
+        })
+      };
+    });
+    const reqMetCount = blocks.filter(b => b.state === 'MET').length;
+
+    // ── eligibility rail
+    const stageIndex = { idle: -1, checking: 0, verifying: 1, partial: 2, eligible: 3 }[s.elig];
+    const eligSteps = ['Checking identity', 'Verifying requirements', 'Requirements resolved', 'Eligible to enter'].map((label, i) => {
+      const active = stageIndex === i, done = stageIndex > i;
+      const failedHere = s.elig === 'partial' && i >= 2;
+      const color = failedHere ? FAIL : done ? MET : active ? PEND : DEAD;
+      return {
+        label: failedHere && i === 2 ? 'Requirements incomplete' : (failedHere ? 'Not eligible yet' : label),
+        n: 'STEP 0' + (i + 1), color,
+        ink: done || active || failedHere ? '#F4EDE6' : '#6E646C',
+        icon: failedHere ? '!' : done ? '✓' : active ? '◵' : String(i + 1),
+        pulse: active && !this.reduced ? 'vx-node' : '',
+        border: done ? 'rgba(0,214,180,.26)' : active ? 'rgba(255,106,0,.32)' : failedHere ? 'rgba(255,60,0,.28)' : 'rgba(255,255,255,.08)',
+        bg: done ? 'rgba(0,214,180,.045)' : active ? 'rgba(255,106,0,.06)' : failedHere ? 'rgba(255,60,0,.05)' : 'rgba(255,255,255,.016)'
+      };
+    });
+
+    const verdict = {
+      idle: ['Eligibility not checked yet', 'Run a check and the requirement engine resolves every block against your connected identities and wallets — no entry is submitted.', '·', DEAD, 'rgba(255,255,255,.05)', ''],
+      checking: ['Reading your identities', 'Resolving connected X account, Discord guild membership and verified wallets.', '◵', PEND, 'rgba(255,106,0,.1)', ''],
+      verifying: ['Verifying requirement blocks', 'Each block is evaluated independently. Values inside a block satisfy it on any match.', '◵', PEND, 'rgba(255,106,0,.1)', ''],
+      partial: ['One block is still missing', 'Token holding is unsatisfied. Everything else passed — acquire one qualifying asset before close and the check clears automatically.', '!', FAIL, 'rgba(255,60,0,.1)', 'vx-seal'],
+      eligible: ['Eligible to enter', 'All four blocks satisfied. Your entry will be recorded in the ledger and frozen at close.', '✓', MET, 'rgba(0,214,180,.1)', 'vx-seal']
+    }[s.elig];
+
+    // ── entry flow
+    const flowState = i => {
+      const reached = [true, s.elig === 'eligible', s.step >= 1, s.step >= 2, s.step >= 3];
+      const activeIdx = s.step >= 3 ? 4 : (s.elig !== 'eligible' ? (s.elig === 'idle' ? 0 : 1) : Math.max(1, s.step + 1));
+      if (i < activeIdx) return 'done';
+      if (i === activeIdx) return reached[i] || i <= 1 ? 'active' : 'idle';
+      return 'idle';
+    };
+    const flowSteps = [
+      ['Check eligibility', 'requirement engine'],
+      ['Review requirements', reqMetCount + ' of 4 blocks met'],
+      ['Select wallet', 'receiving address'],
+      ['Confirm entry', 'gasless · free'],
+      ['Entry live', 'ledger position assigned']
+    ].map(([label, meta], i) => {
+      const st = flowState(i);
+      const color = st === 'done' ? MET : st === 'active' ? PEND : DEAD;
+      return {
+        label, meta, color,
+        icon: st === 'done' ? '✓' : String(i + 1),
+        ink: st === 'idle' ? '#6E646C' : '#F4EDE6',
+        bg: st === 'active' ? 'rgba(255,106,0,.05)' : 'transparent',
+        pulse: st === 'active' && !this.reduced ? 'vx-node' : ''
+      };
+    });
+
+    const flowLabel = s.step >= 3 ? 'Entry submitted'
+      : s.elig !== 'eligible' ? 'Check eligibility first'
+      : s.step < 2 ? 'Continue with this wallet' : 'Confirm entry';
+    const flowReady = s.elig === 'eligible' && s.step < 3;
+
+    const wallets = [['0x8f2c…4A9b', 'PRIMARY'], ['0x41ae…97D0', 'VERIFIED']].map(([addr, tag], i) => ({
+      addr, tag,
+      icon: s.wallet === i ? '●' : '',
+      color: s.wallet === i ? PEND : DEAD,
+      border: s.wallet === i ? 'rgba(255,106,0,.35)' : 'rgba(255,255,255,.09)',
+      bg: s.wallet === i ? 'rgba(255,106,0,.05)' : 'transparent',
+      pick: () => this.setState({ wallet: i })
+    }));
+
+    // ── fairness chain
+    const published = rs === 'finalized' ? 7 : rs === 'finalizing' ? 5 : ended ? 3 : 2;
+    const fairness = [
+      ['STEP 01', 'Server seed commit', 'sha256 · 9f4e…c0b1'],
+      ['STEP 02', 'Entry ledger open', s.entries.toLocaleString('en-US') + ' valid entries'],
+      ['STEP 03', 'Freeze at close', 'snapshot block pinned'],
+      ['STEP 04', 'Entries merkle hash', 'merkle · 2a71…88ff'],
+      ['STEP 05', 'Public entropy', 'block #21,405,912'],
+      ['STEP 06', 'Reveal server seed', 'preimage published'],
+      ['STEP 07', 'Deterministic draw', 'winners reproducible']
+    ].map(([n, title, hash], i) => {
+      const done = i < published;
+      return {
+        n, title, hash: done ? hash : 'awaiting close',
+        color: done ? MET : DEAD, icon: done ? '✓' : '·',
+        border: done ? 'rgba(0,214,180,.24)' : 'rgba(255,255,255,.08)',
+        bg: done ? 'rgba(0,214,180,.04)' : 'rgba(255,255,255,.014)'
+      };
+    });
+
+    const ecoAll = {
+      Active: [
+        ['Arcforge Shard Drop', '250× Shard allocation for verified holders.', 'LIVE', PEND, '1,204 entries', '2d 04h', '#F4EDE6', 'WEIGHTED'],
+        ['Core Contributor Seat', '5 seats on the Arcforge contributor council.', 'LIVE', PEND, '318 entries', '18h 40m', PEND, 'APPLICATION'],
+        ['Forge Beta Access', '1,000 beta keys, first valid entries only.', 'ENDING SOON', '#FFB061', '3,806 entries', '05h 12m', PEND, 'FCFS']
+      ],
+      Upcoming: [
+        ['Genesis Pass · Wave 2', '3× Genesis Pass for reputation ≥ 80.', 'UPCOMING', DEAD, 'opens 19 Sep', '8d', '#9B8F96', 'WEIGHTED'],
+        ['Arcforge Land Parcel', '12 parcels in the first settlement ring.', 'UPCOMING', DEAD, 'opens 24 Sep', '13d', '#9B8F96', 'RANDOM']
+      ],
+      Past: [
+        ['Founder Key', '1× Founder Key · winner published.', 'FINALIZED', MET, '6,204 entries', 'verified', MET, 'RANDOM'],
+        ['Forge Alpha Pass', '80× alpha passes distributed.', 'FINALIZED', MET, '4,118 entries', 'verified', MET, 'FCFS']
+      ]
+    };
+    const ecosystem = ecoAll[s.tab].map(([title, prize, state, stateColor, entries, time, timeColor, mode]) => ({
+      title, prize, state, stateColor, entries, time, timeColor, mode,
+      stateBorder: stateColor === DEAD ? 'rgba(255,255,255,.14)' : stateColor + '55',
+      stateBg: stateColor === DEAD ? 'rgba(255,255,255,.04)' : stateColor + '14'
+    }));
+
+    const ctaLabel = rs === 'finalized' ? 'View winners'
+      : rs === 'ended' || rs === 'finalizing' ? 'Draw in progress'
+      : s.step >= 3 ? 'Entry confirmed'
+      : s.elig === 'eligible' ? 'Enter raffle'
+      : s.elig === 'partial' ? 'Fix what’s missing'
+      : s.elig === 'checking' || s.elig === 'verifying' ? 'Checking…' : 'Check eligibility';
+
+    const userMap = {
+      idle: ['NOT CHECKED', DEAD, 'Run an eligibility check to see whether you qualify. Nothing is submitted.'],
+      checking: ['CHECKING', PEND, 'Reading your connected identities and verified wallets.'],
+      verifying: ['VERIFYING', PEND, 'Evaluating each requirement block against your accounts.'],
+      partial: ['REQUIREMENTS INCOMPLETE', FAIL, 'One block is unsatisfied. Fix it before close to enter.'],
+      eligible: ['READY TO ENTER', MET, 'All blocks satisfied. Confirm to take a position in the ledger.']
+    };
+    let [userStatus, userColor, userHint] = userMap[s.elig];
+    if (s.step >= 3) { userStatus = 'ENTRY SUBMITTED'; userColor = MET; userHint = 'You are in the ledger at position #' + (s.entries - 12) + '. Frozen at close.'; }
+    if (ended) { userStatus = rs === 'finalized' ? 'RAFFLE FINALIZED' : 'RAFFLE ENDED'; userColor = rs === 'finalized' ? MET : DEAD; userHint = rs === 'finalized' ? 'Winners published with the full evidence chain.' : 'Entries frozen. The draw runs once entropy is pinned.'; }
+
+    const checkBusy = s.elig === 'checking' || s.elig === 'verifying';
+    const compact = ended ? 'CLOSED'
+      : total >= 86400 ? Math.floor(total / 86400) + 'd ' + P(Math.floor(total / 3600) % 24) + 'h'
+      : P(Math.floor(total / 3600)) + ':' + P(Math.floor(total / 60) % 60) + ':' + P(total % 60);
+
+    return {
+      statusLabel, statusColor,
+      statusBar: ended ? 'linear-gradient(90deg,#3E353C,#6E646C)' : 'linear-gradient(90deg,#FF3C00,#FFB061,#FF6A00)',
+      statusBorder: statusColor + '55', statusBg: statusColor + '14',
+      modeLabel: 'WEIGHTED RANDOM',
+      countdownLabel: ended ? 'RAFFLE CLOSED' : rs === 'ending' ? 'CLOSES VERY SOON' : 'ENDS IN',
+      countdown, compactTime: compact,
+      timePct: ended ? '100%' : Math.min(100, Math.max(3, 100 - (total / base) * 100)).toFixed(1) + '%',
+      entriesLive: this.state.entries.toLocaleString('en-US'),
+      meta: [
+        { label: 'PRIZE', value: '1 × Genesis Pass' },
+        { label: 'MODE', value: 'Weighted random' },
+        { label: 'CHAIN', value: 'Ethereum' },
+        { label: 'SNAPSHOT', value: 'At close' }
+      ],
+      signals: [
+        { label: 'PROVABLY FAIR DRAW', tone: MET },
+        { label: 'NON-CUSTODIAL', tone: MET },
+        { label: 'SYBIL RESISTANT', tone: PEND },
+        { label: 'GASLESS ENTRY', tone: PEND }
+      ],
+      userStatus, userColor, userHint,
+      userBorder: userColor === DEAD ? 'rgba(255,255,255,.08)' : userColor + '40',
+      userBg: userColor === DEAD ? 'rgba(255,255,255,.016)' : userColor + '0f',
+      ctaLabel,
+      ctaInk: ended && rs !== 'finalized' ? '#6E646C' : '#08060a',
+      ctaBg: ended && rs !== 'finalized' ? 'rgba(255,255,255,.05)' : 'linear-gradient(180deg,#FFA047,#FF6A00)',
+      ctaShadow: ended && rs !== 'finalized' ? 'none' : '0 10px 30px rgba(255,106,0,.3)',
+      primaryAction: this.primary,
+      scrollToFairness: this.scrollToFairness,
+      runCheck: this.runCheck,
+      openFix: this.openFix,
+      checkLabel: checkBusy ? 'Checking…' : s.elig === 'idle' ? 'Check eligibility' : 'Re-check',
+      checkInk: checkBusy ? '#FF8A33' : '#08060a',
+      checkBg: checkBusy ? 'rgba(255,106,0,.08)' : 'linear-gradient(180deg,#FFA047,#FF6A00)',
+      checkBorder: checkBusy ? 'rgba(255,106,0,.35)' : 'transparent',
+      scanning: checkBusy && !this.reduced,
+      eligBorder: s.elig === 'eligible' ? 'rgba(0,214,180,.28)' : s.elig === 'partial' ? 'rgba(255,60,0,.26)' : 'rgba(255,255,255,.09)',
+      eligBg: s.elig === 'eligible' ? 'rgba(0,214,180,.035)' : s.elig === 'partial' ? 'rgba(255,60,0,.03)' : 'rgba(255,255,255,.016)',
+      eligSteps,
+      verdictTitle: verdict[0], verdictBody: verdict[1], verdictIcon: verdict[2],
+      verdictColor: verdict[3], verdictBg: verdict[4], verdictAnim: this.reduced ? '' : verdict[5],
+      showFix: s.elig === 'partial',
+      blocks, reqMetCount, reqTotal: 4,
+      flowSteps, flowLabel,
+      flowAction: flowReady ? this.flowNext : this.runCheck,
+      flowInk: flowReady ? '#08060a' : '#9B8F96',
+      flowBg: flowReady ? 'linear-gradient(180deg,#FFA047,#FF6A00)' : 'rgba(255,255,255,.04)',
+      flowBorder: flowReady ? 'transparent' : 'rgba(255,255,255,.12)',
+      showWalletPick: s.step >= 1 && s.step < 3,
+      showReceipt: s.step >= 3,
+      wallets,
+      receipt: [
+        { k: 'LEDGER POSITION', v: '#' + (s.entries - 12) },
+        { k: 'WALLET', v: wallets[s.wallet].addr },
+        { k: 'ENTRY HASH', v: 'e7a1…5c94' }
+      ],
+      fairness,
+      tabs: ['Active', 'Upcoming', 'Past'].map(label => ({
+        label: label.toUpperCase(),
+        color: s.tab === label ? '#08060a' : '#8C8189',
+        bg: s.tab === label ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ tab: label })
+      })),
+      ecosystem,
+      footer: [
+        { title: 'PLATFORM', links: [{ label: 'Discover' }, { label: 'Raffles' }, { label: 'Communities' }, { label: 'Calendar' }] },
+        { title: 'FAIRNESS', links: [{ label: 'Verify a draw' }, { label: 'Requirement engine' }, { label: 'Rule catalog' }, { label: 'Status' }] },
+        { title: 'LEGAL', links: [{ label: 'Terms' }, { label: 'Privacy' }, { label: 'Risk disclosure' }, { label: 'Support' }] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

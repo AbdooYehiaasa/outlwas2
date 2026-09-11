@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .pm-plans { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+  .pm-split { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px; align-items:start; }
+  .pm-cmp { display:grid; grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr)); }
+  @media (max-width:980px) { .pm-plans { grid-template-columns:minmax(0,1fr); } .pm-split { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:620px) { .pm-cmp { grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr)); font-size:12px; } }
+</style>
+</helmet>
+
+<div data-page="premium" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html" class="on">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div style="padding:52px 0 32px;max-width:760px;">
+      <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 13px 6px 7px;border:1px solid rgba(255,106,0,.3);border-radius:99px;background:rgba(255,106,0,.06);margin-bottom:26px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.12em;color:#08060a;background:#FF6A00;padding:3px 7px;border-radius:99px;">PREMIUM</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#FF9A5C;">SOFTWARE CAPABILITY · NOT BETTER ODDS</span>
+      </div>
+      <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(34px,4.2vw,58px);line-height:1;letter-spacing:-.02em;margin:0 0 18px;">
+        <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">Stop</span><span class="vx-word" style="animation-delay:.24s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">refreshing.</span>
+      </h1>
+      <p style="font-size:16.5px;line-height:1.62;color:#9B8F96;margin:0;text-wrap:pretty;">
+        <span class="vx-word" style="animation-delay:.5s;">Premium automates the boring half of participating: watching for new raffles, executing requirements you already satisfy, and entering the moment a window opens. It cannot and does not touch the draw.</span>
+      </p>
+    </div>
+
+    <!-- plans -->
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+      <div style="display:flex;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;">
+        <sc-for list="{{ cycles }}" as="c" hint-placeholder-count="2">
+          <button onClick="{{ c.pick }}" style="padding:9px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ c.color }};background:{{ c.bg }};border:none;border-radius:8px;cursor:pointer;transition:all .25s;">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#00D6B4;">{{ cycleNote }}</span>
+    </div>
+
+    <div class="pm-plans vx-stagger" style="margin-bottom:34px;">
+      <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
+        <div>
+          <div class="vx-spot" style="display:flex;flex-direction:column;height:100%;border:1px solid {{ p.border }};border-radius:19px;background:{{ p.bg }};overflow:hidden;transition:transform .3s;" style-hover="transform:translateY(-4px)">
+            <div style="height:2px;background:{{ p.bar }};"></div>
+            <div style="padding:24px 22px 0;">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;">
+                <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:17px;letter-spacing:.06em;color:#F4EDE6;">{{ p.name }}</span>
+                <sc-if value="{{ p.badge }}" hint-placeholder-val="{{ true }}">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;padding:4px 8px;border-radius:5px;color:#08060a;background:#FF6A00;">{{ p.badge }}</span>
+                </sc-if>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:38px;font-weight:700;line-height:1;color:{{ p.priceColor }};">{{ p.price }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6E646C;">{{ p.unit }}</span>
+              </div>
+              <p style="font-size:13px;line-height:1.55;color:#8C8189;margin:0 0 20px;min-height:40px;">{{ p.tagline }}</p>
+            </div>
+            <div style="padding:0 22px;flex:1;display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{ p.features }}" as="f" hint-placeholder-count="4">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span style="flex:none;margin-top:2px;color:{{ f.color }};font-family:'JetBrains Mono',monospace;font-size:10px;">{{ f.icon }}</span>
+                  <span style="font-size:13px;line-height:1.5;color:{{ f.ink }};">{{ f.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="padding:22px;">
+              <button style="width:100%;padding:14px;font-size:14.5px;font-weight:700;color:{{ p.ctaInk }};background:{{ p.ctaBg }};border:1px solid {{ p.ctaBorder }};border-radius:11px;cursor:pointer;transition:transform .2s;" style-hover="transform:translateY(-2px)">{{ p.cta }}</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- auto-register console + comparison -->
+    <div class="pm-split">
+      <div style="border:1px solid rgba(255,106,0,.26);border-radius:19px;background:linear-gradient(165deg,rgba(255,106,0,.09),#0a070c 65%);overflow:hidden;position:relative;">
+        <div style="position:absolute;top:-80px;right:-80px;width:200px;height:200px;border:1px dashed rgba(255,106,0,.22);border-radius:99px;animation:vx-orbit 34s linear infinite;pointer-events:none;"></div>
+        <div style="padding:24px 24px 0;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#FF8A33;margin-bottom:14px;">AUTO-REGISTER CONSOLE</div>
+          <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:24px;line-height:1.15;margin:0 0 10px;">Set the rules once</h2>
+          <p style="font-size:13.5px;line-height:1.6;color:#9B8F96;margin:0 0 20px;">Pick which communities, modes and requirement profiles you want entered automatically. Every run is logged — success, failure, or skipped with a reason.</p>
+        </div>
+
+        <div style="padding:0 24px;display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ rules }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid {{ r.border }};border-radius:11px;background:{{ r.bg }};">
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13.5px;font-weight:600;color:#DCD2D6;">{{ r.label }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#6E646C;margin-top:4px;">{{ r.meta }}</div>
+              </div>
+              <button onClick="{{ r.toggle }}" style="flex:none;width:38px;height:20px;border-radius:99px;border:none;background:{{ r.track }};position:relative;cursor:pointer;transition:background .25s;">
+                <span style="position:absolute;top:3px;left:{{ r.x }};width:14px;height:14px;border-radius:99px;background:#08060a;transition:left .25s cubic-bezier(.16,1,.3,1);"></span>
+              </button>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="padding:20px 24px 24px;">
+          <div style="padding:15px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.022);margin-bottom:16px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#6E646C;">LAST 24H RUN LOG</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.09em;color:{{ logTone }};">{{ logSummary }}</span>
+            </div>
+            <sc-for list="{{ log }}" as="l" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:11px;padding:7px 0;">
+                <span style="width:15px;height:15px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ l.color }};color:{{ l.color }};font-size:8px;">{{ l.icon }}</span>
+                <span style="flex:1;min-width:0;font-size:12.5px;color:#C6BBC1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ l.label }}</span>
+                <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:{{ l.color }};">{{ l.state }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <button style="width:100%;padding:14px;font-size:14.5px;font-weight:700;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border:none;border-radius:11px;cursor:pointer;transition:transform .2s;" style-hover="transform:translateY(-2px)">Save automation rules</button>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:19px;background:rgba(255,255,255,.016);overflow:hidden;">
+        <div style="padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.07);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#6E646C;margin-bottom:8px;">FREE vs PREMIUM</div>
+          <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:19px;">What actually changes</div>
+        </div>
+        <div class="pm-cmp" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;border-bottom:1px solid rgba(255,255,255,.06);">
+          <span style="padding:12px 18px;">CAPABILITY</span>
+          <span style="padding:12px 10px;text-align:center;">FREE</span>
+          <span style="padding:12px 10px;text-align:center;color:#FF8A33;">PREMIUM</span>
+        </div>
+        <sc-for list="{{ compare }}" as="c" hint-placeholder-count="8">
+          <div class="pm-cmp" style="border-bottom:1px solid rgba(255,255,255,.04);align-items:center;">
+            <span style="padding:13px 18px;font-size:13px;color:{{ c.ink }};">{{ c.label }}</span>
+            <span style="padding:13px 10px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:{{ c.freeColor }};">{{ c.free }}</span>
+            <span style="padding:13px 10px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:{{ c.proColor }};">{{ c.pro }}</span>
+          </div>
+        </sc-for>
+        <div style="padding:18px 22px;background:rgba(0,214,180,.04);">
+          <div style="display:flex;align-items:flex-start;gap:11px;">
+            <span style="color:#00D6B4;font-size:14px;flex:none;margin-top:1px;">◈</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.65;letter-spacing:.05em;color:#8C8189;">DRAW PROBABILITY IS IDENTICAL ON BOTH TIERS. PREMIUM BUYS SOFTWARE CAPABILITY — AUTOMATION, ALERTS, MULTI-ACCOUNT EXECUTION — AND NOTHING ELSE. ANY CLAIM OTHERWISE WOULD BE VERIFIABLY FALSE IN THE EVIDENCE CHAIN.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+class Component extends DCLogic {
+  state = { cycle: 'Monthly', rules: { communities: true, modes: true, requirements: false, multi: false } };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  renderVals() {
+    const s = this.state;
+    const yearly = s.cycle === 'Yearly';
+
+    const mk = (label, on) => ({ label, icon: on ? '▸' : '×', color: on ? PEND : '#3E353C', ink: on ? '#C6BBC1' : '#4E454C' });
+
+    const plans = [
+      {
+        name: 'FREE', price: '$0', unit: '/ FOREVER', badge: '',
+        tagline: 'Everything needed to participate honestly and verify any draw.',
+        border: 'rgba(255,255,255,.08)', bg: 'linear-gradient(160deg,#100c12,#0a070c)', bar: 'linear-gradient(90deg,#3E353C,#6E646C)',
+        priceColor: '#F4EDE6',
+        features: [mk('Unlimited raffle entries', true), mk('Requirement engine + eligibility checks', true), mk('Full evidence chain and recompute', true), mk('In-app notifications', true), mk('Auto-Register', false), mk('Discord DM + Telegram alerts', false)],
+        cta: 'Current plan', ctaInk: '#9B8F96', ctaBg: 'transparent', ctaBorder: 'rgba(255,255,255,.14)'
+      },
+      {
+        name: 'PREMIUM', price: yearly ? '$90' : '$9', unit: yearly ? '/ YEAR' : '/ MONTH', badge: 'MOST PICKED',
+        tagline: 'Automation and alerting for people entering more than a few raffles a week.',
+        border: 'rgba(255,106,0,.4)', bg: 'linear-gradient(160deg,rgba(255,106,0,.1),#0a070c 62%)', bar: 'linear-gradient(90deg,#FF3C00,#FFB061,#FF6A00)',
+        priceColor: '#FF6A00',
+        features: [mk('Everything in Free', true), mk('Auto-Register across followed communities', true), mk('Discord DM + Telegram alerts', true), mk('Up to 3 X accounts for requirements', true), mk('Priority requirement re-checks', true), mk('Run log with failure reasons', true)],
+        cta: yearly ? 'Subscribe yearly' : 'Subscribe monthly', ctaInk: '#08060a', ctaBg: 'linear-gradient(180deg,#FFA047,#FF6A00)', ctaBorder: 'transparent'
+      },
+      {
+        name: 'OPERATOR', price: yearly ? '$290' : '$29', unit: yearly ? '/ YEAR' : '/ MONTH', badge: 'FOR PROJECTS',
+        tagline: 'For communities running their own draws with templates and published rules.',
+        border: 'rgba(0,214,180,.3)', bg: 'linear-gradient(160deg,rgba(0,214,180,.07),#0a070c 62%)', bar: 'linear-gradient(90deg,#00D6B4,#5ef2d6)',
+        priceColor: '#00D6B4',
+        features: [mk('Everything in Premium', true), mk('Create and host raffles', true), mk('Requirement tree templates', true), mk('Snapshot rules and re-snapshot', true), mk('Published evidence chain per draw', true), mk('Member analytics', true)],
+        cta: 'Talk to us', ctaInk: '#08060a', ctaBg: 'linear-gradient(180deg,#5ef2d6,#00b899)', ctaBorder: 'transparent'
+      }
+    ];
+
+    const rules = [
+      ['communities', 'Followed communities only', '6 COMMUNITIES SELECTED'],
+      ['modes', 'Weighted and random modes', 'SKIPS APPLICATION-REVIEW RAFFLES'],
+      ['requirements', 'Execute social requirements', 'FOLLOW + REPOST ON YOUR BEHALF'],
+      ['multi', 'Use secondary X account', '@vex_alt · CONNECTED']
+    ].map(([key, label, meta]) => {
+      const on = s.rules[key];
+      return {
+        label, meta,
+        track: on ? '#FF6A00' : 'rgba(255,255,255,.14)',
+        x: on ? '21px' : '3px',
+        border: on ? 'rgba(255,106,0,.3)' : 'rgba(255,255,255,.08)',
+        bg: on ? 'rgba(255,106,0,.05)' : 'rgba(255,255,255,.016)',
+        toggle: () => this.setState(st => ({ rules: Object.assign({}, st.rules, { [key]: !on }) }))
+      };
+    });
+
+    return {
+      cycles: ['Monthly', 'Yearly'].map(c => ({
+        label: c.toUpperCase(),
+        color: s.cycle === c ? '#08060a' : '#8C8189',
+        bg: s.cycle === c ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ cycle: c })
+      })),
+      cycleNote: yearly ? 'TWO MONTHS FREE ON ANNUAL' : 'CANCEL ANY TIME · NO LOCK-IN',
+      plans, rules,
+      logSummary: '4 ENTERED · 1 SKIPPED',
+      logTone: PEND,
+      log: [
+        { label: 'Riftbound Arena Beta Key', state: 'ENTERED', color: MET, icon: '✓' },
+        { label: 'Frontier Land Whitelist', state: 'ENTERED', color: MET, icon: '✓' },
+        { label: 'Nova Node Operator Drop', state: 'SKIPPED', color: DEAD, icon: '·' },
+        { label: 'Spectral Audio Rights', state: 'REQUIREMENT MISSING', color: '#FF3C00', icon: '!' }
+      ],
+      compare: [
+        ['Enter raffles', '∞', '∞', true],
+        ['Eligibility checks', '✓', '✓', true],
+        ['Verify any draw', '✓', '✓', true],
+        ['Auto-Register', '×', '✓', false],
+        ['Discord DM alerts', '×', '✓', false],
+        ['Telegram alerts', '×', '✓', false],
+        ['Multiple X accounts', '1', '3', false],
+        ['Draw probability', 'SAME', 'SAME', true]
+      ].map(([label, free, pro, neutral]) => ({
+        label, free, pro,
+        ink: '#DCD2D6',
+        freeColor: free === '×' ? '#4E454C' : neutral ? MET : '#C6BBC1',
+        proColor: pro === '×' ? '#4E454C' : neutral && label === 'Draw probability' ? MET : PEND
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

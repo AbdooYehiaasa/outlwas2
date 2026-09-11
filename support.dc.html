@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .sp-split { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:22px; align-items:start; }
+  .sp-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  @media (max-width:1080px) { .sp-split { grid-template-columns:minmax(0,1fr); } .sp-side { position:static !important; } }
+  @media (max-width:760px) { .sp-cards { grid-template-columns:minmax(0,1fr); } }
+</style>
+</helmet>
+
+<div data-page="support" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div style="padding:50px 0 30px;max-width:680px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:13px;">HELP CENTER</div>
+      <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(32px,3.8vw,52px);line-height:1;letter-spacing:-.02em;margin:0 0 16px;">
+        <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">Answers,</span><span class="vx-word" style="animation-delay:.26s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">not tickets.</span>
+      </h1>
+      <p style="font-size:16px;line-height:1.6;color:#9B8F96;margin:0;text-wrap:pretty;">
+        <span class="vx-word" style="animation-delay:.5s;">Most questions about a draw are answerable from the evidence chain in seconds. Start there — and if the answer is not in the data, we read every report.</span>
+      </p>
+    </div>
+
+    <div class="sp-cards vx-stagger" style="margin-bottom:34px;">
+      <sc-for list="{{ paths }}" as="p" hint-placeholder-count="3">
+        <div>
+          <a href="{{ p.href }}" class="vx-spot" style="display:block;height:100%;padding:22px;border:1px solid {{ p.border }};border-radius:17px;background:{{ p.bg }};transition:transform .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:rgba(255,106,0,.4)">
+            <span style="width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:{{ p.iconBg }};color:{{ p.color }};font-size:15px;margin-bottom:16px;">{{ p.icon }}</span>
+            <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:18px;color:#F4EDE6;margin-bottom:9px;">{{ p.title }}</div>
+            <p style="font-size:13px;line-height:1.55;color:#8C8189;margin:0 0 14px;">{{ p.desc }}</p>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ p.color }};">{{ p.cta }} →</span>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+
+    <div class="sp-split">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:20px;">
+          <div style="position:relative;flex:1;min-width:230px;">
+            <span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6E646C;font-size:14px;">⌕</span>
+            <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search help topics…" style="width:100%;padding:14px 15px 14px 39px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:11px;color:#F4EDE6;font-size:14.5px;outline:none;transition:border-color .25s;" style-focus="border-color:rgba(255,106,0,.55)" />
+          </div>
+          <div style="display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;flex-wrap:wrap;">
+            <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4">
+              <button onClick="{{ t.pick }}" style="padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ t.color }};background:{{ t.bg }};border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <sc-if value="{{ hasFaq }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ faq }}" as="f" hint-placeholder-count="6">
+              <div style="border:1px solid {{ f.border }};border-radius:14px;background:{{ f.bg }};overflow:hidden;transition:border-color .3s;">
+                <div onClick="{{ f.toggle }}" style="display:flex;align-items:center;gap:14px;padding:17px 20px;cursor:pointer;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:{{ f.tagColor }};padding:3px 8px;border:1px solid {{ f.tagBorder }};border-radius:5px;flex:none;">{{ f.topic }}</span>
+                  <span style="flex:1;min-width:0;font-size:15px;font-weight:600;color:#F4EDE6;">{{ f.q }}</span>
+                  <span style="flex:none;color:#6E646C;font-size:11px;transform:{{ f.caret }};transition:transform .3s;">▾</span>
+                </div>
+                <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:0 20px 18px 20px;">
+                    <p style="font-size:14px;line-height:1.65;color:#9B8F96;margin:0;text-wrap:pretty;">{{ f.a }}</p>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ emptyFaq }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:44px 36px;border:1px dashed rgba(255,255,255,.14);border-radius:18px;background:rgba(255,255,255,.014);text-align:center;">
+            <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:20px;margin:0 0 10px;">No topic matches that</h3>
+            <p style="font-size:14px;line-height:1.6;color:#9B8F96;max-width:400px;margin:0 auto 20px;">Send it to us directly and we will answer — and add it here if others will ask it too.</p>
+            <button onClick="{{ clear }}" style="padding:12px 20px;font-size:13.5px;font-weight:600;color:#FF6A00;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.35);border-radius:10px;cursor:pointer;">Clear search</button>
+          </div>
+        </sc-if>
+      </div>
+
+      <aside class="sp-side" style="position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;">
+        <div style="border:1px solid rgba(255,255,255,.09);border-radius:18px;background:linear-gradient(165deg,#141017,#0b080d 60%);overflow:hidden;">
+          <div style="height:2px;background:linear-gradient(90deg,#FF3C00,#FFB061,#FF6A00);"></div>
+          <div style="padding:20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#FF8A33;margin-bottom:12px;">CONTACT US</div>
+            <p style="font-size:13px;line-height:1.6;color:#9B8F96;margin:0 0 16px;">Include the raffle name and your wallet — never a seed phrase or private key. We will never ask for one.</p>
+            <div style="display:flex;flex-direction:column;gap:9px;">
+              <sc-for list="{{ channels }}" as="c" hint-placeholder-count="3">
+                <a href="#" style="display:flex;align-items:center;gap:11px;padding:13px 14px;border:1px solid rgba(255,255,255,.1);border-radius:11px;transition:all .2s;" style-hover="border-color:rgba(255,106,0,.45);background:rgba(255,106,0,.05)">
+                  <span style="width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:8px;background:rgba(255,106,0,.1);color:#FF6A00;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;">{{ c.icon }}</span>
+                  <span style="flex:1;min-width:0;">
+                    <span style="display:block;font-size:13.5px;font-weight:600;color:#DCD2D6;">{{ c.label }}</span>
+                    <span style="display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.07em;color:#6E646C;margin-top:3px;">{{ c.meta }}</span>
+                  </span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:18px 20px;border:1px solid rgba(255,60,0,.24);border-radius:18px;background:rgba(255,60,0,.035);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#FF3C00;margin-bottom:11px;">SCAM WARNING</div>
+          <p style="font-size:12.5px;line-height:1.6;color:#9B8F96;margin:0;">No admin will DM you first. No draw ever requires a payment, an approval transaction, or a seed phrase. Report impersonation and we will publish the wallet.</p>
+        </div>
+
+        <div style="border:1px solid rgba(0,214,180,.22);border-radius:18px;background:rgba(0,214,180,.035);padding:18px 20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#00D6B4;margin-bottom:12px;">PLATFORM STATUS</div>
+          <sc-for list="{{ status }}" as="s" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;">
+              <span style="font-size:12.5px;color:#C6BBC1;">{{ s.label }}</span>
+              <span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:{{ s.color }};">
+                <span style="width:5px;height:5px;border-radius:99px;background:{{ s.color }};"></span>{{ s.state }}
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">LEGAL</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a><a href="support.dc.html">Risk disclosure</a><a href="auth.dc.html">Sign in</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+const FAQ = [
+  ['FAIRNESS', 'How do I verify a draw myself?', 'Open the finalized raffle and download the evidence bundle: the revealed server seed, the frozen entry ledger, its merkle root, and the public entropy block. Hash them in that order with any SHA-256 tool and you get the same winner indices we published. No account, no API key, no trust in us required.'],
+  ['FAIRNESS', 'Can the platform change a result after the draw?', 'No. The server seed hash is committed before entries open, so the seed cannot be swapped afterwards without breaking the published hash. The ledger is frozen at close and its merkle root is published before the seed is revealed.'],
+  ['ELIGIBILITY', 'Why does a requirement show as missing when I satisfied it?', 'Requirements are evaluated against your connected identities. If you followed on a different X account, hold the asset in an unverified wallet, or left the Discord guild after connecting, the block reads as missing. Re-run the check after connecting the right identity — it is instant.'],
+  ['ELIGIBILITY', 'What does a snapshot at close mean?', 'Holdings are counted at the block where the raffle closes, not when you entered. Acquiring a qualifying asset before close still counts; selling it before close removes you from the valid ledger.'],
+  ['ENTRY', 'Does entering cost gas?', 'No. Entry is a signed message, not a transaction. You sign a read-only ownership proof and the entry is recorded off-chain in the ledger, whose root is published on-chain.'],
+  ['ENTRY', 'Can I withdraw an entry?', 'Yes, any time before the raffle closes. After close the ledger is frozen and nothing — including your own entry — can be added or removed.'],
+  ['PREMIUM', 'Does Premium improve my odds?', 'No, and it cannot. Premium automates watching and entering. The draw reads only the frozen ledger and the revealed seed, neither of which knows your subscription state. Any weighting is set by the project, published in advance, and visible in the evidence chain.'],
+  ['PREMIUM', 'What does Auto-Register actually do?', 'It watches communities you selected, checks requirements you already satisfy, and submits the entry when a matching raffle opens. Every run is logged with success, failure, or a skip reason. It never executes payments.'],
+  ['SECURITY', 'Will support ever ask for my seed phrase?', 'Never, under any circumstance. The Outlaws is non-custodial and stores no private keys. Anyone asking for a seed phrase, a private key, or an approval transaction is impersonating us — report it and we publish the wallet.'],
+  ['SECURITY', 'How do I claim a win safely?', 'Claims happen from My Wins with the wallet already proven in the entry. The project signs the transfer directly to that wallet. You never send funds to claim a prize.']
+];
+
+class Component extends DCLogic {
+  state = { query: '', topic: 'All', open: { 0: true } };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  onQuery = e => this.setState({ query: e.target.value });
+  clear = () => this.setState({ query: '', topic: 'All' });
+
+  renderVals() {
+    const s = this.state;
+    const q = s.query.trim().toLowerCase();
+    const tone = { FAIRNESS: MET, ELIGIBILITY: PEND, ENTRY: '#FFB061', PREMIUM: PEND, SECURITY: '#FF3C00' };
+
+    let items = FAQ.map((f, i) => ({ topic: f[0], q: f[1], a: f[2], i }));
+    if (s.topic !== 'All') items = items.filter(f => f.topic === s.topic.toUpperCase());
+    if (q) items = items.filter(f => (f.q + ' ' + f.a + ' ' + f.topic).toLowerCase().indexOf(q) > -1);
+
+    const faq = items.map(f => {
+      const open = !!s.open[f.i];
+      return {
+        topic: f.topic, q: f.q, a: f.a, open,
+        caret: open ? 'rotate(180deg)' : 'rotate(0deg)',
+        tagColor: tone[f.topic], tagBorder: tone[f.topic] + '4d',
+        border: open ? 'rgba(255,106,0,.28)' : 'rgba(255,255,255,.08)',
+        bg: open ? 'rgba(255,106,0,.035)' : 'rgba(255,255,255,.016)',
+        toggle: () => this.setState(st => ({ open: Object.assign({}, st.open, { [f.i]: !open }) }))
+      };
+    });
+
+    return {
+      query: s.query, onQuery: this.onQuery, clear: this.clear,
+      paths: [
+        { icon: '◈', title: 'Verify a draw', desc: 'Recompute any finalized winner selection from published evidence.', cta: 'OPEN A FINALIZED RAFFLE', href: 'raffle.dc.html', color: MET, iconBg: 'rgba(0,214,180,.1)', border: 'rgba(0,214,180,.26)', bg: 'linear-gradient(160deg,rgba(0,214,180,.06),#0a070c 65%)' },
+        { icon: '!', title: 'Eligibility problem', desc: 'A requirement reads as missing even though you satisfied it.', cta: 'RUN A CHECK', href: 'verify.dc.html', color: PEND, iconBg: 'rgba(255,106,0,.1)', border: 'rgba(255,106,0,.26)', bg: 'linear-gradient(160deg,rgba(255,106,0,.06),#0a070c 65%)' },
+        { icon: '★', title: 'Claim a reward', desc: 'You were selected and want the transfer to your proven wallet.', cta: 'GO TO MY WINS', href: 'wins.dc.html', color: '#FFB061', iconBg: 'rgba(255,176,97,.1)', border: 'rgba(255,255,255,.08)', bg: 'linear-gradient(160deg,#100c12,#0a070c)' }
+      ],
+      topics: ['All', 'Fairness', 'Eligibility', 'Entry', 'Premium', 'Security'].map(t => ({
+        label: t.toUpperCase(),
+        color: s.topic === t ? '#08060a' : '#8C8189',
+        bg: s.topic === t ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ topic: t })
+      })),
+      faq, hasFaq: faq.length > 0, emptyFaq: faq.length === 0,
+      channels: [
+        { icon: 'D', label: 'Discord support', meta: 'FASTEST · TICKET CHANNEL' },
+        { icon: 'X', label: '@theoutlaws', meta: 'PUBLIC QUESTIONS' },
+        { icon: '@', label: 'support@outlaws.xyz', meta: 'UNDER 24H RESPONSE' }
+      ],
+      status: [
+        { label: 'Requirement engine', state: 'OPERATIONAL', color: MET },
+        { label: 'Draw + evidence', state: 'OPERATIONAL', color: MET },
+        { label: 'Allocation indexer', state: 'OPERATIONAL', color: MET },
+        { label: 'Discord alerts', state: 'DEGRADED', color: '#FFB061' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

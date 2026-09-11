@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .pj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:16px; }
+  .pj-head { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  @media (max-width:620px) { .pj-bar { flex-direction:column !important; align-items:stretch !important; } }
+</style>
+</helmet>
+
+<div data-page="projects" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html" class="on">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div style="padding:50px 0 28px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:13px;">DISCOVER · PROJECTS</div>
+      <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.02em;margin:0 0 16px;">
+        <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">Who</span><span class="vx-word" style="animation-delay:.24s;margin-right:.22em;">actually</span><span class="vx-word" style="animation-delay:.38s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">ships</span><span class="vx-word" style="animation-delay:.52s;">.</span>
+      </h1>
+      <p style="font-size:16px;line-height:1.6;color:#9B8F96;max-width:580px;margin:0;text-wrap:pretty;">
+        <span class="vx-word" style="animation-delay:.7s;">Projects are the teams running the draws. Follow one and every allocation it opens reaches you before the entry window closes.</span>
+      </p>
+    </div>
+
+    <div class="pj-bar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:24px;">
+      <div style="position:relative;flex:1;min-width:240px;">
+        <span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6E646C;font-size:14px;">⌕</span>
+        <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search projects…" style="width:100%;padding:14px 15px 14px 39px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:11px;color:#F4EDE6;font-size:14.5px;outline:none;transition:border-color .25s;" style-focus="border-color:rgba(255,106,0,.55)" />
+      </div>
+      <div style="display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;flex-wrap:wrap;">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+          <button onClick="{{ f.pick }}" style="padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ f.color }};background:{{ f.bg }};border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ f.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+      <div class="pj-grid vx-stagger">
+        <sc-for list="{{ rows }}" as="p" hint-placeholder-count="6">
+          <div>
+            <div class="vx-spot" style="display:flex;flex-direction:column;height:100%;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:17px;background:linear-gradient(160deg,#100c12,#0a070c);transition:transform .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:rgba(255,106,0,.38)">
+              <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px;">
+                <span style="width:46px;height:46px;flex:none;border-radius:13px;display:grid;place-items:center;background:{{ p.art }};font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;color:#08060a;">{{ p.initials }}</span>
+                <div style="min-width:0;">
+                  <div style="display:flex;align-items:center;gap:7px;">
+                    <a href="project.dc.html" style="font-size:15.5px;font-weight:600;color:#F4EDE6;">{{ p.name }}</a>
+                    <sc-if value="{{ p.verified }}" hint-placeholder-val="{{ true }}"><span style="color:#00D6B4;font-size:11px;">◈</span></sc-if>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:#6E646C;margin-top:5px;">{{ p.community }}</div>
+                </div>
+              </div>
+
+              <p style="font-size:13.5px;line-height:1.55;color:#8C8189;margin:0 0 18px;flex:1;">{{ p.summary }}</p>
+
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:11px;overflow:hidden;margin-bottom:16px;">
+                <sc-for list="{{ p.stats }}" as="s" hint-placeholder-count="3">
+                  <div style="background:#0b080d;padding:12px 11px;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:700;color:{{ s.color }};">{{ s.v }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.11em;color:#6E646C;margin-top:5px;">{{ s.k }}</div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="display:flex;gap:9px;">
+                <a href="project.dc.html" style="flex:1;display:flex;align-items:center;justify-content:center;padding:11px;font-size:13px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:9px;transition:transform .2s;" style-hover="transform:translateY(-2px);color:#08060a">Open project</a>
+                <button onClick="{{ p.follow }}" style="flex:none;padding:11px 15px;font-size:13px;font-weight:600;color:{{ p.followInk }};background:{{ p.followBg }};border:1px solid {{ p.followBorder }};border-radius:9px;cursor:pointer;transition:all .2s;">{{ p.followLabel }}</button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:52px 40px;border:1px dashed rgba(255,255,255,.14);border-radius:18px;background:rgba(255,255,255,.014);text-align:center;">
+        <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:21px;margin:0 0 10px;">No projects match</h3>
+        <p style="font-size:14px;line-height:1.6;color:#9B8F96;max-width:420px;margin:0 auto 22px;">Loosen the filter or clear the search to see all {{ total }} projects running draws on The Outlaws.</p>
+        <button onClick="{{ clear }}" style="padding:13px 22px;font-size:14px;font-weight:600;color:#FF6A00;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.35);border-radius:10px;cursor:pointer;">Clear filters</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00';
+
+const PROJECTS = [
+  { name: 'ARCforge Labs', initials: 'AF', community: 'ARCFORGE COMMUNITY · 12.4K', verified: true, active: 4, upcoming: 2, won: '18', summary: 'Weighted allocation program for founder passes, shards and contributor seats. Publishes every evidence chain.', following: true, cat: 'Verified' },
+  { name: 'Riftbound', initials: 'RB', community: 'RIFTBOUND ARENA · 9.8K', verified: true, active: 2, upcoming: 1, won: '11', summary: 'Competitive arena studio. Gaming beta keys and tournament seats distributed first-come, first-served.', following: false, cat: 'Gaming' },
+  { name: 'Northstar Protocol', initials: 'NS', community: 'NORTHSTAR DAO · 7.1K', verified: true, active: 1, upcoming: 3, won: '9', summary: 'Access pass issuance tied to reputation bands rather than wallet size. One allocation per member.', following: true, cat: 'Verified' },
+  { name: 'Frontier Labs', initials: 'FL', community: 'FRONTIER COLLECTIVE · 8.1K', verified: true, active: 2, upcoming: 0, won: '14', summary: 'Land pioneers curating tier-1 whitelist access across Base and Arbitrum with snapshot rules.', following: false, cat: 'Verified' },
+  { name: 'Nova Protocol', initials: 'NP', community: 'NOVA MESH · 6.8K', verified: false, active: 1, upcoming: 1, won: '6', summary: 'Liquidity mesh with recurring node operator incentive rounds, reviewed by the core team.', following: false, cat: 'New' },
+  { name: 'Nightfall Interactive', initials: 'NI', community: 'NIGHTFALL GUILD · 9.2K', verified: true, active: 3, upcoming: 1, won: '21', summary: 'Season-based arena access for guild members. Gaming category, random draw, published seeds.', following: false, cat: 'Gaming' },
+  { name: 'Spectral DAO', initials: 'SA', community: 'SPECTRAL AUDIO · 5.2K', verified: true, active: 3, upcoming: 0, won: '8', summary: 'Fractional music rights collective governed by on-chain member votes and weighted draws.', following: false, cat: 'Verified' },
+  { name: 'Ember Labs', initials: 'EL', community: 'EMBER · 4.4K', verified: false, active: 0, upcoming: 2, won: '5', summary: 'Founder pass issuance for the Ember toolchain. Application-reviewed rather than random.', following: false, cat: 'New' }
+];
+
+class Component extends DCLogic {
+  state = { query: '', filter: 'All', follows: {} };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  onQuery = e => this.setState({ query: e.target.value });
+  clear = () => this.setState({ query: '', filter: 'All' });
+
+  renderVals() {
+    const s = this.state;
+    const q = s.query.trim().toLowerCase();
+
+    let rows = PROJECTS.filter(p => {
+      if (s.filter === 'Following') return (s.follows[p.name] !== undefined ? s.follows[p.name] : p.following);
+      if (s.filter !== 'All' && p.cat !== s.filter) return false;
+      return true;
+    });
+    if (q) rows = rows.filter(p => (p.name + ' ' + p.summary + ' ' + p.community).toLowerCase().indexOf(q) > -1);
+
+    const view = rows.map(p => {
+      const on = s.follows[p.name] !== undefined ? s.follows[p.name] : p.following;
+      return {
+        name: p.name, initials: p.initials, community: p.community, verified: p.verified, summary: p.summary,
+        art: p.verified ? 'linear-gradient(135deg,#FFA047,#FF3C00)' : 'linear-gradient(135deg,#C6BBC1,#6E646C)',
+        stats: [
+          { k: 'ACTIVE', v: String(p.active), color: p.active ? PEND : '#6E646C' },
+          { k: 'UPCOMING', v: String(p.upcoming), color: '#F4EDE6' },
+          { k: 'FINALIZED', v: p.won, color: MET }
+        ],
+        followLabel: on ? 'Following' : 'Follow',
+        followInk: on ? '#FF6A00' : '#C6BBC1',
+        followBg: on ? 'rgba(255,106,0,.08)' : 'transparent',
+        followBorder: on ? 'rgba(255,106,0,.35)' : 'rgba(255,255,255,.14)',
+        follow: () => this.setState(st => ({ follows: Object.assign({}, st.follows, { [p.name]: !on }) }))
+      };
+    });
+
+    return {
+      query: s.query, onQuery: this.onQuery, clear: this.clear, total: PROJECTS.length,
+      filters: ['All', 'Verified', 'Gaming', 'New', 'Following'].map(f => ({
+        label: f.toUpperCase(),
+        color: s.filter === f ? '#08060a' : '#8C8189',
+        bg: s.filter === f ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ filter: f })
+      })),
+      rows: view, hasRows: view.length > 0, empty: view.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

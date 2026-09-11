@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .vf-split { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr); gap:24px; align-items:start; }
+  .vf-wallets { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  @media (max-width:1080px) { .vf-split { grid-template-columns:minmax(0,1fr); } .vf-aside { position:static !important; } }
+  @media (max-width:640px) { .vf-wallets { grid-template-columns:minmax(0,1fr); } .vf-actions { flex-direction:column !important; } .vf-actions > * { width:100%; justify-content:center; } }
+</style>
+</helmet>
+
+<div data-page="verify" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <div style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.012);">
+    <div class="ol-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:44px;display:flex;align-items:center;gap:12px;overflow:hidden;">
+      <a href="raffle.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#6E646C;">ARCFORGE GENESIS PASS</a>
+      <span style="color:#3E353C;font-size:10px;">/</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#C6BBC1;white-space:nowrap;">WALLET VERIFICATION</span>
+      <span style="flex:1;"></span>
+      <span style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ tone }};white-space:nowrap;">
+        <span style="width:6px;height:6px;border-radius:99px;background:{{ tone }};animation:vx-pulse 1.6s ease-in-out infinite;"></span>{{ railLabel }}
+      </span>
+    </div>
+  </div>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:44px 28px 0;">
+    <div class="vf-split">
+
+      <div>
+        <!-- verdict panel -->
+        <div style="position:relative;border:1px solid {{ panelBorder }};border-radius:20px;background:{{ panelBg }};overflow:hidden;">
+          <div style="height:2px;background:{{ bar }};"></div>
+          <sc-if value="{{ checking }}" hint-placeholder-val="{{ false }}"><div class="vx-scanner"></div></sc-if>
+
+          <div style="padding:32px 30px 26px;">
+            <div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;">
+              <span class="{{ sealAnim }}" style="width:60px;height:60px;flex:none;display:grid;place-items:center;border-radius:17px;background:{{ iconBg }};color:{{ tone }};font-size:25px;">{{ icon }}</span>
+              <div style="flex:1;min-width:240px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:{{ tone }};margin-bottom:11px;">{{ kicker }}</div>
+                <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);line-height:1.05;letter-spacing:-.015em;margin:0 0 14px;">{{ headline }}</h1>
+                <p style="font-size:16px;line-height:1.6;color:#9B8F96;margin:0;max-width:560px;text-wrap:pretty;">{{ body }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- evaluation table -->
+          <div style="padding:0 30px 26px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#6E646C;margin-bottom:12px;">EVALUATION · {{ metLine }}</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid {{ c.border }};border-radius:11px;background:{{ c.bg }};">
+                  <span class="{{ c.pulse }}" style="width:19px;height:19px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ c.color }};color:{{ c.color }};font-size:9px;font-weight:700;">{{ c.icon }}</span>
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-size:13.5px;font-weight:600;color:#DCD2D6;">{{ c.label }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#6E646C;margin-top:4px;">{{ c.detail }}</div>
+                  </div>
+                  <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:{{ c.color }};">{{ c.state }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- actions -->
+          <div style="padding:0 30px 30px;">
+            <div class="vf-actions" style="display:flex;gap:11px;flex-wrap:wrap;">
+              <button onClick="{{ primary }}" style="flex:1;min-width:200px;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border:1px solid {{ ctaBorder }};border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;color:{{ ctaInk }};background:{{ ctaBg }};transition:transform .2s;" style-hover="transform:translateY(-2px)">{{ ctaLabel }}</button>
+              <a href="raffle.dc.html" style="display:flex;align-items:center;justify-content:center;padding:16px 22px;border:1px solid rgba(255,255,255,.14);border-radius:12px;font-size:15px;font-weight:600;color:#DCD2D6;transition:border-color .2s,background .2s;" style-hover="border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)">Back to raffle</a>
+              <button onClick="{{ recheck }}" style="display:flex;align-items:center;justify-content:center;padding:16px 20px;border:1px solid rgba(0,214,180,.32);border-radius:12px;font-size:15px;font-weight:600;color:#00D6B4;background:rgba(0,214,180,.06);cursor:pointer;transition:background .2s;" style-hover="background:rgba(0,214,180,.14)">Re-run check</button>
+            </div>
+            <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.6;letter-spacing:.04em;color:#6E646C;">{{ disclaimer }}</div>
+          </div>
+        </div>
+
+        <!-- wallet selection -->
+        <div style="margin-top:22px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+            <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.03em;">SELECTED WALLET</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:#6E646C;">READ-ONLY · NO KEYS STORED</span>
+          </div>
+          <div class="vf-wallets" style="padding:18px 22px;">
+            <sc-for list="{{ wallets }}" as="w" hint-placeholder-count="2">
+              <div onClick="{{ w.pick }}" style="padding:16px;border:1px solid {{ w.border }};border-radius:13px;background:{{ w.bg }};cursor:pointer;transition:all .25s;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+                  <span style="display:flex;align-items:center;gap:9px;">
+                    <span style="width:17px;height:17px;border-radius:99px;border:1.5px solid {{ w.color }};display:grid;place-items:center;color:{{ w.color }};font-size:8px;">{{ w.dot }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#F4EDE6;">{{ w.addr }}</span>
+                  </span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:{{ w.tagColor }};">{{ w.tag }}</span>
+                </div>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                  <sc-for list="{{ w.facts }}" as="f" hint-placeholder-count="2">
+                    <div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#4E454C;margin-bottom:5px;">{{ f.k }}</div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C6BBC1;">{{ f.v }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:0 22px 20px;">
+            <button style="width:100%;padding:13px;font-size:13.5px;font-weight:600;color:#FF6A00;background:rgba(255,106,0,.07);border:1px dashed rgba(255,106,0,.35);border-radius:11px;cursor:pointer;transition:background .2s;" style-hover="background:rgba(255,106,0,.15)">+ Connect another wallet</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- raffle context -->
+      <aside class="vf-aside" style="position:sticky;top:96px;">
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:18px;background:linear-gradient(168deg,#141017,#0b080d 60%);overflow:hidden;">
+          <div style="height:2px;background:linear-gradient(90deg,#FF3C00,#FFB061,#FF6A00);"></div>
+          <div style="padding:20px 20px 0;display:flex;align-items:center;gap:12px;">
+            <span style="width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#FFA047,#FF3C00);font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:15px;color:#08060a;">AF</span>
+            <div style="min-width:0;">
+              <div style="font-size:14px;font-weight:600;color:#F4EDE6;">ARCforge Genesis Pass</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:#6E646C;margin-top:4px;">ARCFORGE COMMUNITY</div>
+            </div>
+          </div>
+          <div style="padding:18px 20px 0;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06);border-radius:12px;margin:18px 20px 0;overflow:hidden;">
+            <sc-for list="{{ context }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:#0b080d;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;">{{ c.k }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:{{ c.color }};">{{ c.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:18px 20px 22px;">
+            <a href="raffle.dc.html" style="display:flex;align-items:center;justify-content:center;padding:13px;font-size:13.5px;font-weight:600;color:#DCD2D6;border:1px solid rgba(255,255,255,.14);border-radius:10px;transition:border-color .2s;" style-hover="border-color:rgba(255,106,0,.45);color:#FF6A00">View requirements</a>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding:18px 20px;border:1px solid rgba(0,214,180,.22);border-radius:18px;background:rgba(0,214,180,.035);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#00D6B4;margin-bottom:11px;">WHAT VERIFICATION IS NOT</div>
+          <p style="font-size:12.5px;line-height:1.6;color:#9B8F96;margin:0;">Eligibility is not an entry, and an entry is not a win. Verification only answers whether this wallet satisfies the raffle's requirement blocks at this moment.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;result&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;eligible&quot;,&quot;options&quot;:[&quot;eligible&quot;,&quot;failed&quot;,&quot;checking&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;}}">
+const MET = '#00D6B4', PEND = '#FF6A00', FAIL = '#FF3C00', DEAD = '#6E646C';
+
+class Component extends DCLogic {
+  state = { mode: null, wallet: 0, phase: 0 };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); this.ts && this.ts.forEach(clearTimeout); }
+
+  recheck = () => {
+    (this.ts || []).forEach(clearTimeout);
+    this.ts = [];
+    const target = this.state.wallet === 0 ? 'eligible' : 'failed';
+    this.setState({ mode: 'checking', phase: 0 });
+    [1, 2, 3, 4].forEach((n, i) => this.ts.push(setTimeout(() => this.setState({ phase: n }), 500 + i * 520)));
+    this.ts.push(setTimeout(() => this.setState({ mode: target }), 2700));
+  };
+
+  pick = i => () => {
+    this.setState({ wallet: i, mode: 'checking', phase: 0 });
+    (this.ts || []).forEach(clearTimeout);
+    this.ts = [];
+    [1, 2, 3, 4].forEach((n, k) => this.ts.push(setTimeout(() => this.setState({ phase: n }), 420 + k * 460)));
+    this.ts.push(setTimeout(() => this.setState({ mode: i === 0 ? 'eligible' : 'failed' }), 2400));
+  };
+
+  primary = () => {
+    const m = this.mode();
+    if (m === 'eligible') { location.href = 'raffle.dc.html'; return; }
+    if (m === 'failed') { location.href = 'raffle.dc.html'; return; }
+    this.recheck();
+  };
+
+  mode() { return this.state.mode || this.props.result || 'eligible'; }
+
+  renderVals() {
+    const m = this.mode();
+    const checking = m === 'checking';
+    const ok = m === 'eligible';
+    const tone = checking ? PEND : ok ? MET : FAIL;
+    const phase = checking ? this.state.phase : 4;
+
+    const defs = [
+      ['Wallet ownership proof', 'EIP-712 signature · gasless', true],
+      ['Follow @arcforgelabs on X', 'social block · any-of satisfied', true],
+      ['Discord role · Arcforge Core', 'guild role read at check time', true],
+      ['Hold 1× Outlaw Node NFT', 'snapshot at close · Ethereum', ok]
+    ];
+    const checks = defs.map(([label, detail, good], i) => {
+      const done = phase > i;
+      const st = !done ? (checking ? 'CHECKING' : 'PENDING') : good ? 'MET' : 'MISSING';
+      const color = st === 'MET' ? MET : st === 'MISSING' ? FAIL : st === 'CHECKING' ? PEND : DEAD;
+      return {
+        label, detail, state: st, color, icon: st === 'MET' ? '✓' : st === 'MISSING' ? '!' : st === 'CHECKING' ? '◵' : '·',
+        pulse: st === 'CHECKING' && !(window.OutlawsFX && window.OutlawsFX.reduced) ? 'vx-node' : '',
+        border: color === DEAD ? 'rgba(255,255,255,.08)' : color + '40',
+        bg: color === DEAD ? 'rgba(255,255,255,.016)' : color + '0d'
+      };
+    });
+    const met = checks.filter(c => c.state === 'MET').length;
+
+    const copy = {
+      checking: {
+        kicker: 'VERIFICATION IN PROGRESS',
+        headline: 'Evaluating this wallet',
+        body: 'Reading ownership proof, social state, guild roles and on-chain holdings for the selected wallet. Nothing is submitted while this runs.',
+        icon: '◵', cta: 'Checking…',
+        disclaimer: 'A CHECK IS A READ. NO TRANSACTION, NO APPROVAL, NO ENTRY.'
+      },
+      eligible: {
+        kicker: 'ELIGIBLE WALLET',
+        headline: 'This wallet is eligible',
+        body: 'All four requirement blocks are satisfied for ARCforge Genesis Pass. Continue to entry and your position is written to the ledger — you can withdraw any time before close.',
+        icon: '✓', cta: 'Continue to entry',
+        disclaimer: 'ELIGIBILITY IS NOT AN ENTRY. PREMIUM NEVER CHANGES DRAW PROBABILITY.'
+      },
+      failed: {
+        kicker: 'WALLET NOT ELIGIBLE',
+        headline: 'Wallet not eligible',
+        body: 'One requirement block is unmet for this wallet: the token holding. You have not been entered. Satisfy the block, switch to a qualifying wallet, or re-run the check before close.',
+        icon: '!', cta: 'Back to requirements',
+        disclaimer: 'NO ENTRY WAS SUBMITTED. THE LEDGER IS UNCHANGED.'
+      }
+    }[m];
+
+    const wallets = [
+      ['0x8f2c…4A9b', 'PRIMARY', [['HOLDINGS', '1 Node NFT'], ['REPUTATION', '91 / 100']]],
+      ['0x41ae…97D0', 'VERIFIED', [['HOLDINGS', 'none found'], ['REPUTATION', '91 / 100']]]
+    ].map(([addr, tag, facts], i) => ({
+      addr, tag,
+      tagColor: i === this.state.wallet ? PEND : DEAD,
+      dot: i === this.state.wallet ? '●' : '',
+      color: i === this.state.wallet ? PEND : DEAD,
+      border: i === this.state.wallet ? 'rgba(255,106,0,.38)' : 'rgba(255,255,255,.09)',
+      bg: i === this.state.wallet ? 'rgba(255,106,0,.055)' : 'transparent',
+      facts: facts.map(([k, v]) => ({ k, v })),
+      pick: this.pick(i)
+    }));
+
+    return {
+      tone, checking,
+      railLabel: checking ? 'VERIFICATION IN PROGRESS' : ok ? 'ELIGIBLE' : 'NOT ELIGIBLE',
+      panelBorder: tone + '42',
+      panelBg: 'linear-gradient(168deg,' + tone + '14,#0b080d 62%)',
+      bar: checking ? 'linear-gradient(90deg,#FF3C00,#FFB061,#FF6A00)' : ok ? 'linear-gradient(90deg,#00D6B4,#5ef2d6)' : 'linear-gradient(90deg,#FF3C00,#a32600)',
+      iconBg: tone + '1f',
+      icon: copy.icon, kicker: copy.kicker, headline: copy.headline, body: copy.body,
+      sealAnim: checking || (window.OutlawsFX && window.OutlawsFX.reduced) ? '' : 'vx-seal',
+      checks, metLine: met + ' OF 4 BLOCKS MET',
+      primary: this.primary, recheck: this.recheck,
+      ctaLabel: copy.cta,
+      ctaInk: checking ? '#FF8A33' : '#08060a',
+      ctaBg: checking ? 'rgba(255,106,0,.08)' : ok ? 'linear-gradient(180deg,#5ef2d6,#00b899)' : 'linear-gradient(180deg,#FFA047,#FF6A00)',
+      ctaBorder: checking ? 'rgba(255,106,0,.35)' : 'transparent',
+      disclaimer: copy.disclaimer,
+      wallets,
+      context: [
+        { k: 'RAFFLE STATE', v: 'ACTIVE', color: PEND },
+        { k: 'MODE', v: 'WEIGHTED', color: '#F4EDE6' },
+        { k: 'CLOSES IN', v: '2d 14h', color: '#F4EDE6' },
+        { k: 'ENTRIES', v: '4,821', color: '#F4EDE6' },
+        { k: 'WINNER SPOTS', v: '1', color: '#F4EDE6' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

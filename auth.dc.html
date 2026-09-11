@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .au-split { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,460px); gap:46px; align-items:center; min-height:calc(100vh - 74px); }
+  @media (max-width:980px) { .au-split { grid-template-columns:minmax(0,1fr); gap:34px; padding-top:36px; padding-bottom:46px; min-height:0; } .au-pitch { order:2; } }
+</style>
+</helmet>
+
+<div data-page="auth" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <span style="flex:1;"></span>
+      <a href="support.dc.html" style="font-size:13.5px;font-weight:600;color:#9B8F96;transition:color .2s;" style-hover="color:#FF6A00">Need help?</a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div class="au-split">
+
+      <div class="au-pitch">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:16px;">JOIN THE OUTLAWS</div>
+        <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(34px,4.4vw,58px);line-height:.98;letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance;">
+          <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">Read-only</span><span class="vx-word" style="animation-delay:.26s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">access.</span><br />
+          <span class="vx-word" style="animation-delay:.44s;">Always.</span>
+        </h1>
+        <p style="font-size:16.5px;line-height:1.62;color:#9B8F96;max-width:520px;margin:0 0 32px;text-wrap:pretty;">
+          <span class="vx-word" style="animation-delay:.62s;">Connecting proves you control an address. It does not grant spending permission, and The Outlaws never stores a key. You can disconnect any identity at any time.</span>
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:12px;max-width:520px;">
+          <sc-for list="{{ promises }}" as="p" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid {{ p.border }};border-radius:12px;background:{{ p.bg }};">
+              <span style="width:19px;height:19px;flex:none;margin-top:1px;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ p.color }};color:{{ p.color }};font-size:9px;font-weight:700;">{{ p.icon }}</span>
+              <div>
+                <div style="font-size:13.5px;font-weight:600;color:#F4EDE6;">{{ p.title }}</div>
+                <div style="font-size:12.5px;line-height:1.55;color:#8C8189;margin-top:5px;">{{ p.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div>
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:22px;background:linear-gradient(168deg,#141017,#0b080d 62%);overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.62);">
+          <div style="height:2px;background:linear-gradient(90deg,#FF3C00,#FFB061,#FF6A00);"></div>
+
+          <div style="padding:26px 26px 0;">
+            <div style="display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;margin-bottom:24px;">
+              <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+                <button onClick="{{ m.pick }}" style="flex:1;padding:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:{{ m.color }};background:{{ m.bg }};border:none;border-radius:8px;cursor:pointer;transition:all .25s;">{{ m.label }}</button>
+              </sc-for>
+            </div>
+
+            <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:24px;line-height:1.15;margin:0 0 9px;">{{ title }}</h2>
+            <p style="font-size:13.5px;line-height:1.6;color:#9B8F96;margin:0 0 22px;">{{ sub }}</p>
+          </div>
+
+          <div style="padding:0 26px;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ wallets }}" as="w" hint-placeholder-count="4">
+              <button onClick="{{ w.connect }}" style="display:flex;align-items:center;gap:13px;padding:15px 16px;border:1px solid {{ w.border }};border-radius:12px;background:{{ w.bg }};cursor:pointer;text-align:left;transition:all .25s;" style-hover="border-color:rgba(255,106,0,.5)">
+                <span style="width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;background:{{ w.art }};font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#08060a;">{{ w.initials }}</span>
+                <span style="flex:1;min-width:0;">
+                  <span style="display:block;font-size:14.5px;font-weight:600;color:#F4EDE6;">{{ w.name }}</span>
+                  <span style="display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.07em;color:#6E646C;margin-top:4px;">{{ w.meta }}</span>
+                </span>
+                <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ w.stateColor }};">{{ w.state }}</span>
+              </button>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{ connecting }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:20px 26px 0;padding:16px;border:1px solid rgba(255,106,0,.3);border-radius:12px;background:rgba(255,106,0,.06);">
+              <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;">
+                <span class="vx-node" style="width:19px;height:19px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid #FF6A00;color:#FF6A00;font-size:9px;">◵</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#FF8A33;">AWAITING SIGNATURE IN WALLET</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.7;letter-spacing:.03em;color:#8C8189;word-break:break-all;">{{ sigMessage }}</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ connected }}" hint-placeholder-val="{{ false }}">
+            <div class="vx-seal" style="margin:20px 26px 0;padding:16px;border:1px solid rgba(0,214,180,.32);border-radius:12px;background:rgba(0,214,180,.07);">
+              <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px;">
+                <span style="color:#00D6B4;font-size:14px;">◈</span>
+                <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;color:#00D6B4;">Identity verified</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.7;letter-spacing:.04em;color:#9B8F96;">0x8F2C…4A9B · READ-ONLY PROOF · NO SPENDING APPROVAL GRANTED</div>
+            </div>
+          </sc-if>
+
+          <div style="padding:22px 26px 26px;">
+            <a href="{{ ctaHref }}" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;font-size:15px;font-weight:700;color:{{ ctaInk }};background:{{ ctaBg }};border-radius:12px;transition:transform .2s;" style-hover="transform:translateY(-2px)">{{ ctaLabel }}</a>
+
+            <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#6E646C;margin-bottom:12px;">OPTIONAL · CONNECT LATER FROM PROFILE</div>
+              <div style="display:flex;gap:9px;flex-wrap:wrap;">
+                <sc-for list="{{ socials }}" as="s" hint-placeholder-count="3">
+                  <button style="flex:1;min-width:96px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;font-size:13px;font-weight:600;color:#C6BBC1;background:transparent;border:1px solid rgba(255,255,255,.13);border-radius:10px;cursor:pointer;transition:all .2s;" style-hover="border-color:rgba(255,106,0,.45);color:#FF6A00">{{ s.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+
+            <p style="font-size:11.5px;line-height:1.65;color:#6E646C;margin:18px 0 0;">By continuing you accept the <a href="support.dc.html">Terms</a> and <a href="support.dc.html">Risk disclosure</a>. The Outlaws is non-custodial: entries are free, draws are recomputable, and no employee can alter a result.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;align-items:center;gap:11px;padding:14px 18px;border:1px solid rgba(255,60,0,.24);border-radius:14px;background:rgba(255,60,0,.035);">
+          <span style="color:#FF3C00;font-size:13px;flex:none;">!</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.65;letter-spacing:.05em;color:#8C8189;">WE WILL NEVER ASK FOR A SEED PHRASE OR PRIVATE KEY. ANY PAGE OR DM THAT DOES IS NOT US.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:22px 0 30px;border-top:1px solid rgba(255,255,255,.06);">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;">© 2026 THE OUTLAWS · NON-CUSTODIAL</span>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;">
+        <a href="support.dc.html" style="font-size:13px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">Support</a>
+        <a href="support.dc.html" style="font-size:13px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">Terms</a>
+        <a href="support.dc.html" style="font-size:13px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">Privacy</a>
+        <a href="index.html" style="font-size:13px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">Back to site</a>
+      </div>
+    </div>
+  </section>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+class Component extends DCLogic {
+  state = { mode: 'Sign in', phase: 'idle' };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); clearTimeout(this.t); }
+
+  connect = () => {
+    clearTimeout(this.t);
+    this.setState({ phase: 'connecting' });
+    this.t = setTimeout(() => this.setState({ phase: 'connected' }), 1800);
+  };
+
+  renderVals() {
+    const s = this.state;
+    const isNew = s.mode === 'Create account';
+
+    return {
+      modes: ['Sign in', 'Create account'].map(m => ({
+        label: m.toUpperCase(),
+        color: s.mode === m ? '#08060a' : '#8C8189',
+        bg: s.mode === m ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ mode: m, phase: 'idle' })
+      })),
+      title: isNew ? 'Create your account' : 'Connect a wallet',
+      sub: isNew
+        ? 'One identity, as many verified wallets as you need. Requirements are checked against everything you connect.'
+        : 'Pick the wallet you want checked against raffle requirements. You can add more later without losing history.',
+      wallets: [
+        ['MetaMask', 'BROWSER EXTENSION', 'MM', 'DETECTED', MET],
+        ['Rabby', 'BROWSER EXTENSION', 'RB', 'DETECTED', MET],
+        ['WalletConnect', 'QR · MOBILE WALLETS', 'WC', '', DEAD],
+        ['Coinbase Wallet', 'EXTENSION · MOBILE', 'CB', '', DEAD]
+      ].map(([name, meta, initials, state, stateColor], i) => ({
+        name, meta, initials, state, stateColor,
+        art: i === 0 ? 'linear-gradient(135deg,#FFA047,#FF3C00)' : i === 1 ? 'linear-gradient(135deg,#FFD08A,#FF8A33)' : i === 2 ? 'linear-gradient(135deg,#5ef2d6,#00806c)' : 'linear-gradient(135deg,#C6BBC1,#6E646C)',
+        border: 'rgba(255,255,255,.1)',
+        bg: 'rgba(255,255,255,.022)',
+        connect: this.connect
+      })),
+      connecting: s.phase === 'connecting',
+      connected: s.phase === 'connected',
+      sigMessage: 'THE OUTLAWS WANTS YOU TO SIGN: PROVE CONTROL OF 0x8F2C…4A9B · NONCE 8841cb · NO TRANSACTION, NO APPROVAL, NO GAS',
+      ctaLabel: s.phase === 'connected' ? (isNew ? 'Finish setup' : 'Enter The Outlaws') : isNew ? 'Continue' : 'Continue',
+      ctaHref: s.phase === 'connected' ? (isNew ? 'profile.dc.html' : 'index.html') : 'index.html',
+      ctaInk: s.phase === 'connected' ? '#08060a' : '#9B8F96',
+      ctaBg: s.phase === 'connected' ? 'linear-gradient(180deg,#5ef2d6,#00b899)' : 'rgba(255,255,255,.05)',
+      socials: [{ label: 'X' }, { label: 'Discord' }, { label: 'Telegram' }],
+      promises: [
+        { title: 'No spending permission', body: 'Connecting is a signature, not an approval. Nothing can be moved from your wallet through this site.', icon: '✓', color: MET, border: 'rgba(0,214,180,.26)', bg: 'rgba(0,214,180,.045)' },
+        { title: 'No keys stored', body: 'The Outlaws holds no private keys or seed phrases — not encrypted, not anywhere.', icon: '✓', color: MET, border: 'rgba(0,214,180,.26)', bg: 'rgba(0,214,180,.045)' },
+        { title: 'Free entries, always', body: 'Entering a raffle costs nothing and never requires gas. Premium only automates.', icon: '✓', color: MET, border: 'rgba(0,214,180,.26)', bg: 'rgba(0,214,180,.045)' },
+        { title: 'Every draw recomputable', body: 'Seed, ledger and entropy are published so you can verify any result without us.', icon: '◈', color: PEND, border: 'rgba(255,106,0,.26)', bg: 'rgba(255,106,0,.045)' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

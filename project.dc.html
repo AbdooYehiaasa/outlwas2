@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  .pd-hero { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:30px; align-items:center; }
+  .pd-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; }
+  .pd-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:15px; }
+  @media (max-width:1020px) { .pd-hero { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:620px) { .pd-stats { grid-template-columns:repeat(2,minmax(0,1fr)); } .pd-actions { flex-direction:column !important; } .pd-actions > * { width:100%; justify-content:center; } }
+</style>
+</helmet>
+
+<div data-page="project" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <header class="ol-hd">
+    <div class="ol-hd-in">
+      <a href="index.html" class="ol-brand"><span class="ol-diamond"><i></i></span><span class="ol-mark"><b>THE</b><s>OUTLAWS</s></span></a>
+      <nav class="ol-nav">
+        <a href="index.html">Home</a>
+        <a href="discover.dc.html">Discover</a>
+        <a href="projects.dc.html" class="on">Projects</a>
+        <a href="myraffles.dc.html">My Raffles</a>
+        <a href="communities.dc.html">Communities</a>
+        <a href="calendar.dc.html">Calendar</a>
+        <a href="premium.dc.html">Premium</a>
+      </nav>
+      <button class="ol-burger" aria-label="Menu">☰</button>
+      <a href="search.dc.html" class="ol-srch"><span>⌕</span><em>Search raffles, projects…</em><kbd>⌘K</kbd></a>
+      <button class="ol-bell" aria-label="Notifications">◵<i></i></button>
+      <a href="premium.dc.html" class="ol-sub">Subscribe</a>
+      <a href="profile.dc.html" class="ol-user"><i>A</i><s>arc_director</s></a>
+    </div>
+    <div class="ol-hairline"></div>
+  </header>
+
+  <div style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.012);">
+    <div class="ol-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:44px;display:flex;align-items:center;gap:12px;overflow:hidden;">
+      <a href="projects.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#6E646C;">PROJECTS</a>
+      <span style="color:#3E353C;font-size:10px;">/</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#C6BBC1;white-space:nowrap;">ARCFORGE LABS</span>
+      <span style="flex:1;"></span>
+      <span style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#00D6B4;white-space:nowrap;">
+        <span style="width:6px;height:6px;border-radius:99px;background:#00D6B4;"></span>VERIFIED PROJECT
+      </span>
+    </div>
+  </div>
+
+  <section class="ol-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div class="pd-hero" style="padding:46px 0 34px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+          <span style="width:64px;height:64px;flex:none;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#FFA047,#FF3C00);font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:23px;color:#08060a;box-shadow:0 14px 40px rgba(255,106,0,.3);">AF</span>
+          <div style="min-width:0;">
+            <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,44px);line-height:1;letter-spacing:-.015em;margin:0 0 10px;">
+              <span class="vx-word" style="animation-delay:.1s;margin-right:.2em;">ARCforge</span><span class="vx-word" style="animation-delay:.24s;">Labs</span>
+            </h1>
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+              <a href="community.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.09em;color:#FF6A00;">ARCFORGE COMMUNITY · 12.4K</a>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.09em;color:#6E646C;">· ETHEREUM · SINCE JAN 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:16px;line-height:1.62;color:#9B8F96;max-width:620px;margin:0 0 26px;text-wrap:pretty;">
+          <span class="vx-word" style="animation-delay:.45s;">A standing weighted-allocation program for founder passes, shards and contributor seats. Every ARCforge draw publishes its full evidence chain before the winner is announced, so the result is checkable by anyone who cares to check.</span>
+        </p>
+
+        <div class="pd-actions" style="display:flex;gap:11px;flex-wrap:wrap;">
+          <a href="raffle.dc.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-size:14.5px;font-weight:700;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:11px;transition:transform .2s;" style-hover="transform:translateY(-2px);color:#08060a">Open live raffle <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+          <button onClick="{{ follow }}" style="padding:14px 20px;font-size:14.5px;font-weight:600;color:{{ followInk }};background:{{ followBg }};border:1px solid {{ followBorder }};border-radius:11px;cursor:pointer;transition:all .2s;">{{ followLabel }}</button>
+          <a href="community.dc.html" style="padding:14px 20px;font-size:14.5px;font-weight:600;color:#DCD2D6;border:1px solid rgba(255,255,255,.14);border-radius:11px;transition:border-color .2s;" style-hover="border-color:rgba(255,255,255,.32)">View community</a>
+        </div>
+      </div>
+
+      <div class="pd-stats vx-stagger" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;grid-template-columns:repeat(2,minmax(0,1fr));">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div class="vx-spot" style="background:#0b080d;padding:19px 17px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:23px;font-weight:700;color:{{ s.color }};">{{ s.v }}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#6E646C;margin-top:7px;line-height:1.4;">{{ s.k }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- tabs -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:22px;">
+      <div style="display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;flex-wrap:wrap;">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+          <button onClick="{{ t.pick }}" style="padding:9px 15px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;color:{{ t.color }};background:{{ t.bg }};border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#6E646C;">{{ countLine }}</span>
+    </div>
+
+    <sc-if value="{{ isRaffles }}" hint-placeholder-val="{{ true }}">
+      <div class="pd-grid vx-stagger">
+        <sc-for list="{{ raffles }}" as="r" hint-placeholder-count="4">
+          <div>
+            <a href="raffle.dc.html" class="vx-spot" style="position:relative;display:block;height:100%;padding:21px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:linear-gradient(160deg,#100c12,#0a070c);overflow:hidden;transition:transform .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:rgba(255,106,0,.4)">
+              <span style="position:absolute;top:0;left:0;right:0;height:2px;background:{{ r.accent }};"></span>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.11em;padding:4px 8px;border-radius:5px;color:{{ r.stateColor }};border:1px solid {{ r.stateBorder }};background:{{ r.stateBg }};">{{ r.state }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;">{{ r.mode }}</span>
+              </div>
+              <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:18px;line-height:1.2;margin:0 0 8px;color:#F4EDE6;">{{ r.title }}</h3>
+              <p style="font-size:13px;line-height:1.5;color:#8C8189;margin:0 0 18px;min-height:39px;">{{ r.prize }}</p>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#9B8F96;">{{ r.entries }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:{{ r.timeColor }};">{{ r.time }}</span>
+              </div>
+            </a>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isRules }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:15px;">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="4">
+          <div class="vx-spot" style="padding:21px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.016);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#FF6A00;margin-bottom:13px;">{{ r.kicker }}</div>
+            <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:#F4EDE6;margin-bottom:10px;">{{ r.title }}</div>
+            <p style="font-size:13.5px;line-height:1.6;color:#9B8F96;margin:0;">{{ r.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isTeam }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+        <sc-for list="{{ team }}" as="t" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.05);flex-wrap:wrap;">
+            <span style="width:38px;height:38px;flex:none;border-radius:11px;display:grid;place-items:center;background:{{ t.art }};font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#08060a;">{{ t.initials }}</span>
+            <div style="flex:1;min-width:160px;">
+              <div style="font-size:14px;font-weight:600;color:#F4EDE6;">{{ t.name }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.07em;color:#6E646C;margin-top:4px;">{{ t.role }}</div>
+            </div>
+            <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.09em;color:#00D6B4;">{{ t.state }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </section>
+
+  <footer class="ol-ft">
+    <div class="ol-ft-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);"><span style="width:6px;height:6px;background:#FF6A00;"></span></span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <div>
+        <div class="ol-ft-t">PLATFORM</div>
+        <div class="ol-ft-col"><a href="discover.dc.html">Discover</a><a href="projects.dc.html">Projects</a><a href="communities.dc.html">Communities</a><a href="calendar.dc.html">Calendar</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">ACCOUNT</div>
+        <div class="ol-ft-col"><a href="myraffles.dc.html">My Raffles</a><a href="wins.dc.html">My Wins</a><a href="profile.dc.html">Profile</a><a href="premium.dc.html">Premium</a></div>
+      </div>
+      <div>
+        <div class="ol-ft-t">SUPPORT</div>
+        <div class="ol-ft-col"><a href="support.dc.html">Help center</a><a href="support.dc.html">Verify a draw</a><a href="support.dc.html">Terms</a><a href="support.dc.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="ol-ft-bot">
+      <span>© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+class Component extends DCLogic {
+  state = { tab: 'Raffles', following: true };
+
+  fx() { if (window.OutlawsFX) return window.OutlawsFX.start(); this.r = setTimeout(() => this.fx(), 250); }
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.r); }
+
+  renderVals() {
+    const s = this.state;
+    const raffles = [
+      ['ARCforge Genesis Pass', '1 × Genesis Pass with founder allocation rights.', 'LIVE', PEND, '4,821 / 5,000', '2d 14h', '#F4EDE6', 'WEIGHTED'],
+      ['ARCforge Shard Drop', '250 × Shard allocation for verified holders.', 'LIVE', PEND, '1,204 / 2,000', '4d 06h', '#F4EDE6', 'WEIGHTED'],
+      ['Core Contributor Seat', '5 seats on the ARCforge contributor council.', 'ENDING SOON', '#FFB061', '318 applied', '18h 40m', PEND, 'APPLICATION'],
+      ['Forge Beta Access', '1,000 beta keys, first valid entries only.', 'LIVE', PEND, '3,806 / 4,000', '05h 12m', PEND, 'FCFS'],
+      ['Genesis Pass · Wave 2', '3 × Genesis Pass for reputation ≥ 80.', 'UPCOMING', DEAD, 'opens 19 Sep', '8d', '#9B8F96', 'WEIGHTED'],
+      ['Founder Key', '1 × Founder Key · winner published.', 'FINALIZED', MET, '6,204 entries', 'verified', MET, 'RANDOM']
+    ].map(([title, prize, state, stateColor, entries, time, timeColor, mode]) => ({
+      title, prize, state, stateColor, entries, time, timeColor, mode,
+      stateBorder: stateColor === DEAD ? 'rgba(255,255,255,.14)' : stateColor + '55',
+      stateBg: stateColor === DEAD ? 'rgba(255,255,255,.04)' : stateColor + '14',
+      accent: state === 'FINALIZED' ? 'linear-gradient(90deg,#00D6B4,#0a6b5c)'
+        : state === 'UPCOMING' ? 'linear-gradient(90deg,#6E646C,#3E353C)'
+        : 'linear-gradient(90deg,#FF6A00,#FFB061)'
+    }));
+
+    return {
+      stats: [
+        { k: 'LIVE RAFFLES', v: '4', color: PEND },
+        { k: 'UPCOMING', v: '2', color: '#F4EDE6' },
+        { k: 'FINALIZED DRAWS', v: '18', color: MET },
+        { k: 'ALLOCATIONS GIVEN', v: '1,482', color: '#F4EDE6' }
+      ],
+      followLabel: s.following ? 'Following' : 'Follow project',
+      followInk: s.following ? '#FF6A00' : '#C6BBC1',
+      followBg: s.following ? 'rgba(255,106,0,.08)' : 'transparent',
+      followBorder: s.following ? 'rgba(255,106,0,.35)' : 'rgba(255,255,255,.14)',
+      follow: () => this.setState({ following: !s.following }),
+      tabs: ['Raffles', 'Rules', 'Team'].map(t => ({
+        label: t.toUpperCase(),
+        color: s.tab === t ? '#08060a' : '#8C8189',
+        bg: s.tab === t ? '#FF6A00' : 'transparent',
+        pick: () => this.setState({ tab: t })
+      })),
+      isRaffles: s.tab === 'Raffles', isRules: s.tab === 'Rules', isTeam: s.tab === 'Team',
+      countLine: s.tab === 'Raffles' ? '6 RAFFLES · 4 LIVE' : s.tab === 'Rules' ? 'PUBLISHED BEFORE EVERY DRAW' : '4 VERIFIED OPERATORS',
+      raffles,
+      rules: [
+        { kicker: 'REQUIREMENT MODEL', title: 'Blocks are AND, values are OR', body: 'Every ARCforge raffle uses stacked requirement blocks. All blocks must pass; inside a block any single value satisfies it. Nothing is hidden behind a private check.' },
+        { kicker: 'SNAPSHOT RULE', title: 'Holdings counted at close', body: 'Token conditions are read at the closing block, never at entry time. Acquiring before close qualifies; selling before close disqualifies.' },
+        { kicker: 'WEIGHTING', title: 'Reputation bands, published in advance', body: 'Weighted raffles use reputation bands of 1×, 1.25× and 1.5×. The band table is part of the evidence bundle, so weighting is auditable after the fact.' },
+        { kicker: 'SYBIL POLICY', title: 'One identity, many wallets', body: 'Multiple verified wallets are allowed for holdings, but one entry per verified identity. Duplicate-identity entries are removed before the ledger freezes.' }
+      ],
+      team: [
+        { initials: 'AF', name: 'ARCforge Core', role: 'RAFFLE OPERATOR · CREATES AND FINALIZES DRAWS', state: 'VERIFIED', art: 'linear-gradient(135deg,#FFA047,#FF3C00)' },
+        { initials: 'KM', name: 'kade.eth', role: 'COMMUNITY MANAGER · REQUIREMENT REVIEW', state: 'VERIFIED', art: 'linear-gradient(135deg,#FFD08A,#FF8A33)' },
+        { initials: 'SV', name: 'sever', role: 'MODERATOR · APPLICATION SCREENING', state: 'VERIFIED', art: 'linear-gradient(135deg,#C6BBC1,#6E646C)' },
+        { initials: 'OL', name: 'The Outlaws', role: 'PLATFORM · PROVIDES THE DRAW ENGINE ONLY', state: 'NON-CUSTODIAL', art: 'linear-gradient(135deg,#5ef2d6,#00806c)' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

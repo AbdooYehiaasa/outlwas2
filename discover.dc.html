@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#08060a; }
+  body { font-family:'Space Grotesk', Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#FF6A00; text-decoration:none; }
+  a:hover { color:#FF9040; }
+  ::selection { background:#FF6A00; color:#0a0709; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-track { background:#0b0810; }
+  ::-webkit-scrollbar-thumb { background:#2a1f2b; border-radius:99px; }
+  ::-webkit-scrollbar-thumb:hover { background:#FF6A00; }
+
+  @keyframes vx-pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.35; transform:scale(.82); } }
+  @keyframes vx-rise { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes vx-word { 0% { opacity:0; transform:translateY(34px) scale(.9); filter:blur(12px); } 55% { opacity:.85; transform:translateY(8px) scale(.98); filter:blur(2px); } 100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
+  @keyframes vx-draw { 0% { stroke-dashoffset:1200; opacity:0; } 45% { opacity:.5; } 100% { stroke-dashoffset:0; opacity:.22; } }
+  @keyframes vx-dotglow { 0%,100% { opacity:.12; transform:scale(1); } 50% { opacity:.55; transform:scale(1.45); } }
+  @keyframes vx-float { 0%,100% { transform:translate3d(0,0,0); opacity:.18; } 25% { transform:translate3d(6px,-14px,0); opacity:.7; } 50% { transform:translate3d(-4px,-7px,0); opacity:.35; } 75% { transform:translate3d(9px,-19px,0); opacity:.85; } }
+  @keyframes vx-ripple { 0% { transform:translate(-50%,-50%) scale(.2); opacity:.85; } 100% { transform:translate(-50%,-50%) scale(11); opacity:0; } }
+  @keyframes vx-shimmer { from { transform:translateX(-100%); } to { transform:translateX(100%); } }
+  @keyframes ol-enter { from { opacity:0; transform:translateY(14px); filter:blur(4px); } to { opacity:1; transform:none; filter:none; } }
+
+  .vx-rise { animation:vx-rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  .vx-word { display:inline-block; animation:vx-word .95s cubic-bezier(.16,1,.3,1) both; transition:color .3s ease, transform .3s ease, text-shadow .3s ease; }
+  .vx-word:hover { transform:translateY(-4px); text-shadow:0 0 28px rgba(255,106,0,.6); }
+  .vx-line { stroke:#FF6A00; stroke-width:.6; opacity:0; stroke-dasharray:6 7; stroke-dashoffset:1200; animation:vx-draw 2.6s cubic-bezier(.16,1,.3,1) forwards; }
+  .vx-dot { fill:#FF8A33; opacity:0; transform-box:fill-box; transform-origin:center; animation:vx-dotglow 3.4s ease-in-out infinite; }
+  .vx-mote { position:absolute; width:2px; height:2px; border-radius:99px; background:#FF8A33; box-shadow:0 0 8px rgba(255,106,0,.9); animation:vx-float 9s ease-in-out infinite; }
+  .vx-ripple { position:fixed; width:46px; height:46px; border-radius:99px; border:1px solid rgba(255,106,0,.75); pointer-events:none; z-index:9999; animation:vx-ripple .95s cubic-bezier(.16,1,.3,1) forwards; }
+  .vx-skel { position:relative; overflow:hidden; background:rgba(255,255,255,.03); }
+  .vx-skel::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent); animation:vx-shimmer 1.3s linear infinite; }
+
+  .vx-reveal { transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1); }
+  .vx-stagger > * { transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1), filter .85s cubic-bezier(.16,1,.3,1); }
+  .vx-armed.vx-reveal { opacity:0; transform:translateY(38px); filter:blur(7px); }
+  .vx-armed.vx-reveal.vx-in { opacity:1; transform:translateY(0); filter:blur(0); }
+  .vx-armed.vx-stagger > * { opacity:0; transform:translateY(30px) scale(.985); filter:blur(6px); }
+  .vx-armed.vx-stagger.vx-in > * { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+  .vx-stagger > *:nth-child(1) { transition-delay:0s } .vx-stagger > *:nth-child(2) { transition-delay:.07s }
+  .vx-stagger > *:nth-child(3) { transition-delay:.14s } .vx-stagger > *:nth-child(4) { transition-delay:.21s }
+  .vx-stagger > *:nth-child(5) { transition-delay:.28s } .vx-stagger > *:nth-child(6) { transition-delay:.35s }
+
+  .vx-spot { position:relative; }
+  .vx-spot::after { content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .35s ease; background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,.14), transparent 62%); }
+  .vx-spot:hover::after { opacity:1; }
+
+  [data-page] > *:not(header):not(svg):not([aria-hidden="true"]) { animation:ol-enter .42s cubic-bezier(.16,1,.3,1) both; }
+  html[data-leaving] [data-page] > *:not(header):not(svg):not([aria-hidden="true"]) { opacity:0; transform:translateY(-8px); filter:blur(3px); transition:opacity .16s ease, transform .16s ease, filter .16s ease; }
+  html[data-leaving] header { opacity:.72; transition:opacity .16s ease; }
+
+  .vx-burger { display:none; }
+  .vx-filtertoggle { display:none; }
+  @media (max-width:1120px) {
+    .vx-nav { display:none !important; }
+    .vx-burger { display:grid !important; }
+    .vx-search { min-width:0 !important; width:40px; justify-content:center; padding:9px 0 !important; }
+    .vx-search .vx-search-label, .vx-search .vx-search-kbd { display:none !important; }
+  }
+  @media (max-width:980px) {
+    .vx-layout { grid-template-columns:minmax(0,1fr) !important; }
+    .vx-rail { position:static !important; }
+    .vx-filtertoggle { display:flex !important; }
+    .vx-railbody { display:none; }
+    .vx-railbody[data-open="1"] { display:block; }
+  }
+  @media (max-width:820px) {
+    .vx-chip { display:none !important; }
+    .vx-shell { padding-left:18px !important; padding-right:18px !important; }
+    .vx-toolbar { flex-direction:column !important; align-items:stretch !important; }
+  }
+  @media (max-width:620px) {
+    .vx-sub { display:none !important; }
+    .vx-mark span:first-child { display:none !important; }
+    .vx-foot { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .vx-tabs { width:100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vx-word, .vx-line, .vx-mote, .vx-rise, .vx-skel::after { animation:none !important; opacity:1 !important; }
+    .vx-reveal, .vx-stagger > * { opacity:1 !important; transform:none !important; filter:none !important; }
+  }
+</style>
+</helmet>
+
+<div data-page="discover" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <div id="vx-aura" style="position:fixed;inset:0;pointer-events:none;z-index:0;will-change:transform;background:radial-gradient(1000px 600px at 78% -10%, rgba(255,106,0,.14), transparent 65%), radial-gradient(720px 520px at 0% 20%, rgba(255,60,0,.06), transparent 70%);"></div>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.32;background-image:linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);background-size:76px 76px;mask-image:radial-gradient(1000px 700px at 50% 0%, #000 20%, transparent 78%);-webkit-mask-image:radial-gradient(1000px 700px at 50% 0%, #000 20%, transparent 78%);"></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
+    <line x1="0" y1="26%" x2="100%" y2="26%" class="vx-line" style="animation-delay:.4s" />
+    <line x1="22%" y1="0" x2="22%" y2="100%" class="vx-line" style="animation-delay:1.1s" />
+    <line x1="78%" y1="0" x2="78%" y2="100%" class="vx-line" style="animation-delay:1.6s" />
+    <circle cx="22%" cy="26%" r="2.4" class="vx-dot" style="animation-delay:2.4s" />
+    <circle cx="78%" cy="26%" r="2.4" class="vx-dot" style="animation-delay:2.8s" />
+  </svg>
+
+  <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;">
+    <span class="vx-mote" style="top:20%;left:11%;animation-delay:.3s"></span>
+    <span class="vx-mote" style="top:44%;left:91%;animation-delay:1.4s"></span>
+    <span class="vx-mote" style="top:68%;left:8%;animation-delay:2.4s"></span>
+    <span class="vx-mote" style="top:82%;left:76%;animation-delay:3.2s"></span>
+  </div>
+
+  <div id="vx-halo" aria-hidden="true" style="position:fixed;top:0;left:0;width:520px;height:520px;border-radius:99px;pointer-events:none;z-index:1;opacity:0;filter:blur(58px);will-change:transform,opacity;transition:opacity .5s ease;background:radial-gradient(circle, rgba(255,106,0,.13), rgba(255,60,0,.05) 45%, transparent 70%);"></div>
+
+  <div aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:60;pointer-events:none;">
+    <span id="vx-progress" style="display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#FF3C00,#FFA047,#00D6B4);box-shadow:0 0 14px rgba(255,106,0,.7);"></span>
+  </div>
+
+  <!-- ░░ HEADER ░░ -->
+  <header style="position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:rgba(8,6,10,.78);border-bottom:1px solid rgba(255,255,255,.07);">
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:72px;display:flex;align-items:center;gap:22px;">
+      <a href="index.html" style="display:flex;align-items:center;gap:11px;flex:none;">
+        <span style="width:30px;height:30px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);box-shadow:0 0 22px rgba(255,106,0,.45);">
+          <span style="width:8px;height:8px;background:#FF6A00;box-shadow:0 0 10px #FF6A00;"></span>
+        </span>
+        <span class="vx-mark" style="display:flex;flex-direction:column;line-height:1;">
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:11px;letter-spacing:.42em;color:#6E646C;">THE</span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;letter-spacing:.13em;color:#F4EDE6;margin-top:3px;">OUTLAWS</span>
+        </span>
+      </a>
+
+      <nav class="vx-nav" style="display:flex;align-items:center;gap:2px;flex:1;">
+        <a href="index.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Home</a>
+        <a href="discover.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#F4EDE6;border-radius:8px;white-space:nowrap;background:rgba(255,106,0,.1);">Discover</a>
+        <a href="projects.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Projects</a>
+        <a href="myraffles.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">My Raffles</a>
+        <a href="communities.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Communities</a>
+        <a href="calendar.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Calendar</a>
+        <a href="premium.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Premium</a>
+      </nav>
+
+      <button class="ol-burger vx-burger" style="width:40px;height:40px;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#C6BBC1;font-size:15px;cursor:pointer;margin-right:auto;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#FF6A00">☰</button>
+
+      <a href="search.dc.html" class="vx-search" style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#6E646C;font-family:inherit;font-size:13.5px;cursor:pointer;min-width:220px;flex:none;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#A79BA3">
+        <span style="font-size:14px;">⌕</span>
+        <span class="vx-search-label" style="flex:1;text-align:left;white-space:nowrap;">Search raffles, projects…</span>
+        <span class="vx-search-kbd" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 6px;border:1px solid rgba(255,255,255,.13);border-radius:5px;letter-spacing:.06em;">⌘K</span>
+      </a>
+
+      <div style="display:flex;align-items:center;gap:12px;flex:none;">
+        <button style="position:relative;width:38px;height:38px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#A79BA3;cursor:pointer;font-size:15px;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#F4EDE6">
+          ◵
+          <span style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:99px;background:#FF6A00;box-shadow:0 0 9px #FF6A00;"></span>
+        </button>
+        <a href="premium.dc.html" class="vx-sub" style="padding:10px 17px;font-size:13.5px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:9px;white-space:nowrap;box-shadow:0 6px 24px rgba(255,106,0,.32);transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,106,0,.5)">Subscribe</a>
+        <div class="vx-chip" style="display:flex;align-items:center;gap:9px;padding:5px 11px 5px 5px;border:1px solid rgba(255,255,255,.09);border-radius:99px;cursor:pointer;transition:border-color .22s;" style-hover="border-color:rgba(255,106,0,.4)">
+          <span style="width:28px;height:28px;border-radius:99px;background:linear-gradient(135deg,#FF6A00,#7a2a00);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#08060a;">O</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#C6BBC1;">vex_2847</span>
+        </div>
+      </div>
+    </div>
+    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,.55) 18%,rgba(255,106,0,.85) 50%,rgba(255,106,0,.55) 82%,transparent);opacity:.5;"></div>
+  </header>
+
+  <!-- ░░ PAGE HEAD ░░ -->
+  <section class="vx-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div style="padding:54px 0 34px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:14px;">ALLOCATION ENGINE</div>
+      <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(38px,4.2vw,60px);line-height:1;letter-spacing:-.02em;margin:0 0 18px;">
+        <span class="vx-word" style="animation-delay:.1s;margin-right:.22em;">Find</span><span class="vx-word" style="animation-delay:.24s;margin-right:.22em;">what</span><span class="vx-word" style="animation-delay:.38s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.45);">qualifies</span><span class="vx-word" style="animation-delay:.52s;margin-left:.22em;">you.</span>
+      </h1>
+      <p style="font-size:16.5px;line-height:1.6;color:#9B8F96;max-width:620px;margin:0 0 30px;text-wrap:pretty;">
+        <span class="vx-word" style="animation-delay:.7s;">Filter the live allocation surface by chain, mode, community and requirement fit — every result tells you where you stand before you spend a click.</span>
+      </p>
+
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:760px;">
+        <div style="position:relative;flex:1;min-width:260px;">
+          <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#6E646C;font-size:15px;">⌕</span>
+          <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search by raffle, project or prize…" style="width:100%;padding:16px 16px 16px 42px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#F4EDE6;font-family:inherit;font-size:15px;outline:none;transition:border-color .25s,background .25s;" style-focus="border-color:rgba(255,106,0,.55);background:rgba(255,106,0,.04)" />
+        </div>
+        <button onClick="{{ toggleRail }}" class="vx-filtertoggle" style="align-items:center;gap:9px;padding:16px 20px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:12px;color:#DCD2D6;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;">
+          Filters <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF6A00;">{{ activeCount }}</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ LAYOUT ░░ -->
+  <section class="vx-shell" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px 0;">
+    <div class="vx-layout" style="display:grid;grid-template-columns:264px minmax(0,1fr);gap:26px;align-items:start;">
+
+      <!-- FILTER RAIL -->
+      <aside class="vx-rail" style="position:sticky;top:96px;">
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.016);overflow:hidden;">
+          <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#6E646C;">REFINE</span>
+            <button onClick="{{ clearAll }}" style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:{{ clearColor }};background:transparent;border:none;cursor:pointer;padding:0;transition:color .2s;">CLEAR ALL</button>
+          </div>
+
+          <div class="vx-railbody" data-open="{{ railOpen }}">
+            <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+              <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.05);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#6E646C;margin-bottom:12px;">{{ g.title }}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:7px;">
+                  <sc-for list="{{ g.options }}" as="o" hint-placeholder-count="4">
+                    <button onClick="{{ o.toggle }}" style="padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:{{ o.color }};background:{{ o.bg }};border:1px solid {{ o.border }};border-radius:7px;cursor:pointer;transition:all .22s;">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+
+            <div style="padding:16px 18px;">
+              <button onClick="{{ toggleVerified }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid {{ verifiedBorder }};border-radius:10px;background:{{ verifiedBg }};cursor:pointer;transition:all .22s;">
+                <span style="display:flex;align-items:center;gap:9px;font-size:13px;color:#DCD2D6;"><span style="color:#00D6B4;">◈</span> Verified only</span>
+                <span style="width:34px;height:18px;border-radius:99px;background:{{ switchTrack }};position:relative;transition:background .25s;">
+                  <span style="position:absolute;top:2px;left:{{ switchX }};width:14px;height:14px;border-radius:99px;background:#08060a;transition:left .25s cubic-bezier(.16,1,.3,1);"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;padding:16px 18px;border:1px solid rgba(255,106,0,.24);border-radius:16px;background:linear-gradient(160deg,rgba(255,106,0,.09),transparent 70%);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#FF8A33;margin-bottom:10px;">REQUIREMENT FIT</div>
+          <p style="font-size:12.5px;line-height:1.55;color:#9B8F96;margin:0 0 14px;">Show only raffles whose requirement blocks your connected identities already satisfy.</p>
+          <button onClick="{{ toggleFit }}" style="width:100%;padding:11px;font-family:inherit;font-size:12.5px;font-weight:600;color:{{ fitInk }};background:{{ fitBg }};border:1px solid {{ fitBorder }};border-radius:9px;cursor:pointer;transition:all .22s;">{{ fitLabel }}</button>
+        </div>
+      </aside>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="vx-toolbar" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:22px;">
+          <div class="vx-tabs" style="display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.09);border-radius:11px;">
+            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+              <button onClick="{{ t.pick }}" style="flex:1;padding:9px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:{{ t.color }};background:{{ t.bg }};border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ t.label }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#6E646C;white-space:nowrap;">{{ resultLine }}</span>
+            <div style="display:flex;gap:5px;padding:4px;border:1px solid rgba(255,255,255,.09);border-radius:10px;">
+              <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="3">
+                <button onClick="{{ s.pick }}" style="padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:{{ s.color }};background:{{ s.bg }};border:none;border-radius:7px;cursor:pointer;white-space:nowrap;transition:all .25s;">{{ s.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+            <sc-for list="{{ chips }}" as="c" hint-placeholder-count="2">
+              <button onClick="{{ c.remove }}" style="display:inline-flex;align-items:center;gap:9px;padding:8px 13px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#FF8A33;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.3);border-radius:99px;cursor:pointer;transition:all .2s;" style-hover="background:rgba(255,106,0,.16)">{{ c.label }} <span style="color:#6E646C;">✕</span></button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- LOADING -->
+        <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+            <sc-for list="{{ skeletons }}" as="k" hint-placeholder-count="6">
+              <div style="padding:22px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:#0a070c;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+                  <span class="vx-skel" style="width:32px;height:32px;border-radius:9px;"></span>
+                  <span class="vx-skel" style="flex:1;height:12px;border-radius:6px;max-width:120px;"></span>
+                </div>
+                <div class="vx-skel" style="height:18px;border-radius:6px;margin-bottom:10px;"></div>
+                <div class="vx-skel" style="height:12px;border-radius:6px;width:70%;margin-bottom:24px;"></div>
+                <div class="vx-skel" style="height:3px;border-radius:99px;"></div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- ERROR -->
+        <sc-if value="{{ errored }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:44px;border:1px solid rgba(255,60,0,.26);border-radius:18px;background:rgba(255,60,0,.04);text-align:center;">
+            <div style="width:48px;height:48px;margin:0 auto 18px;display:grid;place-items:center;border-radius:14px;background:rgba(255,60,0,.12);color:#FF3C00;font-size:20px;">!</div>
+            <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:21px;margin:0 0 10px;">Indexer is behind</h3>
+            <p style="font-size:14px;line-height:1.6;color:#9B8F96;max-width:440px;margin:0 auto 22px;">The allocation index didn't respond for this filter set. Live raffles are unaffected — entries already submitted are safe.</p>
+            <button onClick="{{ retry }}" style="padding:13px 24px;font-family:inherit;font-size:14px;font-weight:600;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border:none;border-radius:10px;cursor:pointer;">Retry query</button>
+          </div>
+        </sc-if>
+
+        <!-- EMPTY -->
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:52px 44px;border:1px dashed rgba(255,255,255,.14);border-radius:18px;background:rgba(255,255,255,.014);text-align:center;">
+            <div style="width:48px;height:48px;margin:0 auto 18px;display:grid;place-items:center;border-radius:14px;border:1px solid rgba(255,106,0,.3);color:#FF6A00;font-size:18px;">⌕</div>
+            <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:21px;margin:0 0 10px;">Nothing matches that combination</h3>
+            <p style="font-size:14px;line-height:1.6;color:#9B8F96;max-width:420px;margin:0 auto 22px;">Your filters exclude every open allocation right now. Loosen one and the surface repopulates instantly.</p>
+            <button onClick="{{ clearAll }}" style="padding:13px 24px;font-family:inherit;font-size:14px;font-weight:600;color:#FF6A00;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.35);border-radius:10px;cursor:pointer;">Clear all filters</button>
+          </div>
+        </sc-if>
+
+        <!-- RESULTS GRID -->
+        <sc-if value="{{ showResults }}" hint-placeholder-val="{{ true }}">
+          <div class="vx-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+            <sc-for list="{{ results }}" as="r" hint-placeholder-count="6">
+              <div>
+                <a href="raffle.dc.html" class="vx-spot" style="position:relative;display:block;height:100%;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:linear-gradient(160deg,#100c12,#0a070c);overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;" style-hover="transform:translateY(-5px);border-color:rgba(255,106,0,.4);box-shadow:0 22px 50px rgba(0,0,0,.6)">
+                  <span style="position:absolute;top:0;left:0;right:0;height:2px;background:{{ r.accent }};"></span>
+
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;">
+                    <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+                      <span style="width:32px;height:32px;flex:none;border-radius:9px;display:grid;place-items:center;background:{{ r.avatarBg }};font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:13px;color:#08060a;">{{ r.initials }}</span>
+                      <div style="min-width:0;">
+                        <div style="display:flex;align-items:center;gap:6px;">
+                          <span style="font-size:12.5px;font-weight:600;color:#C6BBC1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.project }}</span>
+                          <sc-if value="{{ r.verified }}" hint-placeholder-val="{{ true }}"><span style="color:#00D6B4;font-size:10px;">◈</span></sc-if>
+                        </div>
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.09em;color:#6E646C;margin-top:3px;">{{ r.chain }} · {{ r.type }}</div>
+                      </div>
+                    </div>
+                    <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.11em;padding:4px 8px;border-radius:5px;color:{{ r.stateColor }};border:1px solid {{ r.stateBorder }};background:{{ r.stateBg }};">{{ r.state }}</span>
+                  </div>
+
+                  <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:19px;line-height:1.2;margin:0 0 8px;color:#F4EDE6;">{{ r.title }}</h3>
+                  <p style="font-size:13px;line-height:1.5;color:#8C8189;margin:0 0 18px;min-height:39px;">{{ r.prize }}</p>
+
+                  <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid {{ r.fitBorder }};border-radius:9px;background:{{ r.fitBg }};margin-bottom:16px;">
+                    <span style="width:15px;height:15px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ r.fitColor }};color:{{ r.fitColor }};font-size:8px;font-weight:700;">{{ r.fitIcon }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.07em;color:{{ r.fitColor }};">{{ r.fitLabel }}</span>
+                  </div>
+
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);">
+                    <div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.11em;color:#6E646C;margin-bottom:5px;">ENTRIES</div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:14px;font-weight:600;color:#F4EDE6;">{{ r.entries }}</div>
+                    </div>
+                    <div style="text-align:right;">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.11em;color:#6E646C;margin-bottom:5px;">{{ r.timeLabel }}</div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:14px;font-weight:600;color:{{ r.timeColor }};">{{ r.time }}</div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:14px;height:3px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;">
+                    <span style="display:block;height:100%;width:{{ r.fill }};border-radius:99px;background:{{ r.accent }};"></span>
+                  </div>
+                </a>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer style="position:relative;z-index:1;margin-top:84px;border-top:1px solid rgba(255,255,255,.07);">
+    <div class="vx-foot vx-shell" style="max-width:1400px;margin:0 auto;padding:48px 28px 24px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:36px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);">
+            <span style="width:6px;height:6px;background:#FF6A00;"></span>
+          </span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <sc-for list="{{ footer }}" as="col" hint-placeholder-count="3">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#4E454C;margin-bottom:16px;">{{ col.title }}</div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="4">
+              <a href="support.dc.html" style="font-size:13.5px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:20px 28px 32px;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;">© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;simulateError&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;}}">
+const MET = '#00D6B4', PEND = '#FF6A00', DEAD = '#6E646C';
+
+const DATA = [
+  { title: 'Arcforge Genesis Pass', project: 'Arcforge Labs', initials: 'AF', chain: 'ETHEREUM', type: 'WEIGHTED', community: 'Arcforge Core', verified: true, status: 'live', fit: 'partial', entries: 4821, cap: 5000, mins: 3742, prize: '1 × Genesis Pass with founder allocation rights.' },
+  { title: 'Frontier Land Whitelist', project: 'Frontier Labs', initials: 'FL', chain: 'BASE', type: 'FCFS', community: 'Frontier Collective', verified: true, status: 'ending', fit: 'eligible', entries: 892, cap: 1000, mins: 752, prize: '50 × Tier-1 whitelist spots, first valid entries only.' },
+  { title: 'Nova Node Operator Drop', project: 'Nova Protocol', initials: 'NP', chain: 'ARBITRUM', type: 'APPLICATION', community: 'Nova Mesh', verified: false, status: 'upcoming', fit: 'unknown', entries: 664, cap: 1500, mins: 4820, prize: '2,000 USDC pool reviewed by the Nova core team.' },
+  { title: 'Nightfall Arena Access', project: 'Nightfall Interactive', initials: 'NI', chain: 'ETHEREUM', type: 'RANDOM', community: 'Nightfall Guild', verified: true, status: 'ending', fit: 'eligible', entries: 3806, cap: 4000, mins: 312, prize: '200 × arena access keys for season one.' },
+  { title: 'Spectral Audio Rights', project: 'Spectral DAO', initials: 'SA', chain: 'SOLANA', type: 'WEIGHTED', community: 'Spectral Audio', verified: true, status: 'live', fit: 'missing', entries: 2100, cap: 3000, mins: 2610, prize: 'Fractional rights to the first Spectral release.' },
+  { title: 'Vaultborn Founder Key', project: 'Vaultborn Realms', initials: 'VR', chain: 'BASE', type: 'RANDOM', community: 'Vaultborn', verified: false, status: 'live', fit: 'partial', entries: 1930, cap: 2500, mins: 75, prize: '3 × Founder Keys with permanent governance weight.' },
+  { title: 'Obsidian Realm Bundle', project: 'Obsidian Core', initials: 'OC', chain: 'ETHEREUM', type: 'APPLICATION', community: 'Obsidian', verified: true, status: 'upcoming', fit: 'unknown', entries: 0, cap: 800, mins: 7200, prize: 'Full realm bundle: land, pass and cosmetics.' },
+  { title: 'Riftbound Beta Key', project: 'Riftbound', initials: 'RB', chain: 'ARBITRUM', type: 'FCFS', community: 'Riftbound Arena', verified: true, status: 'live', fit: 'eligible', entries: 3820, cap: 5000, mins: 1640, prize: '1,000 × closed beta keys for the arena build.' },
+  { title: 'Mesa Seed Pass', project: 'Mesa Protocol', initials: 'MP', chain: 'SOLANA', type: 'FCFS', community: 'Mesa', verified: false, status: 'upcoming', fit: 'unknown', entries: 0, cap: 200, mins: 10080, prize: '200 × seed passes for the Mesa testnet cohort.' },
+  { title: 'Morrow Genesis Membership', project: 'Morrow', initials: 'MW', chain: 'ETHEREUM', type: 'WEIGHTED', community: 'Morrow Society', verified: true, status: 'finalized', fit: 'eligible', entries: 6204, cap: 6204, mins: 0, prize: '1 × lifetime membership — winner published.' },
+  { title: 'Atlas Realm Parcel', project: 'Atlas Realm', initials: 'AR', chain: 'BASE', type: 'RANDOM', community: 'Atlas', verified: true, status: 'finalized', fit: 'partial', entries: 4118, cap: 4118, mins: 0, prize: '12 × parcels in the first settlement ring.' },
+  { title: 'Ironwood Harvester Allocation', project: 'Ironwood', initials: 'IW', chain: 'ARBITRUM', type: 'APPLICATION', community: 'Ironwood', verified: false, status: 'live', fit: 'missing', entries: 1204, cap: 2000, mins: 5180, prize: '250 × harvester allocations for verified holders.' }
+];
+
+class Component extends DCLogic {
+  state = {
+    query: '', tab: 'Raffles', sort: 'Ending soon',
+    status: [], chain: [], type: [],
+    verified: false, fitOnly: false,
+    railOpen: false, loading: false, errored: false
+  };
+
+  fx() {
+    if (window.OutlawsFX) { window.OutlawsFX.start(); return; }
+    this.fxRetry = setTimeout(() => this.fx(), 250);
+  }
+
+  componentDidMount() { this.fx(); }
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+  componentWillUnmount() { clearTimeout(this.fxRetry); clearTimeout(this.loadT); }
+
+  // every filter change runs a short query pass — that is the loading state
+  query(patch) {
+    clearTimeout(this.loadT);
+    this.setState(Object.assign({ loading: true, errored: false }, patch));
+    this.loadT = setTimeout(() => this.setState({ loading: false }), 420);
+  }
+
+  multi(key, value) {
+    return () => {
+      const cur = this.state[key];
+      const next = cur.indexOf(value) > -1 ? cur.filter(v => v !== value) : cur.concat([value]);
+      this.query({ [key]: next });
+    };
+  }
+
+  onQuery = e => {
+    const v = e.target.value;
+    clearTimeout(this.loadT);
+    this.setState({ query: v, loading: true, errored: false });
+    this.loadT = setTimeout(() => this.setState({ loading: false }), 320);
+  };
+
+  clearAll = () => this.query({ query: '', status: [], chain: [], type: [], verified: false, fitOnly: false });
+  retry = () => this.query({ errored: false });
+  toggleRail = () => this.setState(s => ({ railOpen: !s.railOpen }));
+
+  renderVals() {
+    const s = this.state;
+    const label = { live: 'LIVE', ending: 'ENDING SOON', upcoming: 'UPCOMING', finalized: 'FINALIZED' };
+    const stateColor = { live: PEND, ending: '#FFB061', upcoming: DEAD, finalized: MET };
+
+    let rows = DATA.filter(d => {
+      if (s.status.length && s.status.indexOf(label[d.status]) < 0) return false;
+      if (s.chain.length && s.chain.indexOf(d.chain) < 0) return false;
+      if (s.type.length && s.type.indexOf(d.type) < 0) return false;
+      if (s.verified && !d.verified) return false;
+      if (s.fitOnly && d.fit !== 'eligible') return false;
+      const q = s.query.trim().toLowerCase();
+      if (q && (d.title + ' ' + d.project + ' ' + d.prize).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+
+    if (s.sort === 'Ending soon') rows = rows.slice().sort((a, b) => (a.mins || 1e9) - (b.mins || 1e9));
+    if (s.sort === 'Most entries') rows = rows.slice().sort((a, b) => b.entries - a.entries);
+    if (s.sort === 'Newest') rows = rows.slice().reverse();
+
+    const fitMap = {
+      eligible: ['ALL REQUIREMENTS MET', MET, '✓'],
+      partial: ['1 BLOCK MISSING', PEND, '!'],
+      missing: ['NOT ELIGIBLE YET', '#FF3C00', '!'],
+      unknown: ['NOT CHECKED', DEAD, '·']
+    };
+
+    const results = rows.map(d => {
+      const [fitLabel, fitColor, fitIcon] = fitMap[d.fit];
+      const hrs = Math.floor(d.mins / 60), days = Math.floor(hrs / 24);
+      const time = d.status === 'finalized' ? 'verified'
+        : d.status === 'upcoming' ? 'in ' + days + 'd'
+        : days >= 1 ? days + 'd ' + String(hrs % 24).padStart(2, '0') + 'h'
+        : String(hrs).padStart(2, '0') + 'h ' + String(d.mins % 60).padStart(2, '0') + 'm';
+      return {
+        title: d.title, project: d.project, initials: d.initials, chain: d.chain, type: d.type,
+        verified: d.verified, prize: d.prize,
+        state: label[d.status], stateColor: stateColor[d.status],
+        stateBorder: stateColor[d.status] === DEAD ? 'rgba(255,255,255,.14)' : stateColor[d.status] + '55',
+        stateBg: stateColor[d.status] === DEAD ? 'rgba(255,255,255,.04)' : stateColor[d.status] + '14',
+        entries: d.entries ? d.entries.toLocaleString('en-US') + (d.cap ? ' / ' + d.cap.toLocaleString('en-US') : '') : 'not open',
+        timeLabel: d.status === 'finalized' ? 'DRAW' : d.status === 'upcoming' ? 'OPENS' : 'CLOSES IN',
+        time, timeColor: d.mins && d.mins < 360 ? PEND : '#F4EDE6',
+        fill: Math.min(100, Math.round((d.entries / (d.cap || 1)) * 100)) + '%',
+        accent: d.status === 'finalized' ? 'linear-gradient(90deg,#00D6B4,#0a6b5c)'
+          : d.status === 'upcoming' ? 'linear-gradient(90deg,#6E646C,#3E353C)'
+          : 'linear-gradient(90deg,#FF6A00,#FFB061)',
+        avatarBg: d.verified ? 'linear-gradient(135deg,#FFA047,#FF3C00)' : 'linear-gradient(135deg,#C6BBC1,#6E646C)',
+        fitLabel, fitColor, fitIcon,
+        fitBorder: fitColor === DEAD ? 'rgba(255,255,255,.08)' : fitColor + '3d',
+        fitBg: fitColor === DEAD ? 'rgba(255,255,255,.02)' : fitColor + '0f'
+      };
+    });
+
+    const opt = (key, value) => {
+      const on = this.state[key].indexOf(value) > -1;
+      return {
+        label: value, toggle: this.multi(key, value),
+        color: on ? '#08060a' : '#8C8189',
+        bg: on ? '#FF6A00' : 'transparent',
+        border: on ? '#FF6A00' : 'rgba(255,255,255,.1)'
+      };
+    };
+
+    const chips = []
+      .concat(s.status.map(v => ({ label: v, remove: this.multi('status', v) })))
+      .concat(s.chain.map(v => ({ label: v, remove: this.multi('chain', v) })))
+      .concat(s.type.map(v => ({ label: v, remove: this.multi('type', v) })))
+      .concat(s.verified ? [{ label: 'VERIFIED ONLY', remove: () => this.query({ verified: false }) }] : [])
+      .concat(s.fitOnly ? [{ label: 'REQUIREMENT FIT', remove: () => this.query({ fitOnly: false }) }] : []);
+
+    const activeCount = chips.length + (s.query.trim() ? 1 : 0);
+    const busy = s.loading, bad = s.errored || !!this.props.simulateError;
+    const empty = !busy && !bad && results.length === 0;
+
+    return {
+      query: s.query, onQuery: this.onQuery,
+      railOpen: s.railOpen ? '1' : '0',
+      toggleRail: this.toggleRail,
+      activeCount: activeCount ? String(activeCount) : '0',
+      clearAll: this.clearAll, retry: this.retry,
+      clearColor: activeCount ? '#FF6A00' : '#4E454C',
+      groups: [
+        { title: 'STATUS', options: ['LIVE', 'ENDING SOON', 'UPCOMING', 'FINALIZED'].map(v => opt('status', v)) },
+        { title: 'CHAIN', options: ['ETHEREUM', 'BASE', 'ARBITRUM', 'SOLANA'].map(v => opt('chain', v)) },
+        { title: 'RAFFLE TYPE', options: ['WEIGHTED', 'FCFS', 'RANDOM', 'APPLICATION'].map(v => opt('type', v)) }
+      ],
+      toggleVerified: () => this.query({ verified: !s.verified }),
+      verifiedBorder: s.verified ? 'rgba(0,214,180,.32)' : 'rgba(255,255,255,.1)',
+      verifiedBg: s.verified ? 'rgba(0,214,180,.06)' : 'transparent',
+      switchTrack: s.verified ? '#00D6B4' : 'rgba(255,255,255,.14)',
+      switchX: s.verified ? '18px' : '2px',
+      toggleFit: () => this.query({ fitOnly: !s.fitOnly }),
+      fitLabel: s.fitOnly ? 'Showing eligible only' : 'Show eligible only',
+      fitInk: s.fitOnly ? '#08060a' : '#FF6A00',
+      fitBg: s.fitOnly ? 'linear-gradient(180deg,#FFA047,#FF6A00)' : 'rgba(255,106,0,.08)',
+      fitBorder: s.fitOnly ? 'transparent' : 'rgba(255,106,0,.35)',
+      tabs: ['Raffles', 'Projects', 'Communities'].map(t => ({
+        label: t.toUpperCase(),
+        color: s.tab === t ? '#08060a' : '#8C8189',
+        bg: s.tab === t ? '#FF6A00' : 'transparent',
+        pick: () => this.query({ tab: t })
+      })),
+      sorts: ['Ending soon', 'Most entries', 'Newest'].map(v => ({
+        label: v.toUpperCase(),
+        color: s.sort === v ? '#FF6A00' : '#6E646C',
+        bg: s.sort === v ? 'rgba(255,106,0,.1)' : 'transparent',
+        pick: () => this.query({ sort: v })
+      })),
+      resultLine: busy ? 'QUERYING ALLOCATION INDEX…' : results.length + ' OF ' + DATA.length + ' ALLOCATIONS',
+      chips, hasChips: chips.length > 0 && !busy,
+      loading: busy, errored: bad, empty,
+      showResults: !busy && !bad && results.length > 0,
+      skeletons: [1, 2, 3, 4, 5, 6].map(n => ({ n })),
+      results,
+      footer: [
+        { title: 'PLATFORM', links: [{ label: 'Discover' }, { label: 'Raffles' }, { label: 'Communities' }, { label: 'Calendar' }] },
+        { title: 'FAIRNESS', links: [{ label: 'Verify a draw' }, { label: 'Requirement engine' }, { label: 'Rule catalog' }, { label: 'Status' }] },
+        { title: 'LEGAL', links: [{ label: 'Terms' }, { label: 'Privacy' }, { label: 'Risk disclosure' }, { label: 'Support' }] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

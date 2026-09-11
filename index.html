@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="outlaws.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#08060a; }
+  body { font-family:'Space Grotesk', Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#FF6A00; text-decoration:none; }
+  a:hover { color:#FF9040; }
+  ::selection { background:#FF6A00; color:#0a0709; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-track { background:#0b0810; }
+  ::-webkit-scrollbar-thumb { background:#2a1f2b; border-radius:99px; }
+  ::-webkit-scrollbar-thumb:hover { background:#FF6A00; }
+  @keyframes vx-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  @keyframes vx-pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.35; transform:scale(.82); } }
+  @keyframes vx-rise { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes vx-sweep { from { transform:translateX(-120%); } to { transform:translateX(320%); } }
+  @keyframes vx-orbit { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+  @keyframes vx-flicker { 0%,100% { opacity:.5 } 47% { opacity:.5 } 48% { opacity:.15 } 49% { opacity:.6 } 50% { opacity:.2 } 51% { opacity:.55 } }
+  .vx-rise { animation:vx-rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  .vx-scroll::-webkit-scrollbar { height:4px; }
+
+  /* ── word-by-word reveal ── */
+  @keyframes vx-word { 0% { opacity:0; transform:translateY(34px) scale(.9); filter:blur(12px); } 55% { opacity:.85; transform:translateY(8px) scale(.98); filter:blur(2px); } 100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
+  .vx-word { display:inline-block; animation:vx-word .95s cubic-bezier(.16,1,.3,1) both; transition:color .3s ease, transform .3s ease, text-shadow .3s ease; }
+  .vx-word:hover { transform:translateY(-4px); text-shadow:0 0 28px rgba(255,106,0,.6); }
+
+  /* ── self-drawing grid + detail dots ── */
+  @keyframes vx-draw { 0% { stroke-dashoffset:1200; opacity:0; } 45% { opacity:.5; } 100% { stroke-dashoffset:0; opacity:.22; } }
+  @keyframes vx-dotglow { 0%,100% { opacity:.12; transform:scale(1); } 50% { opacity:.55; transform:scale(1.45); } }
+  .vx-line { stroke:#FF6A00; stroke-width:.6; opacity:0; stroke-dasharray:6 7; stroke-dashoffset:1200; animation:vx-draw 2.6s cubic-bezier(.16,1,.3,1) forwards; }
+  .vx-dot { fill:#FF8A33; opacity:0; transform-box:fill-box; transform-origin:center; animation:vx-dotglow 3.4s ease-in-out infinite; }
+
+  /* ── floating motes ── */
+  @keyframes vx-float { 0%,100% { transform:translate3d(0,0,0); opacity:.18; } 25% { transform:translate3d(6px,-14px,0); opacity:.7; } 50% { transform:translate3d(-4px,-7px,0); opacity:.35; } 75% { transform:translate3d(9px,-19px,0); opacity:.85; } }
+  .vx-mote { position:absolute; width:2px; height:2px; border-radius:99px; background:#FF8A33; box-shadow:0 0 8px rgba(255,106,0,.9); animation:vx-float 9s ease-in-out infinite; }
+
+  /* ── click ripple ── */
+  @keyframes vx-ripple { 0% { transform:translate(-50%,-50%) scale(.2); opacity:.85; } 100% { transform:translate(-50%,-50%) scale(11); opacity:0; } }
+  .vx-ripple { position:fixed; width:46px; height:46px; border-radius:99px; border:1px solid rgba(255,106,0,.75); pointer-events:none; z-index:9999; animation:vx-ripple .95s cubic-bezier(.16,1,.3,1) forwards; }
+
+  /* ── scroll reveal + stagger ── */
+  .vx-reveal { transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1); }
+  .vx-stagger > * { transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1), filter .85s cubic-bezier(.16,1,.3,1); }
+  .vx-armed.vx-reveal { opacity:0; transform:translateY(38px); filter:blur(7px); }
+  .vx-armed.vx-reveal.vx-in { opacity:1; transform:translateY(0); filter:blur(0); }
+  .vx-armed.vx-stagger > * { opacity:0; transform:translateY(30px) scale(.985); filter:blur(6px); }
+  .vx-armed.vx-stagger.vx-in > * { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+  .vx-stagger > *:nth-child(1) { transition-delay:0s } .vx-stagger > *:nth-child(2) { transition-delay:.09s }
+  .vx-stagger > *:nth-child(3) { transition-delay:.18s } .vx-stagger > *:nth-child(4) { transition-delay:.27s }
+  .vx-stagger > *:nth-child(5) { transition-delay:.36s } .vx-stagger > *:nth-child(6) { transition-delay:.45s }
+
+  /* ── cursor spotlight on cards ── */
+  .vx-spot { position:relative; }
+  .vx-spot::after { content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .35s ease; background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,.14), transparent 62%); }
+  .vx-spot:hover::after { opacity:1; }
+
+  /* ── section index rule ── */
+  @keyframes vx-rulegrow { to { transform:scaleX(1); } }
+  .vx-rule { transform:scaleX(0); transform-origin:left; transition:transform 1.2s cubic-bezier(.16,1,.3,1) .15s; }
+  .vx-in .vx-rule, .vx-rule.vx-in { transform:scaleX(1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vx-word, .vx-line, .vx-mote, .vx-rise { animation:none !important; opacity:1 !important; }
+    .vx-reveal, .vx-stagger > * { opacity:1 !important; transform:none !important; filter:none !important; }
+  }
+
+  /* ── page transition (level 3: quiet, fast) ── */
+  @keyframes ol-enter { from { opacity:0; transform:translateY(14px); filter:blur(4px); } to { opacity:1; transform:none; filter:none; } }
+  [data-page] > *:not(header):not(svg):not([aria-hidden="true"]) { animation:ol-enter .42s cubic-bezier(.16,1,.3,1) both; }
+  html[data-leaving] [data-page] > *:not(header):not(svg):not([aria-hidden="true"]) { opacity:0; transform:translateY(-8px); filter:blur(3px); transition:opacity .16s ease, transform .16s ease, filter .16s ease; }
+  html[data-leaving] header { opacity:.72; transition:opacity .16s ease; }
+
+  img, svg, canvas { max-width:100%; }
+  [data-page] { max-width:100vw; }
+  @media (max-width:620px) { h1, h2, h3 { overflow-wrap:break-word; } }
+
+  /* ── responsive reflow ── */
+  .vx-burger { display:none; }
+  @media (max-width:1240px) {
+    .vx-hero { grid-template-columns:minmax(0,1fr) !important; gap:44px !important; padding-top:64px !important; }
+    .vx-split { grid-template-columns:minmax(0,1fr) !important; }
+  }
+  @media (max-width:1120px) {
+    .vx-nav { display:none !important; }
+    .vx-burger { display:grid !important; }
+    .vx-search { min-width:0 !important; width:40px; justify-content:center; padding:9px 0 !important; }
+    .vx-search .vx-search-label, .vx-search .vx-search-kbd { display:none !important; }
+  }
+  @media (max-width:820px) {
+    .vx-chip { display:none !important; }
+    .vx-shell { padding-left:18px !important; padding-right:18px !important; }
+  }
+  @media (max-width:620px) {
+    .vx-sub { display:none !important; }
+    .vx-quad { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .vx-foot { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .vx-mark span:first-child { display:none !important; }
+  }
+  @media (max-width:520px) {
+    .vx-count > div > div:first-child { font-size:27px !important; min-width:40px !important; }
+    .vx-count { gap:4px !important; }
+  }
+</style>
+</helmet>
+
+<div data-page="home" style="min-height:100vh;background:#08060a;color:#F4EDE6;position:relative;overflow-x:hidden;">
+
+  <div id="vx-aura" style="position:fixed;inset:0;pointer-events:none;z-index:0;will-change:transform;background:radial-gradient(1100px 620px at 72% -8%, rgba(255,106,0,.16), transparent 65%), radial-gradient(720px 520px at 4% 12%, rgba(255,60,0,.07), transparent 70%);"></div>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;background-image:linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);background-size:76px 76px;mask-image:radial-gradient(1000px 700px at 50% 0%, #000 20%, transparent 78%);-webkit-mask-image:radial-gradient(1000px 700px at 50% 0%, #000 20%, transparent 78%);"></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
+    <line x1="0" y1="22%" x2="100%" y2="22%" class="vx-line" style="animation-delay:.4s" />
+    <line x1="0" y1="78%" x2="100%" y2="78%" class="vx-line" style="animation-delay:.9s" />
+    <line x1="16%" y1="0" x2="16%" y2="100%" class="vx-line" style="animation-delay:1.3s" />
+    <line x1="84%" y1="0" x2="84%" y2="100%" class="vx-line" style="animation-delay:1.7s" />
+    <line x1="50%" y1="0" x2="50%" y2="100%" class="vx-line" style="animation-delay:2.1s;opacity:.05" />
+    <circle cx="16%" cy="22%" r="2.4" class="vx-dot" style="animation-delay:2.6s" />
+    <circle cx="84%" cy="22%" r="2.4" class="vx-dot" style="animation-delay:2.85s" />
+    <circle cx="16%" cy="78%" r="2.4" class="vx-dot" style="animation-delay:3.1s" />
+    <circle cx="84%" cy="78%" r="2.4" class="vx-dot" style="animation-delay:3.35s" />
+    <circle cx="50%" cy="50%" r="1.6" class="vx-dot" style="animation-delay:3.6s" />
+  </svg>
+
+  <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;">
+    <span class="vx-mote" style="top:18%;left:12%;animation-delay:.3s"></span>
+    <span class="vx-mote" style="top:31%;left:87%;animation-delay:1.1s"></span>
+    <span class="vx-mote" style="top:47%;left:7%;animation-delay:2s"></span>
+    <span class="vx-mote" style="top:64%;left:92%;animation-delay:.8s"></span>
+    <span class="vx-mote" style="top:72%;left:23%;animation-delay:2.7s"></span>
+    <span class="vx-mote" style="top:12%;left:62%;animation-delay:3.4s"></span>
+    <span class="vx-mote" style="top:88%;left:44%;animation-delay:1.6s"></span>
+    <span class="vx-mote" style="top:55%;left:71%;animation-delay:4.1s"></span>
+  </div>
+
+  <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:30;">
+    <span class="vx-rise" style="position:absolute;top:88px;left:16px;width:34px;height:34px;border-left:1px solid rgba(255,106,0,.35);border-top:1px solid rgba(255,106,0,.35);animation-delay:3.6s"></span>
+    <span class="vx-rise" style="position:absolute;top:88px;right:16px;width:34px;height:34px;border-right:1px solid rgba(255,106,0,.35);border-top:1px solid rgba(255,106,0,.35);animation-delay:3.75s"></span>
+    <span class="vx-rise" style="position:absolute;bottom:16px;left:16px;width:34px;height:34px;border-left:1px solid rgba(255,106,0,.35);border-bottom:1px solid rgba(255,106,0,.35);animation-delay:3.9s"></span>
+    <span class="vx-rise" style="position:absolute;bottom:16px;right:16px;width:34px;height:34px;border-right:1px solid rgba(255,106,0,.35);border-bottom:1px solid rgba(255,106,0,.35);animation-delay:4.05s"></span>
+  </div>
+
+  <div id="vx-halo" aria-hidden="true" style="position:fixed;top:0;left:0;width:520px;height:520px;border-radius:99px;pointer-events:none;z-index:1;opacity:0;filter:blur(58px);will-change:transform,opacity;transition:opacity .5s ease;background:radial-gradient(circle, rgba(255,106,0,.13), rgba(255,60,0,.05) 45%, transparent 70%);"></div>
+
+  <div aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:60;pointer-events:none;">
+    <span id="vx-progress" style="display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#FF3C00,#FFA047,#00D6B4);box-shadow:0 0 14px rgba(255,106,0,.7);"></span>
+  </div>
+
+  <!-- ░░ HEADER ░░ -->
+  <header style="position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:rgba(8,6,10,.78);border-bottom:1px solid rgba(255,255,255,.07);">
+    <div class="vx-shell" style="max-width:1400px;margin:0 auto;padding:0 28px;height:72px;display:flex;align-items:center;gap:22px;">
+      <a href="index.html" style="display:flex;align-items:center;gap:11px;flex:none;">
+        <span style="width:30px;height:30px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);box-shadow:0 0 22px rgba(255,106,0,.45);">
+          <span style="width:8px;height:8px;background:#FF6A00;box-shadow:0 0 10px #FF6A00;"></span>
+        </span>
+        <span class="vx-mark" style="display:flex;flex-direction:column;line-height:1;">
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:11px;letter-spacing:.42em;color:#6E646C;">THE</span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;letter-spacing:.13em;color:#F4EDE6;margin-top:3px;">OUTLAWS</span>
+        </span>
+      </a>
+
+      <nav class="vx-nav" style="display:flex;align-items:center;gap:2px;flex:1;">
+        <a href="index.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#F4EDE6;border-radius:8px;white-space:nowrap;background:rgba(255,106,0,.1);">Home</a>
+        <a href="discover.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Discover</a>
+        <a href="projects.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Projects</a>
+        <a href="myraffles.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">My Raffles</a>
+        <a href="communities.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Communities</a>
+        <a href="calendar.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Calendar</a>
+        <a href="premium.dc.html" style="padding:9px 15px;font-size:14.5px;font-weight:500;color:#8C8189;border-radius:8px;white-space:nowrap;transition:color .22s,background .22s;" style-hover="color:#F4EDE6;background:rgba(255,255,255,.05)">Premium</a>
+      </nav>
+
+      <button class="ol-burger vx-burger" style="width:40px;height:40px;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#C6BBC1;font-size:15px;cursor:pointer;margin-right:auto;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#FF6A00">☰</button>
+
+      <a href="search.dc.html" class="vx-search" style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#6E646C;font-family:inherit;font-size:13.5px;cursor:pointer;transition:border-color .22s,color .22s;min-width:220px;flex:none;" style-hover="border-color:rgba(255,106,0,.45);color:#A79BA3">
+        <span style="font-size:14px;">⌕</span>
+        <span class="vx-search-label" style="flex:1;text-align:left;white-space:nowrap;">Search raffles, projects…</span>
+        <span class="vx-search-kbd" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 6px;border:1px solid rgba(255,255,255,.13);border-radius:5px;letter-spacing:.06em;">⌘K</span>
+      </a>
+
+      <div style="display:flex;align-items:center;gap:12px;flex:none;">
+        <button style="position:relative;width:38px;height:38px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.09);border-radius:9px;color:#A79BA3;cursor:pointer;font-size:15px;transition:border-color .22s,color .22s;" style-hover="border-color:rgba(255,106,0,.45);color:#F4EDE6">
+          ◵
+          <span style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:99px;background:#FF6A00;box-shadow:0 0 9px #FF6A00;"></span>
+        </button>
+        <a href="premium.dc.html" class="vx-sub" style="padding:10px 17px;font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#08060a;background:linear-gradient(180deg,#FFA047,#FF6A00);border-radius:9px;box-shadow:0 6px 24px rgba(255,106,0,.32);white-space:nowrap;transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,106,0,.5)">Subscribe</a>
+        <div class="vx-chip" style="display:flex;align-items:center;gap:9px;padding:5px 11px 5px 5px;border:1px solid rgba(255,255,255,.09);border-radius:99px;cursor:pointer;transition:border-color .22s;" style-hover="border-color:rgba(255,106,0,.4)">
+          <span style="width:28px;height:28px;border-radius:99px;background:linear-gradient(135deg,#FF6A00,#7a2a00);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#08060a;">V</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#C6BBC1;letter-spacing:.03em;">vex_2847</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,.55) 18%,rgba(255,106,0,.85) 50%,rgba(255,106,0,.55) 82%,transparent);opacity:.5;"></div>
+  </header>
+
+  <!-- ░░ TICKER ░░ -->
+  <div style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.012);overflow:hidden;height:38px;display:flex;align-items:center;">
+    <div style="flex:none;display:flex;align-items:center;gap:8px;padding:0 18px;height:100%;border-right:1px solid rgba(255,255,255,.07);background:rgba(255,106,0,.07);">
+      <span style="width:6px;height:6px;border-radius:99px;background:#FF6A00;animation:vx-pulse 1.6s ease-in-out infinite;"></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:#FF8A33;">LIVE</span>
+    </div>
+    <div style="flex:1;overflow:hidden;position:relative;">
+      <div style="display:flex;width:max-content;animation:vx-marquee 46s linear infinite;">
+        <sc-for list="{{ tickerLoop }}" as="t" hint-placeholder-count="12">
+          <span style="display:flex;align-items:center;gap:9px;padding:0 22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;color:#6E646C;white-space:nowrap;">
+            <span style="color:{{ t.tone }};">{{ t.tag }}</span>
+            <span>{{ t.text }}</span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░ HERO ░░ -->
+  <section style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 28px;">
+    <div class="vx-hero" style="display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:center;padding:92px 0 76px;">
+
+      <div class="vx-rise">
+        <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 13px 6px 7px;border:1px solid rgba(255,106,0,.3);border-radius:99px;background:rgba(255,106,0,.06);margin-bottom:30px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.12em;color:#08060a;background:#FF6A00;padding:3px 7px;border-radius:99px;">V3.0</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#FF9A5C;">PROVABLY FAIR ENGINE ONLINE</span>
+        </div>
+
+        <h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(46px,5.2vw,76px);line-height:.96;letter-spacing:-.02em;margin:0 0 24px;text-wrap:balance;">
+          <span class="vx-word" style="animation-delay:.15s;margin-right:.22em;">Every</span><span class="vx-word" style="animation-delay:.3s;">draw,</span><br />
+          <span class="vx-word" style="animation-delay:.5s;color:#FF6A00;text-shadow:0 0 46px rgba(255,106,0,.5);">mathematically</span><br />
+          <span class="vx-word" style="animation-delay:.72s;">accountable.</span>
+        </h1>
+
+        <p style="font-size:17px;line-height:1.62;color:#9B8F96;max-width:520px;margin:0 0 38px;text-wrap:pretty;">
+          <span class="vx-word" style="animation-delay:.95s;">Discover curated Web3 raffles, satisfy requirements once, and verify the winner selection yourself — seed, ledger, entropy, and draw published for every finalized raffle.</span>
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:13px;margin-bottom:46px;">
+          <a href="raffle.dc.html" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:11px;padding:15px 27px;background:linear-gradient(180deg,#FFA047,#FF6A00);color:#08060a;font-size:15px;font-weight:700;letter-spacing:.01em;border-radius:11px;box-shadow:0 10px 34px rgba(255,106,0,.34);transition:transform .22s,box-shadow .22s;" style-hover="transform:translateY(-2px);box-shadow:0 16px 44px rgba(255,106,0,.5)">
+            <span>Explore live raffles</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;">→</span>
+            <span style="position:absolute;top:0;bottom:0;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:vx-sweep 3.6s ease-in-out infinite;"></span>
+          </a>
+          <a href="support.dc.html" style="display:inline-flex;align-items:center;gap:11px;padding:15px 25px;border:1px solid rgba(255,255,255,.14);border-radius:11px;color:#DCD2D6;font-size:15px;font-weight:600;transition:border-color .22s,background .22s,color .22s;" style-hover="border-color:rgba(0,214,180,.55);background:rgba(0,214,180,.07);color:#fff"><span style="color:#00D6B4;">◈</span><span>How verification works</span>
+          </a>
+        </div>
+
+        <div class="vx-stagger vx-quad" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:13px;overflow:hidden;">
+          <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="4">
+            <div class="vx-spot" style="background:#0b080d;padding:17px 15px;" style-hover="background:#120c11">
+              <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:20px;font-weight:700;color:#F4EDE6;letter-spacing:-.01em;">{{ s.value }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.13em;color:#6E646C;margin-top:6px;">{{ s.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Featured raffle card -->
+      <div class="vx-rise" style="animation-delay:.14s;position:relative;">
+        <div style="position:absolute;inset:-34px;background:radial-gradient(circle at 62% 32%, rgba(255,106,0,.2), transparent 62%);filter:blur(28px);pointer-events:none;"></div>
+
+        <div style="position:relative;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:linear-gradient(165deg,#141017 0%,#0b080d 58%);overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.62);">
+          <div style="height:2px;background:linear-gradient(90deg,#FF6A00,#FFB061,#FF3C00);"></div>
+
+          <div style="padding:24px 26px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:#FF8A33;padding:4px 9px;border:1px solid rgba(255,106,0,.35);border-radius:5px;background:rgba(255,106,0,.08);">FEATURED</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:#00D6B4;padding:4px 9px;border:1px solid rgba(0,214,180,.3);border-radius:5px;background:rgba(0,214,180,.07);">VERIFIED</span>
+            </div>
+            <span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#FF6A00;">
+              <span style="width:6px;height:6px;border-radius:99px;background:#FF6A00;animation:vx-pulse 1.4s ease-in-out infinite;"></span>ACTIVE
+            </span>
+          </div>
+
+          <div style="padding:18px 26px 0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#6E646C;margin-bottom:9px;">ARCFORGE LABS · WEIGHTED RANDOM</div>
+            <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:29px;line-height:1.12;margin:0 0 18px;letter-spacing:-.01em;">Arcforge Genesis Pass</h3>
+          </div>
+
+          <div style="margin:0 26px;padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.022);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;color:#6E646C;margin-bottom:13px;">ENDS IN</div>
+            <div class="vx-count" style="display:flex;align-items:flex-end;gap:10px;">
+              <sc-for list="{{ countdown }}" as="c" hint-placeholder-count="4">
+                <div style="text-align:center;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:34px;font-weight:700;line-height:1;color:#F4EDE6;min-width:56px;">{{ c.v }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;margin-top:7px;">{{ c.l }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="padding:20px 26px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;margin-bottom:6px;">PRIZE</div>
+              <div style="font-size:14.5px;font-weight:600;color:#F4EDE6;">1 × Genesis Pass</div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;margin-bottom:6px;">ENTRIES</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:14.5px;font-weight:600;color:#F4EDE6;">{{ entriesLive }}</div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;color:#6E646C;margin-bottom:6px;">WINNERS</div>
+              <div style="font-size:14.5px;font-weight:600;color:#F4EDE6;">1 spot</div>
+            </div>
+          </div>
+
+          <div style="padding:20px 26px 0;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.13em;color:#6E646C;">REQUIREMENTS · 2 OF 3 SATISFIED</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#FF8A33;">AND</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <sc-for list="{{ reqs }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:11px;padding:10px 13px;border:1px solid {{ r.border }};border-radius:9px;background:{{ r.bg }};">
+                  <span style="width:17px;height:17px;flex:none;display:grid;place-items:center;border-radius:99px;border:1.5px solid {{ r.dot }};color:{{ r.dot }};font-size:9px;font-weight:700;">{{ r.icon }}</span>
+                  <span style="flex:1;font-size:13.5px;color:#DCD2D6;">{{ r.label }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:{{ r.dot }};">{{ r.state }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="padding:22px 26px 26px;">
+            <a href="raffle.dc.html" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:linear-gradient(180deg,#FFA047,#FF6A00);color:#08060a;font-size:15px;font-weight:700;border-radius:11px;box-shadow:0 8px 28px rgba(255,106,0,.3);transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-2px);box-shadow:0 14px 38px rgba(255,106,0,.46)">
+              Enter raffle
+            </a>
+            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.07em;color:#6E646C;">
+              <span style="color:#00D6B4;">◈</span> FREE ENTRY · PREMIUM CHANGES NOTHING ABOUT YOUR ODDS
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ TRENDING ░░ -->
+  <section style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:24px 28px 0;">
+    <div class="vx-reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:26px;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:11px;">01 — TRENDING NOW</div>
+        <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:34px;letter-spacing:-.01em;margin:0;">Where the entries are going</h2>
+      </div>
+      <a href="discover.dc.html" style="flex:none;display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#9B8F96;padding-bottom:4px;transition:color .2s;" style-hover="color:#FF6A00">View all 48 <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+    </div>
+
+    <div class="vx-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+      <sc-for list="{{ trending }}" as="t" hint-placeholder-count="3">
+        <div>
+        <a href="raffle.dc.html" class="vx-spot" style="position:relative;display:block;height:100%;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:linear-gradient(160deg,#100c12,#0a070c);overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;" style-hover="transform:translateY(-5px);border-color:rgba(255,106,0,.4);box-shadow:0 22px 50px rgba(0,0,0,.6)">
+          <span style="position:absolute;top:0;left:0;right:0;height:2px;background:{{ t.accent }};opacity:.85;"></span>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:{{ t.avatarBg }};font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:13px;color:#08060a;">{{ t.initials }}</span>
+              <div>
+                <div style="font-size:12.5px;font-weight:600;color:#C6BBC1;">{{ t.project }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:#6E646C;margin-top:2px;">{{ t.chain }}</div>
+              </div>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;padding:4px 8px;border-radius:5px;color:{{ t.stateColor }};border:1px solid {{ t.stateBorder }};background:{{ t.stateBg }};">{{ t.state }}</span>
+          </div>
+
+          <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:20px;line-height:1.2;margin:0 0 8px;color:#F4EDE6;">{{ t.title }}</h3>
+          <p style="font-size:13.5px;line-height:1.55;color:#8C8189;margin:0 0 20px;min-height:42px;">{{ t.prize }}</p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;margin-bottom:5px;">ENTRIES</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:15px;font-weight:600;color:#F4EDE6;">{{ t.entries }}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6E646C;margin-bottom:5px;">{{ t.timeLabel }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:15px;font-weight:600;color:{{ t.timeColor }};">{{ t.time }}</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;height:3px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;">
+            <span style="display:block;height:100%;width:{{ t.fill }};border-radius:99px;background:{{ t.accent }};"></span>
+          </div>
+        </a>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ░░ ENDING SOON / UPCOMING split ░░ -->
+  <section style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:76px 28px 0;">
+    <div class="vx-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;">
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+        <div style="padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(255,106,0,.045);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="width:7px;height:7px;border-radius:99px;background:#FF6A00;animation:vx-pulse 1.5s ease-in-out infinite;"></span>
+            <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.04em;color:#F4EDE6;">ENDING SOON</span>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;letter-spacing:.1em;">5 CLOSING TODAY</span>
+        </div>
+        <sc-for list="{{ endingSoon }}" as="e" hint-placeholder-count="4">
+          <a href="raffle.dc.html" style="display:flex;align-items:center;gap:15px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s,padding-left .25s;" style-hover="background:rgba(255,106,0,.055);padding-left:27px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#3E353C;flex:none;width:18px;">{{ e.n }}</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:14px;font-weight:600;color:#DCD2D6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ e.title }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;margin-top:4px;letter-spacing:.05em;">{{ e.meta }}</div>
+            </div>
+            <span style="flex:none;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:13px;font-weight:600;color:#FF6A00;">{{ e.left }}</span>
+          </a>
+        </sc-for>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+        <div style="padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:14px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="width:7px;height:7px;border-radius:99px;border:1.5px solid #6E646C;"></span>
+            <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.04em;color:#F4EDE6;">UPCOMING</span>
+          </div>
+          <a href="calendar.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;letter-spacing:.1em;transition:color .2s;" style-hover="color:#FF6A00">CALENDAR →</a>
+        </div>
+        <sc-for list="{{ upcoming }}" as="u" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:15px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s;" style-hover="background:rgba(255,255,255,.03)">
+            <div style="flex:none;width:42px;text-align:center;padding:6px 0;border:1px solid rgba(255,255,255,.09);border-radius:8px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#F4EDE6;line-height:1;">{{ u.day }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#6E646C;margin-top:3px;">{{ u.mon }}</div>
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:14px;font-weight:600;color:#DCD2D6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ u.title }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;margin-top:4px;letter-spacing:.05em;">{{ u.meta }}</div>
+            </div>
+            <button style="flex:none;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:#9B8F96;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;cursor:pointer;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">REMIND</button>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FAIRNESS ░░ -->
+  <section style="position:relative;z-index:1;margin-top:96px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg,rgba(0,214,180,.035),transparent 70%);">
+    <div style="max-width:1400px;margin:0 auto;padding:66px 28px;">
+      <div class="vx-stagger vx-split" style="display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:52px;align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#00D6B4;margin-bottom:13px;">02 — PROVABLY FAIR</div>
+          <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:36px;line-height:1.1;letter-spacing:-.01em;margin:0 0 18px;">Don't trust us.<br />Recompute the draw.</h2>
+          <p style="font-size:15.5px;line-height:1.65;color:#9B8F96;margin:0 0 26px;text-wrap:pretty;">
+            Every finalized raffle publishes the full evidence chain. Anyone can replay it offline and land on the exact same winners — no privileged access, no platform discretion.
+          </p>
+          <a href="raffle.dc.html" style="display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border:1px solid rgba(0,214,180,.4);border-radius:10px;color:#00D6B4;font-size:14px;font-weight:600;background:rgba(0,214,180,.05);transition:background .22s,transform .22s;" style-hover="background:rgba(0,214,180,.13);transform:translateY(-2px)">Verify a finalized raffle <span style="font-family:'JetBrains Mono',monospace;">→</span>
+          </a>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;">
+          <sc-for list="{{ fairness }}" as="f" hint-placeholder-count="6">
+            <div style="background:#0a070c;padding:20px 17px;position:relative;transition:background .25s;" style-hover="background:#0d1412">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#00D6B4;letter-spacing:.12em;margin-bottom:13px;">{{ f.n }}</div>
+              <div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;color:#F4EDE6;line-height:1.25;margin-bottom:8px;">{{ f.title }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.5;color:#6E646C;">{{ f.hash }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ COMMUNITIES ░░ -->
+  <section style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:76px 28px 0;">
+    <div class="vx-reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:26px;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#FF6A00;margin-bottom:11px;">03 — FEATURED COMMUNITIES</div>
+        <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:34px;letter-spacing:-.01em;margin:0;">Rooms worth being in</h2>
+      </div>
+      <a href="communities.dc.html" style="flex:none;display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#9B8F96;padding-bottom:4px;transition:color .2s;" style-hover="color:#FF6A00">All communities <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+    </div>
+
+    <div class="vx-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+      <sc-for list="{{ communities }}" as="c" hint-placeholder-count="4">
+        <div><div class="vx-spot" style="position:relative;height:100%;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:#0b080d;overflow:hidden;transition:border-color .3s,transform .3s;" style-hover="border-color:rgba(255,106,0,.35);transform:translateY(-4px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+            <span style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:{{ c.bg }};font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:15px;color:#08060a;">{{ c.initials }}</span>
+            <div style="min-width:0;">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <a href="community.dc.html" style="font-size:14.5px;font-weight:600;color:#F4EDE6;">{{ c.name }}</a>
+                <span style="color:#00D6B4;font-size:11px;">◈</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;margin-top:3px;letter-spacing:.05em;">{{ c.members }} MEMBERS</div>
+            </div>
+          </div>
+          <p style="font-size:13px;line-height:1.55;color:#8C8189;margin:0 0 18px;min-height:40px;">{{ c.desc }}</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#FF8A33;letter-spacing:.06em;">{{ c.live }}</span>
+            <button style="padding:8px 15px;font-size:12.5px;font-weight:600;color:{{ c.btnColor }};background:{{ c.btnBg }};border:1px solid {{ c.btnBorder }};border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;" style-hover="border-color:#FF6A00;color:#FF6A00">{{ c.btn }}</button>
+          </div>
+        </div></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ░░ ACTIVITY ░░ -->
+  <section style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:76px 28px 0;">
+    <div class="vx-stagger vx-split" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;">
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);overflow:hidden;">
+        <div style="padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:14px;">
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;letter-spacing:.04em;">LATEST COMMUNITY ACTIVITY</span>
+          <span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;letter-spacing:.1em;">
+            <span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;animation:vx-pulse 2s ease-in-out infinite;"></span>REALTIME
+          </span>
+        </div>
+        <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
+          <div style="display:flex;gap:14px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s;" style-hover="background:rgba(255,255,255,.025)">
+            <span style="flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:{{ a.bg }};color:{{ a.color }};font-size:12px;">{{ a.icon }}</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;line-height:1.5;color:#C6BBC1;">{{ a.text }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6E646C;margin-top:5px;letter-spacing:.06em;">{{ a.meta }}</div>
+            </div>
+            <span style="flex:none;font-family:'JetBrains Mono',monospace;font-size:10px;color:#4E454C;">{{ a.time }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div style="position:relative;padding:26px;border:1px solid rgba(255,106,0,.28);border-radius:18px;background:linear-gradient(160deg,rgba(255,106,0,.1),rgba(255,106,0,.02) 60%,transparent);overflow:hidden;">
+          <div style="position:absolute;top:-70px;right:-70px;width:180px;height:180px;border:1px dashed rgba(255,106,0,.25);border-radius:99px;animation:vx-orbit 34s linear infinite;"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#FF8A33;margin-bottom:15px;">PREMIUM · AUTOMATION</div>
+          <h3 style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:24px;line-height:1.16;margin:0 0 12px;">Stop refreshing.<br />Auto-Register instead.</h3>
+          <p style="font-size:13.5px;line-height:1.6;color:#9B8F96;margin:0 0 20px;">Pick communities, projects and raffle modes once. The Outlaws enters the matching raffles for you and logs every success, failure and pending run.</p>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px;">
+            <sc-for list="{{ premiumBullets }}" as="p" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#C6BBC1;">
+                <span style="color:#FF6A00;font-family:'JetBrains Mono',monospace;font-size:11px;">▸</span>{{ p.text }}
+              </div>
+            </sc-for>
+          </div>
+          <a href="premium.dc.html" style="display:flex;align-items:center;justify-content:center;padding:13px;background:linear-gradient(180deg,#FFA047,#FF6A00);color:#08060a;font-size:14px;font-weight:700;border-radius:10px;transition:transform .2s;" style-hover="transform:translateY(-2px)">Configure Auto-Register</a>
+          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.6;color:#6E646C;letter-spacing:.04em;">
+            PREMIUM UNLOCKS SOFTWARE CAPABILITIES ONLY. IT DOES NOT AFFECT DRAW PROBABILITY.
+          </div>
+        </div>
+
+        <div style="padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.016);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#6E646C;margin-bottom:16px;">YOUR STANDING</div>
+          <div style="display:flex;align-items:flex-end;gap:12px;margin-bottom:18px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;line-height:.9;color:#F4EDE6;">91</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#6E646C;padding-bottom:5px;">/ 100 REPUTATION</span>
+          </div>
+          <div style="height:5px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:18px;">
+            <span style="display:block;height:100%;width:91%;border-radius:99px;background:linear-gradient(90deg,#FF3C00,#FFA047);"></span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+            <sc-for list="{{ standing }}" as="s" hint-placeholder-count="3">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:#F4EDE6;">{{ s.v }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:#6E646C;margin-top:5px;">{{ s.l }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ CTA ░░ -->
+  <section style="position:relative;z-index:1;max-width:1400px;margin:96px auto 0;padding:0 28px;">
+    <div class="vx-reveal vx-spot" style="position:relative;border:1px solid rgba(255,106,0,.25);border-radius:22px;background:linear-gradient(150deg,#1a1014,#0a070c 62%);overflow:hidden;padding:62px 44px;text-align:center;">
+      <div style="position:absolute;inset:0;opacity:.5;background-image:linear-gradient(rgba(255,106,0,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,106,0,.07) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(500px 260px at 50% 50%,#000,transparent 72%);-webkit-mask-image:radial-gradient(500px 260px at 50% 50%,#000,transparent 72%);"></div>
+      <div style="position:relative;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:#FF8A33;margin-bottom:20px;">FOR PROJECTS &amp; COMMUNITIES</div>
+        <h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(32px,3.6vw,50px);line-height:1.05;letter-spacing:-.02em;margin:0 auto 18px;max-width:760px;">Run a raffle nobody can accuse you of rigging.</h2>
+        <p style="font-size:16px;line-height:1.6;color:#9B8F96;max-width:580px;margin:0 auto 32px;text-wrap:pretty;">Requirement trees, snapshot rules, reusable templates, and a published evidence chain for every finalized draw.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center;">
+          <a href="auth.dc.html" style="padding:15px 28px;background:linear-gradient(180deg,#FFA047,#FF6A00);color:#08060a;font-size:15px;font-weight:700;border-radius:11px;box-shadow:0 10px 34px rgba(255,106,0,.32);transition:transform .2s;" style-hover="transform:translateY(-2px)">Create a community</a>
+          <a href="support.dc.html" style="padding:15px 26px;border:1px solid rgba(255,255,255,.15);border-radius:11px;color:#DCD2D6;font-size:15px;font-weight:600;transition:border-color .2s,background .2s;" style-hover="border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.04)">Read the docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer style="position:relative;z-index:1;margin-top:86px;border-top:1px solid rgba(255,255,255,.07);">
+    <div class="vx-foot" style="max-width:1400px;margin:0 auto;padding:52px 28px 26px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:40px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <span style="width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #FF6A00;transform:rotate(45deg);">
+            <span style="width:6px;height:6px;background:#FF6A00;"></span>
+          </span>
+          <span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:16px;letter-spacing:.16em;">THE OUTLAWS</span>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#6E646C;max-width:330px;margin:0;">Web3 community raffle platform. Non-custodial, provably fair, and built so the winner selection can be recomputed by anyone.</p>
+      </div>
+      <sc-for list="{{ footer }}" as="col" hint-placeholder-count="3">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#4E454C;margin-bottom:16px;">{{ col.title }}</div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="4">
+              <a href="support.dc.html" style="font-size:13.5px;color:#8C8189;transition:color .2s;" style-hover="color:#FF6A00">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="max-width:1400px;margin:0 auto;padding:20px 28px 34px;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;">© 2026 THE OUTLAWS · NON-CUSTODIAL · NO PRIVATE KEYS STORED</span>
+      <div style="display:flex;align-items:center;gap:18px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#4E454C;letter-spacing:.05em;">
+        <span style="display:flex;align-items:center;gap:7px;"><span style="width:5px;height:5px;border-radius:99px;background:#00D6B4;"></span>ALL SYSTEMS OPERATIONAL</span>
+        <span>p95 · {{ latency }}ms</span>
+      </div>
+    </div>
+  </footer>
+</div>]]>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FF6A00&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#FF6A00&quot;,&quot;#FF3C00&quot;,&quot;#FFA047&quot;,&quot;#F97316&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;showTicker&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;comfortable&quot;,&quot;options&quot;:[&quot;comfortable&quot;,&quot;compact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { t: 0, entries: 4821, latency: 182, count: 0 };
+
+  fx() {
+    if (window.OutlawsFX) { window.OutlawsFX.start(); return; }
+    this.fxRetry = setTimeout(() => this.fx(), 250);
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(s => ({
+        t: s.t + 1,
+        entries: s.entries + (Math.random() > 0.55 ? 1 : 0),
+        latency: 150 + Math.floor(Math.random() * 60)
+      }));
+    }, 1000);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.reduced = reduced;
+    this.fx(); // page-level motion + navigation runtime (outlaws.js)
+
+    // ── counter tween for the hero stat row
+    const start = performance.now() + 400;
+    const tick = now => {
+      const p = Math.min(1, Math.max(0, (now - start) / 1600));
+      const eased = 1 - Math.pow(1 - p, 4);
+      if (eased !== this.state.count) this.setState({ count: eased });
+      if (p < 1) this.countRaf = requestAnimationFrame(tick);
+    };
+    this.countRaf = requestAnimationFrame(reduced ? () => this.setState({ count: 1 }) : tick);
+
+  }
+
+  componentDidUpdate() { if (window.OutlawsFX) window.OutlawsFX.sweep(); }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    clearTimeout(this.fxRetry);
+    cancelAnimationFrame(this.countRaf);
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#FF6A00';
+    const k = this.state.count;
+    const total = 2 * 86400 + 14 * 3600 + 22 * 60 - this.state.t;
+    const p = n => String(Math.max(0, n)).padStart(2, '0');
+    const countdown = [
+      { v: p(Math.floor(total / 86400)), l: 'DAYS' },
+      { v: p(Math.floor(total / 3600) % 24), l: 'HRS' },
+      { v: p(Math.floor(total / 60) % 60), l: 'MIN' },
+      { v: p(total % 60), l: 'SEC' }
+    ];
+
+    const ticker = [
+      { tag: 'ENTRY', tone: '#FF6A00', text: 'vex_2847 entered Arcforge Genesis Pass · #4,821' },
+      { tag: 'FINALIZED', tone: '#00D6B4', text: 'Morrow Genesis — 1 winner · seed revealed' },
+      { tag: 'NEW', tone: '#FF6A00', text: 'Riftbound Arena opened Beta Key raffle · 50 spots' },
+      { tag: 'ENDING', tone: '#FFB061', text: 'Nightfall Arena Access closes in 12h 32m' },
+      { tag: 'VERIFIED', tone: '#00D6B4', text: 'Atlas Realm draw recomputed by 412 external parties' },
+      { tag: 'COMMUNITY', tone: '#FF6A00', text: 'Frontier Collective published a snapshot event' }
+    ];
+
+    return {
+      accent,
+      latency: this.state.latency,
+      entriesLive: this.state.entries.toLocaleString('en-US'),
+      countdown,
+      tickerLoop: [...ticker, ...ticker],
+      nav: [
+        { label: 'Home' }, { label: 'Raffles' }, { label: 'Projects' },
+        { label: 'Communities' }, { label: 'Calendar' }, { label: 'My Raffles' }
+      ],
+      heroStats: [
+        { value: Math.round(48 * k).toString(), label: 'LIVE RAFFLES' },
+        { value: Math.round(1840 * k).toLocaleString('en-US'), label: 'COMMUNITIES' },
+        { value: (Math.round(1420 * k) / 10).toFixed(1) + 'K', label: 'VERIFIED USERS' },
+        { value: Math.round(100 * k) + '%', label: 'DRAWS VERIFIABLE' }
+      ],
+      reqs: [
+        { label: 'Follow @ArcforgeLabs on X', state: 'MET', icon: '✓', dot: '#00D6B4', border: 'rgba(0,214,180,.28)', bg: 'rgba(0,214,180,.05)' },
+        { label: 'Discord role · Arcforge Core', state: 'MET', icon: '✓', dot: '#00D6B4', border: 'rgba(0,214,180,.28)', bg: 'rgba(0,214,180,.05)' },
+        { label: 'Hold 1× Outlaw Node NFT', state: 'PENDING', icon: '!', dot: '#FF6A00', border: 'rgba(255,106,0,.3)', bg: 'rgba(255,106,0,.05)' }
+      ],
+      trending: [
+        {
+          project: 'Arcadia Labs', initials: 'AL', chain: 'ETHEREUM · WEIGHTED',
+          title: 'Genesis Pass Giveaway', prize: '10 ETH treasury allocation across 1 guaranteed winner.',
+          entries: '4,821 / 5,000', timeLabel: 'CLOSES IN', time: '4d 18h', timeColor: '#F4EDE6',
+          state: 'LIVE', stateColor: '#FF6A00', stateBorder: 'rgba(255,106,0,.35)', stateBg: 'rgba(255,106,0,.08)',
+          accent: 'linear-gradient(90deg,#FF6A00,#FFB061)', avatarBg: 'linear-gradient(135deg,#FFA047,#FF3C00)', fill: '96%'
+        },
+        {
+          project: 'Frontier Labs', initials: 'FL', chain: 'BASE · FCFS',
+          title: 'Frontier Land Whitelist', prize: '50× Tier-1 whitelist spots, first valid entrants only.',
+          entries: '892 / 1,000', timeLabel: 'CLOSES IN', time: '12h 32m', timeColor: '#FF6A00',
+          state: 'ENDING SOON', stateColor: '#FFB061', stateBorder: 'rgba(255,176,97,.3)', stateBg: 'rgba(255,176,97,.07)',
+          accent: 'linear-gradient(90deg,#FFB061,#FF6A00)', avatarBg: 'linear-gradient(135deg,#FFD08A,#FF8A33)', fill: '89%'
+        },
+        {
+          project: 'Nova Protocol', initials: 'NP', chain: 'ARBITRUM · APPLICATION',
+          title: 'Nova Node Operator Drop', prize: '2,000 USDC pool reviewed by the Nova core team.',
+          entries: '664 applied', timeLabel: 'STARTS IN', time: '3d 08h', timeColor: '#9B8F96',
+          state: 'UPCOMING', stateColor: '#9B8F96', stateBorder: 'rgba(255,255,255,.14)', stateBg: 'rgba(255,255,255,.04)',
+          accent: 'linear-gradient(90deg,#6E646C,#3E353C)', avatarBg: 'linear-gradient(135deg,#C6BBC1,#6E646C)', fill: '44%'
+        }
+      ],
+      endingSoon: [
+        { n: '01', title: 'Nightfall Arena Access', meta: 'NIGHTFALL INTERACTIVE · 892 ENTRIES', left: '12h 32m' },
+        { n: '02', title: 'Riftbound Arena Beta Key', meta: 'RIFTBOUND · 3,820 ENTRIES · FCFS', left: '06h 42m' },
+        { n: '03', title: 'Vaultborn Founder Key', meta: 'VAULTBORN REALMS · 1,930 ENTRIES', left: '01h 15m' },
+        { n: '04', title: 'Spectral Audio Protocol Drop', meta: 'SPECTRAL DAO · 2,100 ENTRIES', left: '00h 28m' }
+      ],
+      upcoming: [
+        { day: '14', mon: 'SEP', title: 'Obsidian Realm Bundle', meta: 'OBSIDIAN CORE · WALLET COLLECTION' },
+        { day: '16', mon: 'SEP', title: 'Northstar Access Pass', meta: 'NORTHSTAR PROTOCOL · WEIGHTED' },
+        { day: '19', mon: 'SEP', title: 'Ironwood Harvester Alloc.', meta: 'IRONWOOD · APPLICATION REVIEW' },
+        { day: '23', mon: 'SEP', title: 'Mesa Protocol Seed Pass', meta: 'MESA · FCFS · 200 SPOTS' }
+      ],
+      fairness: [
+        { n: 'STEP 01', title: 'Server seed hash', hash: 'sha256 · 9f4e…c0b1' },
+        { n: 'STEP 02', title: 'Freeze ledger', hash: '4,821 valid entries' },
+        { n: 'STEP 03', title: 'Entries hash', hash: 'merkle · 2a71…88ff' },
+        { n: 'STEP 04', title: 'Public entropy', hash: 'block #21,405,912' },
+        { n: 'STEP 05', title: 'Reveal seed', hash: 'preimage published' },
+        { n: 'STEP 06', title: 'Deterministic draw', hash: 'winners · reproducible' }
+      ],
+      communities: [
+        { initials: 'AL', name: 'Arcadia Labs', members: '12.4K', desc: 'Core governance guild running weighted allocations and quarterly treasury draws.', live: '4 LIVE RAFFLES', btn: 'Following', btnColor: '#FF6A00', btnBg: 'rgba(255,106,0,.08)', btnBorder: 'rgba(255,106,0,.35)', bg: 'linear-gradient(135deg,#FFA047,#FF3C00)' },
+        { initials: 'FL', name: 'Frontier Labs', members: '8.1K', desc: 'Land pioneers curating tier-1 whitelist access across Base and Arbitrum.', live: '2 LIVE RAFFLES', btn: 'Join', btnColor: '#C6BBC1', btnBg: 'transparent', btnBorder: 'rgba(255,255,255,.14)', bg: 'linear-gradient(135deg,#FFD08A,#FF8A33)' },
+        { initials: 'NP', name: 'Nova Protocol', members: '6.8K', desc: 'Liquidity mesh network with recurring node operator incentive rounds.', live: '1 LIVE RAFFLE', btn: 'Join', btnColor: '#C6BBC1', btnBg: 'transparent', btnBorder: 'rgba(255,255,255,.14)', bg: 'linear-gradient(135deg,#C6BBC1,#6E646C)' },
+        { initials: 'SA', name: 'Spectral Audio', members: '5.2K', desc: 'Fractional music rights collective governed by on-chain member votes.', live: '3 LIVE RAFFLES', btn: 'Join', btnColor: '#C6BBC1', btnBg: 'transparent', btnBorder: 'rgba(255,255,255,.14)', bg: 'linear-gradient(135deg,#FF8A33,#7a2a00)' }
+      ],
+      activity: [
+        { icon: '◆', color: '#00D6B4', bg: 'rgba(0,214,180,.09)', text: 'Morrow Genesis Membership finalized — 1 winner drawn', meta: 'SEED REVEALED · RECOMPUTE AVAILABLE', time: '2m' },
+        { icon: '▸', color: '#FF6A00', bg: 'rgba(255,106,0,.09)', text: 'Arcadia Labs published Arcadia Sentinel Whitelist', meta: 'FCFS · 50 SPOTS · REQUIREMENTS: 3 BLOCKS', time: '10m' },
+        { icon: '◵', color: '#FFB061', bg: 'rgba(255,176,97,.09)', text: 'Nova Protocol updated eligibility for Node Operator Drop', meta: 'SNAPSHOT RE-TAKEN AT BLOCK #21,405,880', time: '27m' },
+        { icon: '★', color: '#00D6B4', bg: 'rgba(0,214,180,.09)', text: 'alexander.eth won Aethelgard Founder Pass', meta: 'REWARD SENT TO WINNING WALLET · 0x8f2…4A9b', time: '1h' },
+        { icon: '▸', color: '#FF6A00', bg: 'rgba(255,106,0,.09)', text: 'Frontier Collective announced a community snapshot event', meta: 'FOLLOWERS NOTIFIED · IN-APP + DISCORD', time: '2h' }
+      ],
+      premiumBullets: [
+        { text: 'Auto-Register across selected communities' },
+        { text: 'Discord DM + Telegram raffle alerts' },
+        { text: 'Multiple X accounts for requirement execution' }
+      ],
+      standing: [
+        { v: '48', l: 'ENTRIES' }, { v: '07', l: 'WINS' }, { v: '18', l: 'FOLLOWING' }
+      ],
+      footer: [
+        { title: 'PLATFORM', links: [{ label: 'Discover' }, { label: 'Raffles' }, { label: 'Communities' }, { label: 'Calendar' }] },
+        { title: 'FAIRNESS', links: [{ label: 'Verify a draw' }, { label: 'Requirement engine' }, { label: 'Rule catalog' }, { label: 'Status' }] },
+        { title: 'LEGAL', links: [{ label: 'Terms' }, { label: 'Privacy' }, { label: 'Risk disclosure' }, { label: 'Support' }] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
